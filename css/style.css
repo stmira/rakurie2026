@@ -1,0 +1,186 @@
+:root {
+--blue: #0a7fb8;
+--blue-light: #e6f4fb;
+--text: #26394a;
+--text-sub: #6b7a88;
+--border: #dde3e8;
+--white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+margin: 0;
+background: var(--white);
+color: var(--text);
+font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+-webkit-font-smoothing: antialiased;
+}
+
+/* 画面全体：フォームを中央に配置 */
+.page {
+min-height: 100vh;
+display: flex;
+justify-content: center;
+padding: 70px 16px 48px;
+}
+
+.card {
+width: 100%;
+max-width: 318px;
+}
+
+/* 鍵アイコン */
+.icon-box {
+width: 32px;
+height: 32px;
+border-radius: 8px;
+background: var(--blue-light);
+color: var(--blue);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.title {
+margin: 10px 0 0;
+font-size: 22px;
+line-height: 1.4;
+font-weight: 700;
+color: var(--text);
+}
+
+.lead {
+margin: 10px 0 20px;
+font-size: 10.5px;
+line-height: 1.55;
+color: var(--text-sub);
+}
+
+/* 入力欄まわり */
+.field { margin-bottom: 16px; }
+
+.label {
+display: flex;
+align-items: center;
+gap: 6px;
+margin-bottom: 6px;
+font-size: 12px;
+line-height: 16px;
+font-weight: 700;
+color: var(--text);
+}
+
+.badge {
+font-size: 9px;
+font-weight: 500;
+color: var(--blue);
+}
+
+.input-wrap { position: relative; }
+
+.input {
+display: block;
+width: 100%;
+height: 33px;
+padding: 0 12px;
+border: 1px solid var(--border);
+border-radius: 6px;
+background: var(--white);
+font-family: inherit;
+font-size: 12px;
+color: var(--text);
+outline: none;
+transition: border-color .15s, box-shadow .15s;
+}
+
+.input.has-icon { padding-right: 36px; }
+
+.input:focus {
+border-color: var(--blue);
+box-shadow: 0 0 0 3px rgba(10, 127, 184, .15);
+}
+
+.toggle {
+position: absolute;
+top: 0;
+right: 0;
+width: 36px;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+border: 0;
+background: transparent;
+color: #6b7a88;
+cursor: pointer;
+}
+
+.toggle:focus-visible {
+outline: 2px solid var(--blue);
+outline-offset: -2px;
+border-radius: 6px;
+}
+
+.hint {
+margin: 6px 0 0;
+font-size: 10px;
+line-height: 1.4;
+color: var(--text-sub);
+}
+
+/* ボタン */
+.actions {
+display: flex;
+gap: 9px;
+margin-top: 17px;
+}
+
+.btn {
+height: 32px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+border-radius: 6px;
+font-family: inherit;
+font-size: 11px;
+font-weight: 700;
+cursor: pointer;
+transition: background-color .15s, border-color .15s;
+}
+
+.btn-reset {
+flex: 0 0 95px;
+background: var(--white);
+border: 1px solid var(--border);
+color: var(--text);
+}
+.btn-reset:hover { background: #f5f8fa; }
+
+.btn-submit {
+flex: 1;
+background: var(--blue);
+border: 1px solid var(--blue);
+color: var(--white);
+}
+.btn-submit:hover { background: #086a9c; border-color: #086a9c; }
+
+.btn:focus-visible,
+.back-link:focus-visible {
+outline: 2px solid var(--blue);
+outline-offset: 2px;
+}
+
+/* ログイン画面に戻るリンク */
+.back-link {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+margin-top: 14px;
+font-size: 10.5px;
+color: var(--blue);
+text-decoration: none;
+}
+.back-link:hover { text-decoration: underline; }
