@@ -73,7 +73,7 @@
         </button>
     </div>
 
-    <a href="login.html" class="back-link">
+    <a href="index.html" class="back-link">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         ログイン画面に戻る
     </a>
