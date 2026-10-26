@@ -185,6 +185,7 @@ max-width: 1000px;
 }
 .back-link:hover { text-decoration: underline; }
 /* ====================パスワード再設定画面===================== */
+
 /* ====================ログイン画面===================== */
 /* 楽ラック ログイン画面 */
 :root {
@@ -544,6 +545,71 @@ body {
 .header .nav { overflow-x: auto; }
 }
 /* ====================ヘッダー画面===================== */
+
+/* ====================通知画面===================== */
+:root {
+    --blue: #0a7fb8;
+    --accent: #2a9df4;
+    --navy: #26394a;
+    --text: #2b3a47;
+    --text-sub: #6b7a88;
+    --line: #e1e8ee;
+    --unread-bg: #e8f4fd;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: #f4f7fa;
+    color: var(--text);
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; }
+
+/* 通知パネル本体（幅400px） */
+.notif {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    position: fixed;
+    right: 0px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: #fff;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+}
+
+/* ===== 上部 ===== */
+.notif-head {
+    padding: 17px 20px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.title-row { display: flex; align-items: center; gap: 8px; height: 28px; }
+.title-row h1 { font-size: 20px; font-weight: 700; color: var(--navy); }
+
+.badge-unread {
+    height: 19px; padding: 0 8px;
+    display: inline-flex; align-items: center;
+    border-radius: 10px;
+    background: #fde68a; color: #3a3320;
+    font-size: 9.5px; font-weight: 700;
+}
+
+.close {
+    margin-left: auto;
+    width: 28px; height: 28px; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    border: 0; border-radius: 6px; background: none;
+    color: #5d6c79;
+/* ====================通知画面===================== */
+  
 /* ====================社員登録画面===================== */
 /* 楽ラック 社員情報画面 (common.css と併用) */
 /* ページ全体は縦並び(タイトル → 一覧/登録)。他CSSと衝突しないよう専用クラス名にしています */

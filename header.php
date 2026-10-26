@@ -2,8 +2,6 @@
 <?php require 'config/database.php'; ?>
 <!-- CSSはHTMLのlinkタグで読み込む -->
 <link rel="stylesheet" href="css/style.css">
-<!-- PHPファイル側でJavaScriptを読み込む場合 -->
-<script src="js/header.js"></script>
 <?php
 // ============================================================
 // 共通ヘッダー（全画面で使う部品）
