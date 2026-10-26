@@ -27,13 +27,8 @@ body {
 }
 
 .card {
-<<<<<<< HEAD
 width: 100%;
 max-width:900px;
-=======
-    width: 100%;
-    max-width: 318px;
->>>>>>> main
 }
 
 /* 鍵アイコン */
@@ -194,21 +189,6 @@ max-width:900px;
 /* ====================ログイン画面===================== */
 /* 楽ラック ログイン画面 */
 :root {
-<<<<<<< HEAD
-  --c-brand: #0a80b6;
-  --c-brand-dark: #0a6c9a;
-  --c-logo-text: #0f5670;
-  --c-logo-bg: #ffe266;
-  --c-text: #1f2d3a;
-  --c-sub: #6b7a86;
-  --c-border: #d8dee3;
-  --c-info-bg: #f1f5f8;
-  --c-error: #c8352f;
-}
-
-* {
-  box-sizing: border-box;
-=======
     --c-brand: #0a80b6;
     --c-brand-dark: #0a6c9a;
     --c-logo-text: #0f5670;
@@ -222,36 +202,10 @@ max-width:900px;
 
 * {
     box-sizing: border-box;
->>>>>>> main
 }
 
 html,
 body {
-<<<<<<< HEAD
-  height: 100%;
-  margin: 0;
-}
-
-body {
-  font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
-    "Yu Gothic", "Meiryo", sans-serif;
-  color: var(--c-text);
-  background: #fff;
-  -webkit-font-smoothing: antialiased;
-}
-
-.login-page {
-  min-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-}
-
-.login-container {
-  width: 100%;
-  max-width: 525px;
-=======
     height: 100%;
     margin: 0;
 }
@@ -275,7 +229,6 @@ body {
 .login-container {
     width: 100%;
     max-width: 525px;
->>>>>>> main
 }
 
 /* ロゴ */
@@ -303,118 +256,6 @@ body {
 
 /* フォーム */
 .field {
-<<<<<<< HEAD
-  margin-bottom: 40px;
-}
-
-.field.has-hint {
-  margin-bottom: 0;
-}
-
-.label-row {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.label-row label {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--c-text);
-}
-
-.required {
-  font-size: 13px;
-  color: var(--c-brand);
-}
-
-.input-wrap {
-  position: relative;
-}
-
-.input-wrap input {
-  width: 100%;
-  height: 58px;
-  padding: 0 18px;
-  font-family: inherit;
-  font-size: 17px;
-  color: var(--c-text);
-  background: #fff;
-  border: 1px solid var(--c-border);
-  border-radius: 10px;
-  outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-
-.input-wrap input:focus {
-  border-color: var(--c-brand);
-  box-shadow: 0 0 0 3px rgba(10, 128, 182, 0.15);
-}
-
-.input-wrap input.is-error {
-  border-color: var(--c-error);
-}
-
-.input-wrap.has-toggle input {
-  padding-right: 56px;
-}
-
-.toggle-pw {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  border-radius: 6px;
-  color: #5d6b76;
-  cursor: pointer;
-}
-
-.toggle-pw:focus-visible {
-  outline: 2px solid var(--c-brand);
-}
-
-.toggle-pw svg {
-  width: 22px;
-  height: 22px;
-}
-
-.toggle-pw .icon-eye {
-  display: none;
-}
-
-.toggle-pw.is-visible .icon-eye {
-  display: block;
-}
-
-.toggle-pw.is-visible .icon-eye-off {
-  display: none;
-}
-
-.hint {
-  margin: 14px 0 0;
-  font-size: 14px;
-  color: var(--c-sub);
-}
-
-.error-message {
-  min-height: 0;
-  margin: 12px 0 0;
-  font-size: 14px;
-  color: var(--c-error);
-}
-
-.error-message:empty {
-  display: none;
-=======
     margin-bottom: 40px;
 }
 
@@ -525,48 +366,10 @@ body {
 
 .error-message:empty {
     display: none;
->>>>>>> main
 }
 
 /* ログインボタン */
 .login-button {
-<<<<<<< HEAD
-  width: 100%;
-  height: 55px;
-  margin-top: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  font-family: inherit;
-  font-size: 17px;
-  font-weight: 700;
-  color: #fff;
-  background: var(--c-brand);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.login-button:hover {
-  background: var(--c-brand-dark);
-}
-
-.login-button:focus-visible {
-  outline: 3px solid rgba(10, 128, 182, 0.35);
-  outline-offset: 2px;
-}
-
-.login-button:disabled {
-  opacity: 0.6;
-  cursor: default;
-}
-
-.login-button svg {
-  width: 20px;
-  height: 20px;
-=======
     width: 100%;
     height: 55px;
     margin-top: 32px;
@@ -602,23 +405,10 @@ body {
 .login-button svg {
     width: 20px;
     height: 20px;
->>>>>>> main
 }
 
 /* パスワードリンク */
 .forgot {
-<<<<<<< HEAD
-  display: block;
-  margin-top: 32px;
-  text-align: center;
-  font-size: 17px;
-  color: var(--c-brand);
-  text-decoration: none;
-}
-
-.forgot:hover {
-  text-decoration: underline;
-=======
     display: block;
     margin-top: 32px;
     text-align: center;
@@ -629,34 +419,10 @@ body {
 
 .forgot:hover {
     text-decoration: underline;
->>>>>>> main
 }
 
 /* 案内ボックス */
 .notice {
-<<<<<<< HEAD
-  margin-top: 40px;
-  padding: 22px 24px;
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  background: var(--c-info-bg);
-  border-radius: 10px;
-  color: var(--c-sub);
-}
-
-.notice svg {
-  flex: none;
-  width: 22px;
-  height: 22px;
-  margin-top: 1px;
-}
-
-.notice p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.6;
-=======
     margin-top: 40px;
     padding: 22px 24px;
     display: flex;
@@ -678,7 +444,6 @@ body {
     margin: 0;
     font-size: 14px;
     line-height: 1.6;
->>>>>>> main
 }
 
 @media (max-width: 480px) {
@@ -688,8 +453,6 @@ body {
 }
 
 /* ====================ログイン画面===================== */
-<<<<<<< HEAD
-=======
 
 /* ====================ヘッダー画面===================== */
 /* ===== 共通ヘッダー ===== */
@@ -933,4 +696,3 @@ button { font-family: inherit; cursor: pointer; }
 }
 .foot svg { flex: none; }
 /* ====================通知画面===================== */
->>>>>>> main
