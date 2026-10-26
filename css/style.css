@@ -608,6 +608,7 @@ button { font-family: inherit; cursor: pointer; }
     display: flex; align-items: center; justify-content: center;
     border: 0; border-radius: 6px; background: none;
     color: #5d6c79;
+}
 /* ====================通知画面===================== */
   
 /* ====================社員登録画面===================== */
