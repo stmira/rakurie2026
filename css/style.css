@@ -27,8 +27,8 @@ body {
 }
 
 .card {
-    width: 100%;
-    max-width: 318px;
+width: 100%;
+max-width:900px;
 }
 
 /* 鍵アイコン */
@@ -186,6 +186,7 @@ body {
 }
 .back-link:hover { text-decoration: underline; }
 /* ====================パスワード再設定画面===================== */
+
 /* ====================ログイン画面===================== */
 /* 楽ラック ログイン画面 */
 :root {
@@ -575,9 +576,11 @@ button { font-family: inherit; cursor: pointer; }
 .notif {
     width: 100%;
     max-width: 400px;
-    min-height: 100vh;
+    height: 100vh;
     position: fixed;
     right: 0px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: #fff;
     border-left: 1px solid var(--line);
     border-right: 1px solid var(--line);
