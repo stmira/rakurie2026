@@ -1,18 +1,58 @@
-<!-- データベース接続 -->
-<?php require 'config/database.php'; ?>
-
-<!-- ヘッダーの読み込み -->
-<?php $currentPage = 'employee'; ?>
-
-<!-- 社員情報登録画面 -->
-<?php require 'html/employee.html'; ?>
-<!-- CSSはHTMLのlinkタグで読み込む -->
-<link rel="stylesheet" href="css/style.css">
 <!-- PHPファイル側でJavaScriptを読み込む場合 -->
-<!-- <script src="js/employee.js"></script> -->
+<script src="js/employee.js"></script>
 <?php
-// 社員情報画面。ヘッダーは header.php を参照します。
-$currentPage = 'employees';
+// 社員情報画面。ヘッダーは header.php(共通部品)を読み込みます。
+// ※ DB接続は employees_api.php(db.php)側で行うため、ここでは読み込みません。
+
+// header.php の $navItems のキーと同じ値にすると、社員情報タブが選択状態になります
+$currentPage = 'employee';
+
+// ファイルの置き場所。フォルダ構成が違う場合は、ここだけ書き換えてください
+// (例: 'css' => 'css/employees.css', 'js' => 'js/employees.js', 'api' => 'api/employees_api.php')
+$paths = [
+    'common_css' => 'common.css',
+    'css'        => 'css/style.css',     // ← 「css/」を追加する
+    'js'         => 'js/employee.js',    // ← 「js/」を追加する
+    'api'        => 'employees_api.php', // ← そのままでOK
+];
+
+// 更新がすぐ反映されるよう、ファイルの更新日時を付ける(ファイルが無くてもエラーにしない)
+function asset(string $path): string
+{
+    $full = __DIR__ . '/' . $path;
+    return htmlspecialchars($path, ENT_QUOTES, 'UTF-8') . (is_file($full) ? '?v=' . filemtime($full) : '');
+}
+
+// ---- 社員一覧をDBから取得(ページを開いた時点で表示するため、PHP側で取得します) ----
+// config/database.php を読み込むと、$pdo と $errorMessage が使えるようになります
+require __DIR__ . '/config/database.php';
+
+$debug = true;   // 開発中は true(取得エラーの詳細を表示)。本番では false にしてください
+
+$employees = [];
+$loadError = '';
+try {
+    if (!($pdo instanceof PDO)) {
+        throw new RuntimeException($errorMessage !== '' ? $errorMessage : 'データベースに接続できません。');
+    }
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // password_hash は画面に出さないため SELECT しない
+    $stmt = $pdo->query(
+        'SELECT employee_id, employee_name, department_name, email
+          FROM employees
+          ORDER BY employee_id ASC'
+    );
+    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Throwable $e) {
+    error_log($e->getMessage());
+    $loadError = '社員一覧を取得できませんでした。' . ($debug ? "\n" . $e->getMessage() : '');
+}
+
+/** HTML表示用のエスケープ */
+function esc($value): string
+{
+    return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -23,12 +63,12 @@ $currentPage = 'employees';
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="common.css">
-  <link rel="stylesheet" href="employees.css?v=<?= filemtime(__DIR__ . '/employees.css') ?>">
+  <link rel="stylesheet" href="<?= asset($paths['common_css']) ?>">
+  <link rel="stylesheet" href="<?= asset($paths['css']) ?>">
 </head>
 <body>
 
-  <?php include __DIR__ . '/header.php'; ?>
+  <?php require __DIR__ . '/header.php'; ?>
 
   <main class="emp-page">
     <h1 class="emp-title">社員情報</h1>
@@ -66,7 +106,24 @@ $currentPage = 'employees';
               </tr>
             </thead>
             <tbody id="empBody">
-              <tr><td colspan="6" class="empty">読み込み中…</td></tr>
+              <?php if ($loadError !== ''): ?>
+                <tr><td colspan="6" class="empty"><?= esc($loadError) ?></td></tr>
+                <?php elseif (!$employees): ?>
+                <tr><td colspan="6" class="empty">社員が登録されていません。</td></tr>
+              <?php else: foreach ($employees as $emp): ?>
+                <tr>
+                  <td><?= esc($emp['employee_id']) ?></td>
+                  <td><?= esc($emp['employee_name']) ?></td>
+                  <td><?= esc($emp['department_name']) ?></td>
+                  <td><span class="mask">••••••••</span></td>
+                  <td title="<?= esc($emp['email']) ?>"><?= esc($emp['email']) ?></td>
+                  <td>
+                    <button type="button" class="row-btn" aria-label="<?= esc($emp['employee_name']) ?>を編集">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19z"/><path d="M14.5 6.5l3 3"/></svg>編集
+                    </button>
+                  </td>
+                </tr>
+              <?php endforeach; endif; ?>
             </tbody>
           </table>
         </div>
@@ -127,16 +184,16 @@ $currentPage = 'employees';
               <p class="hint">初回ログイン時に、本人による変更が必要です。</p>
               <p class="field-error" hidden></p>
             </div>
-
+ 
             <div class="field" data-field="email">
               <label for="fEmail">メールアドレス <em class="req">必須</em></label>
               <input type="email" id="fEmail" maxlength="255" placeholder="例：yamada@example.jp" autocomplete="off">
               <p class="field-error" hidden></p>
             </div>
-
+ 
             <p class="form-error" id="formError" role="alert" hidden></p>
           </div>
-
+ 
           <div class="reg-foot">
             <button type="button" class="btn btn-outline btn-lg" id="btnReset">キャンセル</button>
             <button type="submit" class="btn btn-primary btn-lg" id="btnRegister">
@@ -148,9 +205,15 @@ $currentPage = 'employees';
       </section>
     </div>
   </main>
-
+ 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-
-  <script src="employees.js?v=<?= filemtime(__DIR__ . '/employees.js') ?>"></script>
+ 
+  <script>window.EMP_API = <?= json_encode($paths['api']) ?>;</script>
+  <!-- ページを開いた時点の社員一覧(JavaScriptはこれを使って編集機能を有効にします) -->
+  <script type="application/json" id="empData"><?= json_encode(
+      ['employees' => $employees, 'error' => $loadError],
+      JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+  ) ?></script>
+  <script src="<?= asset($paths['js']) ?>"></script>
 </body>
 </html>

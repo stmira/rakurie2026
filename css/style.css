@@ -696,6 +696,7 @@ font-size: 10px; font-weight: 700;
 .emp-table tr.is-editing { background: #f4fafd !important; }
 
 .emp-table .empty {
+  white-space: pre-line;
   height: 120px;
   text-align: center;
   color: var(--c-sub);
