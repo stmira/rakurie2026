@@ -189,267 +189,357 @@ text-decoration: none;
 /* ====================ログイン画面===================== */
 /* 楽ラック ログイン画面 */
 :root {
-  --c-brand: #0a80b6;
-  --c-brand-dark: #0a6c9a;
-  --c-logo-text: #0f5670;
-  --c-logo-bg: #ffe266;
-  --c-text: #1f2d3a;
-  --c-sub: #6b7a86;
-  --c-border: #d8dee3;
-  --c-info-bg: #f1f5f8;
-  --c-error: #c8352f;
+--c-brand: #0a80b6;
+--c-brand-dark: #0a6c9a;
+--c-logo-text: #0f5670;
+--c-logo-bg: #ffe266;
+--c-text: #1f2d3a;
+--c-sub: #6b7a86;
+--c-border: #d8dee3;
+--c-info-bg: #f1f5f8;
+--c-error: #c8352f;
 }
 
 * {
-  box-sizing: border-box;
+box-sizing: border-box;
 }
 
 html,
 body {
-  height: 100%;
-  margin: 0;
+height: 100%;
+margin: 0;
 }
 
 body {
-  font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
     "Yu Gothic", "Meiryo", sans-serif;
-  color: var(--c-text);
-  background: #fff;
-  -webkit-font-smoothing: antialiased;
+color: var(--c-text);
+background: #fff;
+-webkit-font-smoothing: antialiased;
 }
 
 .login-page {
-  min-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
+min-height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 40px 20px;
 }
 
 .login-container {
-  width: 100%;
-  max-width: 525px;
+width: 100%;
+max-width: 525px;
 }
 
 /* ロゴ */
 .logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 44px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 12px;
+margin-bottom: 44px;
 }
 
 .logo-icon {
-  width: 60px;
-  height: 60px;
-  display: block;
+width: 60px;
+height: 60px;
+display: block;
 }
 
 .logo-text {
-  font-size: 40px;
-  font-weight: 700;
-  color: var(--c-logo-text);
-  letter-spacing: 0.02em;
-  line-height: 1;
+font-size: 40px;
+font-weight: 700;
+color: var(--c-logo-text);
+letter-spacing: 0.02em;
+line-height: 1;
 }
 
 /* フォーム */
 .field {
-  margin-bottom: 40px;
+margin-bottom: 40px;
 }
 
 .field.has-hint {
-  margin-bottom: 0;
+margin-bottom: 0;
 }
 
 .label-row {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 14px;
+display: flex;
+align-items: baseline;
+gap: 12px;
+margin-bottom: 14px;
 }
 
 .label-row label {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--c-text);
+font-size: 17px;
+font-weight: 700;
+color: var(--c-text);
 }
 
 .required {
-  font-size: 13px;
-  color: var(--c-brand);
+font-size: 13px;
+color: var(--c-brand);
 }
 
 .input-wrap {
-  position: relative;
+position: relative;
 }
 
 .input-wrap input {
-  width: 100%;
-  height: 58px;
-  padding: 0 18px;
-  font-family: inherit;
-  font-size: 17px;
-  color: var(--c-text);
-  background: #fff;
-  border: 1px solid var(--c-border);
-  border-radius: 10px;
-  outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+width: 100%;
+height: 58px;
+padding: 0 18px;
+font-family: inherit;
+font-size: 17px;
+color: var(--c-text);
+background: #fff;
+border: 1px solid var(--c-border);
+border-radius: 10px;
+outline: none;
+transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .input-wrap input:focus {
-  border-color: var(--c-brand);
-  box-shadow: 0 0 0 3px rgba(10, 128, 182, 0.15);
+border-color: var(--c-brand);
+box-shadow: 0 0 0 3px rgba(10, 128, 182, 0.15);
 }
 
 .input-wrap input.is-error {
-  border-color: var(--c-error);
+border-color: var(--c-error);
 }
 
 .input-wrap.has-toggle input {
-  padding-right: 56px;
+padding-right: 56px;
 }
 
 .toggle-pw {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  border-radius: 6px;
-  color: #5d6b76;
-  cursor: pointer;
+position: absolute;
+top: 50%;
+right: 12px;
+transform: translateY(-50%);
+width: 36px;
+height: 36px;
+padding: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+background: none;
+border: none;
+border-radius: 6px;
+color: #5d6b76;
+cursor: pointer;
 }
 
 .toggle-pw:focus-visible {
-  outline: 2px solid var(--c-brand);
+outline: 2px solid var(--c-brand);
 }
 
 .toggle-pw svg {
-  width: 22px;
-  height: 22px;
+width: 22px;
+height: 22px;
 }
 
 .toggle-pw .icon-eye {
-  display: none;
+display: none;
 }
 
 .toggle-pw.is-visible .icon-eye {
-  display: block;
+display: block;
 }
 
 .toggle-pw.is-visible .icon-eye-off {
-  display: none;
+display: none;
 }
 
 .hint {
-  margin: 14px 0 0;
-  font-size: 14px;
-  color: var(--c-sub);
+margin: 14px 0 0;
+font-size: 14px;
+color: var(--c-sub);
 }
 
 .error-message {
-  min-height: 0;
-  margin: 12px 0 0;
-  font-size: 14px;
-  color: var(--c-error);
+min-height: 0;
+margin: 12px 0 0;
+font-size: 14px;
+color: var(--c-error);
 }
 
 .error-message:empty {
-  display: none;
+display: none;
 }
 
 /* ログインボタン */
 .login-button {
-  width: 100%;
-  height: 55px;
-  margin-top: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  font-family: inherit;
-  font-size: 17px;
-  font-weight: 700;
-  color: #fff;
-  background: var(--c-brand);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.15s;
+width: 100%;
+height: 55px;
+margin-top: 32px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 10px;
+font-family: inherit;
+font-size: 17px;
+font-weight: 700;
+color: #fff;
+background: var(--c-brand);
+border: none;
+border-radius: 8px;
+cursor: pointer;
+transition: background 0.15s;
 }
 
 .login-button:hover {
-  background: var(--c-brand-dark);
+background: var(--c-brand-dark);
 }
 
 .login-button:focus-visible {
-  outline: 3px solid rgba(10, 128, 182, 0.35);
-  outline-offset: 2px;
+outline: 3px solid rgba(10, 128, 182, 0.35);
+outline-offset: 2px;
 }
 
 .login-button:disabled {
-  opacity: 0.6;
-  cursor: default;
+opacity: 0.6;
+cursor: default;
 }
 
 .login-button svg {
-  width: 20px;
-  height: 20px;
+width: 20px;
+height: 20px;
 }
 
 /* パスワードリンク */
 .forgot {
-  display: block;
-  margin-top: 32px;
-  text-align: center;
-  font-size: 17px;
-  color: var(--c-brand);
-  text-decoration: none;
+display: block;
+margin-top: 32px;
+text-align: center;
+font-size: 17px;
+color: var(--c-brand);
+text-decoration: none;
 }
 
 .forgot:hover {
-  text-decoration: underline;
+text-decoration: underline;
 }
 
 /* 案内ボックス */
 .notice {
-  margin-top: 40px;
-  padding: 22px 24px;
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  background: var(--c-info-bg);
-  border-radius: 10px;
-  color: var(--c-sub);
+margin-top: 40px;
+padding: 22px 24px;
+display: flex;
+align-items: flex-start;
+gap: 14px;
+background: var(--c-info-bg);
+border-radius: 10px;
+color: var(--c-sub);
 }
 
 .notice svg {
-  flex: none;
-  width: 22px;
-  height: 22px;
-  margin-top: 1px;
+flex: none;
+width: 22px;
+height: 22px;
+margin-top: 1px;
 }
 
 .notice p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.6;
+margin: 0;
+font-size: 14px;
+line-height: 1.6;
 }
 
 @media (max-width: 480px) {
-  .logo-text {
+.logo-text {
     font-size: 34px;
-  }
+}
 }
 
 /* ====================ログイン画面===================== */
+
+/* ====================ヘッダー画面===================== */
+/* ===== 共通ヘッダー ===== */
+.header {
+height: 62px;
+display: flex;
+align-items: stretch;
+padding: 0 24px 0 23px;
+background: #fff;
+border-bottom: 1px solid #e3e9ee;
+font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+-webkit-font-smoothing: antialiased;
+}
+
+/* ロゴ */
+.header .logo {
+display: flex;
+align-items: center;
+padding-top: 28px;
+gap: 8px;
+margin-right: 22px;
+text-decoration: none;
+}
+.header .logo-text {
+font-size: 18px;
+font-weight: 700;
+color: #1a4a6b;
+white-space: nowrap;
+}
+
+/* メニュー */
+.header .nav { display: flex; gap: 17px; }
+.header .nav a {
+position: relative;
+display: flex;
+align-items: center;
+font-size: 11px;
+color: #6b7a88;
+text-decoration: none;
+white-space: nowrap;
+}
+.header .nav a:hover { color: #0a7fb8; }
+.header .nav a.is-active { color: #0a7fb8; font-weight: 700; }
+.header .nav a.is-active::after {
+content: "";
+position: absolute;
+left: 0; right: 0; bottom: -1px;
+height: 2px;
+background: #2a9df4;
+}
+
+/* 右側（通知・設定・ユーザー） */
+.header .header-right {
+margin-left: auto;
+display: flex;
+align-items: center;
+gap: 21px;
+}
+.header .icon-btn {
+position: relative;
+width: 20px; height: 20px;
+padding: 0;
+display: flex; align-items: center; justify-content: center;
+border: 0; background: none;
+color: #6b8ba3;
+cursor: pointer;
+}
+.header .icon-btn:hover { color: #0a7fb8; }
+.header .bell .dot {
+position: absolute; top: 0; right: 1px;
+width: 4px; height: 4px; border-radius: 50%;
+background: #f5d02e;
+}
+
+.header .user { display: flex; align-items: center; gap: 7px; }
+.header .avatar {
+width: 26px; height: 26px; border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+background: #e6f4fb; color: #0a7fb8;
+font-size: 10px; font-weight: 700;
+}
+.header .user-info { display: flex; flex-direction: column; line-height: 1.3; }
+.header .user-name { font-size: 10px; font-weight: 700; color: #26394a; }
+.header .user-role { font-size: 7px; color: #6b7a88; }
+
+/* 狭い画面ではメニューを横スクロールにする */
+@media (max-width: 900px) {
+.header .nav { overflow-x: auto; }
+}
+/* ====================ヘッダー画面===================== */

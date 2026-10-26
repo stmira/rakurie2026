@@ -1,0 +1,67 @@
+<!-- データベース接続 -->
+<?php require 'config/database.php'; ?>
+<!-- CSSはHTMLのlinkタグで読み込む -->
+<link rel="stylesheet" href="css/style.css">
+<?php
+// ============================================================
+// 共通ヘッダー（全画面で使う部品）
+// 各画面の <body> の直後で、現在のページ名を決めてから読み込む
+//
+// <?php $currentPage = 'schedule'; 
+// <?php require __DIR__ . '/header.php'; 
+//
+// $currentPage に入れた値と一致するメニューが「選択中」になります。
+// ============================================================
+
+// 現在のページ（未指定のときは何も選択しない）
+$currentPage = $currentPage ?? '';
+
+// メニュー（key => [表示名, 移動先]）
+$navItems = [
+    'todo'          => ['今日のタスク',   'todo.php'],
+    'schedule'       => ['工程表',         'schedule.php'],
+    'reference'      => ['早見表',         'reference.php'],
+    'customer'       => ['お客様情報登録', 'customer.php'],
+    'shedule-entry'  => ['工程表情報登録', 'shedule-entry.php'],
+    'employee'       => ['社員情報',       'employee.php'],
+];
+
+// ログイン中のユーザー（本番はセッションやDBから取得）
+$user = ['name' => 'Oさん', 'role' => '管理者']; //ここでdbから名前をとる
+?>
+<header class="header">
+<a href="today.php" class="logo">
+    <svg class="logo-mark" width="28" height="28" viewBox="0 0 26 26" aria-hidden="true">
+    <rect width="26" height="26" rx="6" fill="#fcd34d"/>
+    <rect x="5" y="6" width="3" height="14" rx="1" fill="#0f5c8c"/>
+    <rect x="18" y="6" width="3" height="14" rx="1" fill="#0f5c8c"/>
+    <rect x="10" y="8" width="6" height="3" rx="1" fill="#0f5c8c"/>
+    <rect x="10" y="15" width="6" height="3" rx="1" fill="#0f5c8c"/>
+    </svg>
+    <span class="logo-text">楽ラック</span>
+</a>
+
+<nav class="nav" aria-label="メインメニュー">
+    <?php foreach ($navItems as $key => [$label, $href]): ?>
+    <?php $isActive = ($key === $currentPage); ?>
+    <a href="<?= htmlspecialchars($href, ENT_QUOTES, 'UTF-8') ?>"<?= $isActive ? ' class="is-active" aria-current="page"' : '' ?>><?= htmlspecialchars($label, ENT_QUOTES, 'UTF-8') ?></a>
+    <?php endforeach; ?>
+</nav>
+
+<div class="header-right">
+    <button type="button" class="icon-btn bell" aria-label="通知">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+    <span class="dot"></span>
+    </button>
+    <button type="button" class="icon-btn" aria-label="設定">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+    <div class="user">
+    <span class="avatar"><?= htmlspecialchars(mb_substr($user['name'], 0, 1), ENT_QUOTES, 'UTF-8') ?></span>
+    <span class="user-info">
+        <span class="user-name"><?= htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8') ?></span>
+        <span class="user-role"><?= htmlspecialchars($user['role'], ENT_QUOTES, 'UTF-8') ?></span>
+    </span>
+    </div>
+</div>
+</header>
