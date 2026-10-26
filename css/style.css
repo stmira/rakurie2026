@@ -28,7 +28,7 @@ padding: 70px 16px 48px;
 
 .card {
 width: 100%;
-max-width: 318px;
+max-width:900px;
 }
 
 /* 鍵アイコン */
@@ -233,25 +233,25 @@ body {
 
 /* ロゴ */
 .logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 44px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 12px;
+margin-bottom: 44px;
 }
 
 .logo-icon {
-  width: 60px;
-  height: 60px;
-  display: block;
+width: 60px;
+height: 60px;
+display: block;
 }
 
 .logo-text {
-  font-size: 40px;
-  font-weight: 700;
-  color: var(--c-logo-text);
-  letter-spacing: 0.02em;
-  line-height: 1;
+font-size: 40px;
+font-weight: 700;
+color: var(--c-logo-text);
+letter-spacing: 0.02em;
+line-height: 1;
 }
 
 /* フォーム */
