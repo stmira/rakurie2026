@@ -75,3 +75,19 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+$ git push
+fatal: The current branch matsuura has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+git push --set-upstream origin matsuura
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+解説してください
+
+10:59
+このエラーは、現在のブランチ matsuura が、リモートのどのブランチへ push するか設定されていないという意味です。
+
+案内どおり、次のコマンドを実行すると origin に matsuura ブランチを作成して push し、以後の push/pull の追跡先として登録します。
+
