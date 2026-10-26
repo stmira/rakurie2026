@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お客様情報登録 | 楽ラック</title>
+</head>
+
+<body>
+
+    <!-- 1. Header Area -->
+    <!-- <header class="app-header">
+        <div class="header-left">
+            <a href="index.html" class="logo-container">
+                <div class="logo-mark">
+                    <div class="yellow-bar"></div>
+                    <div class="blue-bar"></div>
+                </div>
+                <span>楽ラック</span>
+            </a>
+            <nav>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="today_tasks.php">今日のタスク</a></li>
+                    <li class="nav-item"><a href="schedule_table.php">工程表</a></li>
+                    <li class="nav-item"><a href="quick_reference.php">早見表</a></li>
+                    <li class="nav-item active"><a href="customer_register.php">お客様情報登録</a></li>
+                    <li class="nav-item"><a href="process_register.php">工程表情報登録</a></li>
+                    <li class="nav-item"><a href="employee_info.php">社員情報</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header-right">
+            <a href="notifications.php" class="icon-btn" title="通知">
+                <svg class="icon" viewBox="0 0 24 24" width="20" height="20">
+                    <path
+                        d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"
+                        fill="currentColor" />
+                </svg>
+                <span class="notification-dot"></span>
+            </a>
+            <a href="settings.php" class="icon-btn" title="設定">
+                <svg class="icon" viewBox="0 0 24 24" width="20" height="20">
+                    <path
+                        d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"
+                        fill="currentColor" />
+                </svg>
+            </a>
+            <div class="user-profile">
+                <div class="user-avatar">O</div>
+                <div class="user-info">
+                    <span class="user-name">Oさん</span>
+                    <span class="user-role">管理者</span>
+                </div>
+            </div>
+        </div>
+    </header> -->
+
+    <!-- 2. Main Content Container -->
+    <main class="container">
+
+        <!-- Page Title Bar -->
+        <div class="page-title-section">
+            <div class="title-area">
+                <h1>お客様情報登録</h1>
+                <p>お客様の依頼内容と納期、製作に必要な情報を登録します。</p>
+            </div>
+            <div class="required-note">
+                <span class="badge-required">必須</span> の項目は必ず入力してください
+            </div>
+        </div>
+
+        <!-- Main Input Form Card -->
+        <form id="customerForm" action="save_customer.php" method="POST">
+            <div class="main-card">
+
+                <!-- Top Card Instruction Banner -->
+                <div class="card-banner">
+                    <strong>
+                        <svg class="icon" viewBox="0 0 24 24" width="18" height="18">
+                            <path
+                                d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+                                fill="currentColor" />
+                        </svg>
+                        新しいお客様情報
+                    </strong>
+                    <span class="sub">各項目を入力し、画面下の登録ボタンを押してください。</span>
+                </div>
+
+                <!-- Form Fields Grid Layout -->
+                <div class="form-body">
+
+                    <!-- Left Column: 基本情報 -->
+                    <div class="form-col-left">
+                        <div class="section-header">
+                            <div class="section-header-icon">
+                                <svg class="icon" viewBox="0 0 24 24" width="14" height="14">
+                                    <path
+                                        d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"
+                                        fill="currentColor" />
+                                </svg>
+                            </div>
+                            <span>基本情報</span>
+                        </div>
+                        <p class="section-desc">お客様の会社名、依頼の概要と納期を入力してください。</p>
+
+                        <div class="form-group">
+                            <label class="form-label" for="order_id">
+                                注文ID <span class="badge-required-red">必須</span>
+                            </label>
+                            <input type="text" id="order_id" name="order_id" class="input-text"
+                                placeholder="例：ORD-2026-001" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="company_name">
+                                会社名 <span class="badge-required-red">必須</span>
+                            </label>
+                            <input type="text" id="company_name" name="company_name" class="input-text"
+                                placeholder="例：株式会社 山田製作所" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="summary">概要</label>
+                            <textarea id="summary" name="summary" class="textarea"
+                                placeholder="ご依頼の内容や製品の仕様を入力してください"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="delivery_date">
+                                納期 <span class="badge-required-red">必須</span>
+                            </label>
+                            <div class="date-field-group">
+                                <div class="date-input-wrapper" style="flex: 1;">
+                                    <input type="date" id="delivery_date" name="delivery_date" class="input-text"
+                                        required>
+                                </div>
+                                <!-- <span class="input-help">カレンダーから選択できます</span> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: 製作・工程情報 -->
+                    <div class="form-col-right">
+                        <div class="section-header">
+                            <div class="section-header-icon">
+                                <svg class="icon" viewBox="0 0 24 24" width="14" height="14">
+                                    <path
+                                        d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.6C.4 7 1 10 3 12c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.4-.4.4-1.1 0-1.5z"
+                                        fill="currentColor" />
+                                </svg>
+                            </div>
+                            <span>製作・工程情報</span>
+                        </div>
+                        <p class="section-desc">製作に必要な情報を入力してください。該当する項目のみで構いません。</p>
+
+                        <table class="process-table">
+                            <thead>
+                                <tr>
+                                    <th>項目</th>
+                                    <th>内容・仕様</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>製作図</th>
+                                    <td><input type="text" name="process_drawing" placeholder="例：TNK-001"></td>
+                                </tr>
+                                <tr>
+                                    <th>ポストL</th>
+                                    <td><input type="text" name="post_l" placeholder="設計内容・図面番号を入力"></td>
+                                </tr>
+                                <tr>
+                                    <th>ポストT</th>
+                                    <td><input type="text" name="post_t" placeholder="溶接内容を入力"></td>
+                                </tr>
+                                <tr>
+                                    <th>ベース</th>
+                                    <td><input type="text" name="base" placeholder="仕様・数量を入力"></td>
+                                </tr>
+                                <tr>
+                                    <th>アーム</th>
+                                    <td><input type="text" name="arm" placeholder="仕様・数量を入力"></td>
+                                </tr>
+                                <tr>
+                                    <th>アングル</th>
+                                    <td><input type="text" name="angle" placeholder="仕様・数量を入力"></td>
+                                </tr>
+                                <tr>
+                                    <th>Aベース</th>
+                                    <td><input type="text" name="a_base" placeholder="その他の製作情報を入力"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="info-note">
+                            <svg class="icon" viewBox="0 0 24 24" width="14" height="14" style="color: #64748b;">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+                                    fill="currentColor" />
+                            </svg>
+                            <span>製作・工程情報は、登録後に変更することもできます。</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Yellow Highlight Notice Bar -->
+                <div class="notice-box">
+                    <svg class="icon notice-icon" viewBox="0 0 24 24" width="18" height="18">
+                        <path
+                            d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 017 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"
+                            fill="currentColor" />
+                    </svg>
+                    <span>工程の予定も続けて登録する場合は、「工程表情報を登録」から進めます。</span>
+                </div>
+
+                <!-- Action Buttons Footer -->
+                <div class="card-footer">
+                    <button type="button" class="btn btn-default" onclick="history.back()">キャンセル</button>
+
+                    <div class="footer-right-buttons">
+                        <button type="button" class="btn btn-outline-primary" onclick="submitToProcess()">
+                            <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
+                                <path
+                                    d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"
+                                    fill="currentColor" />
+                            </svg>
+                            工程表情報を登録
+                        </button>
+
+                        <button type="submit" class="btn btn-primary">
+                            <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor" />
+                            </svg>
+                            お客様情報を登録
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </main>
+</body>
+</html>
