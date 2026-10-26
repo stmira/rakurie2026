@@ -24,7 +24,7 @@
     </div>
 
     <div class="action-row">
-        <button type="button" class="read-all">すべて既読にする</button>
+        <button type="button" class="read-all" id="read_all_btn">すべて既読にする</button>
         <button type="button" class="multi">複数選択</button>
         <button type="button" class="more" aria-label="その他の操作">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
@@ -34,10 +34,10 @@
     </header>
 
     <!-- ===== 通知一覧 ===== -->
-    <ul class="list">
+    <ul class="list" id="list_area">
 
     <li>
-        <a href="#" class="item is-unread">
+        <a href="#" class="item is-unread" id="">
         <span class="meta">
             <i class="dot" aria-hidden="true"></i>
             <time>10月9日（金）14:40</time>
