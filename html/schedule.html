@@ -1,0 +1,37 @@
+<main class="sc-container">
+  <div class="sc-title">
+    <h1>工程表一覧</h1>
+    <p>入荷予定と担当者の作業を、日ごとに確認できます。</p>
+  </div>
+
+  <div class="sc-toolbar">
+    <label class="sc-search">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+      <input id="scSearch" type="search" placeholder="会社名・作業内容を検索">
+    </label>
+
+    <div class="sc-filter">
+      <button type="button" id="scFilterBtn" class="sc-btn">絞り込み<span id="scFilterCount" class="sc-count" hidden></span></button>
+      <div id="scFilterPanel" class="sc-panel" hidden></div>
+    </div>
+
+    <div class="sc-spacer"></div>
+    <button type="button" id="scToday" class="sc-btn">今日</button>
+    <div class="sc-range">
+      <button type="button" id="scPrev" aria-label="前の日付へ">&lt;</button>
+      <span id="scRange"></span>
+      <button type="button" id="scNext" aria-label="次の日付へ">&gt;</button>
+    </div>
+  </div>
+
+  <div class="sc-legend">
+    <span class="sc-legend-title">タスクの状態</span>
+    <span class="sc-chip"><i class="sc-dot todo"></i>未着手</span>
+    <span class="sc-chip"><i class="sc-dot doing"></i>作業中</span>
+    <span class="sc-chip"><i class="sc-dot done"></i>完了</span>
+    <span class="sc-chip"><i class="sc-dot late"></i>遅延</span>
+    <span class="sc-legend-note">背景色は進捗を表します（作業区分・担当者によらず共通）</span>
+  </div>
+
+  <div class="sc-scroll"><div id="scGrid" class="sc-grid"></div></div>
+</main>
