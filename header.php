@@ -30,5 +30,6 @@ $navItems = [
     $user = ['name' => 'Oさん', 'role' => '管理者']; //ここでdbから名前をとる
     ?>
 <?php require 'html/header.html'; ?>
+
 <!-- 通知画面読み込み -->
 <?php require 'notification.php'; ?>
