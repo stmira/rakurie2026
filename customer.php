@@ -1,3 +1,5 @@
+<!-- お客様情報登録画面について -->
+
 <!-- ヘッダーの読み込み -->
 <?php $currentPage = 'customer'; ?>
 <?php require 'header.php'; ?>
