@@ -592,6 +592,10 @@ button { font-family: inherit; cursor: pointer; }
 .notif-head {
     padding: 17px 20px 0;
     border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 99;
 }
 
 .title-row { display: flex; align-items: center; gap: 8px; height: 28px; }
@@ -659,6 +663,7 @@ button { font-family: inherit; cursor: pointer; }
 .item:hover { background: #f6fafd; }
 .item.is-unread { background: var(--unread-bg); }
 .item.is-unread:hover { background: #dfeffb; }
+.item:not(.is-unread):hover { background: #fff; }
 
 .meta {
     display: flex; align-items: center;
@@ -700,6 +705,7 @@ button { font-family: inherit; cursor: pointer; }
     font-size: 10px; color: var(--text-sub);
 }
 .foot svg { flex: none; }
+
 /* ====================通知画面===================== */
 
 /* ====================社員登録画面===================== */

@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>通知 | 楽ラック</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
 <aside class="notif" id="notification_area" aria-labelledby="notif-title" style="display: none;">
 
     <!-- ===== 上部 ===== -->
     <header class="notif-head">
     <div class="title-row">
         <h1 id="notif-title">通知</h1>
-        <span class="badge-unread">未読２件</span>
+        <span class="badge-unread">未読1件</span>
         <button type="button" class="close" id="close_btn" aria-label="通知を閉じる">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
         </button>
@@ -25,10 +12,6 @@
 
     <div class="action-row">
         <button type="button" class="read-all" id="read_all_btn">すべて既読にする</button>
-        <button type="button" class="multi">複数選択</button>
-        <button type="button" class="more" aria-label="その他の操作">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
-        </button>
     </div>
 
     </header>
@@ -37,9 +20,8 @@
     <ul class="list" id="list_area">
 
     <li>
-        <a href="#" class="item is-unread" id="">
+        <a href="#" class="item is-unread">
         <span class="meta">
-            <i class="dot" aria-hidden="true"></i>
             <time>10月9日（金）14:40</time>
         </span>
         <span class="main">
@@ -54,7 +36,6 @@
     <li>
         <a href="#" class="item is-unread">
         <span class="meta">
-            <i class="dot" aria-hidden="true"></i>
             <time>10月8日（木）9:00</time>
         </span>
         <span class="main">
@@ -69,7 +50,6 @@
     <li>
         <a href="#" class="item is-unread">
         <span class="meta">
-            <i class="dot" aria-hidden="true"></i>
             <time>10月7日（水）9:00</time>
         </span>
         <span class="main">
@@ -84,7 +64,6 @@
     <li>
         <a href="#" class="item is-unread">
         <span class="meta">
-            <i class="dot" aria-hidden="true"></i>
             <time>10月5日（月）10:00</time>
         </span>
         <span class="main">
@@ -99,7 +78,6 @@
     <li>
         <a href="#" class="item is-unread">
         <span class="meta">
-            <i class="dot" aria-hidden="true"></i>
             <time>10月5日（月）10:00</time>
         </span>
         <span class="main">
@@ -120,6 +98,3 @@
     </p>
 
 </aside>
-
-</body>
-</html>
