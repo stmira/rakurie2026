@@ -1,5 +1,5 @@
 /* ====================パスワード再設定画面===================== */
-:root {
+body.password-page {
     --blue: #0a7fb8;
     --blue-light: #e6f4fb;
     --text: #26394a;
@@ -10,7 +10,7 @@
 
 * { box-sizing: border-box; }
 
-body {
+body.password-page {
     margin: 0;
     background: var(--white);
     color: var(--text);
@@ -19,20 +19,20 @@ body {
 }
 
 /* 画面全体：フォームを中央に配置 */
-.page {
+.password-page .page {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    padding: 70px 16px 48px;
+    padding: 120px 16px 48px;
 }
 
-.card {
+.password-page .password-card {
 width: 100%;
-max-width:900px;
+max-width: 318px;
 }
 
 /* 鍵アイコン */
-.icon-box {
+.password-page .icon-box {
     width: 32px;
     height: 32px;
     border-radius: 8px;
@@ -43,7 +43,7 @@ max-width:900px;
     justify-content: center;
 }
 
-.title {
+.password-page .title {
     margin: 10px 0 0;
     font-size: 22px;
     line-height: 1.4;
@@ -51,7 +51,7 @@ max-width:900px;
     color: var(--text);
 }
 
-.lead {
+.password-page .lead {
     margin: 10px 0 20px;
     font-size: 10.5px;
     line-height: 1.55;
@@ -59,9 +59,9 @@ max-width:900px;
 }
 
 /* 入力欄まわり */
-.field { margin-bottom: 16px; }
+.password-page .field { margin-bottom: 16px; }
 
-.label {
+.password-page .label {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -72,15 +72,15 @@ max-width:900px;
     color: var(--text);
 }
 
-.badge {
+.password-page .badge {
     font-size: 9px;
     font-weight: 500;
     color: var(--blue);
 }
 
-.input-wrap { position: relative; }
+.password-page .input-wrap { position: relative; }
 
-.input {
+.password-page .input {
     display: block;
     width: 100%;
     height: 33px;
@@ -95,14 +95,14 @@ max-width:900px;
     transition: border-color .15s, box-shadow .15s;
 }
 
-.input.has-icon { padding-right: 36px; }
+.password-page .input.has-icon { padding-right: 36px; }
 
-.input:focus {
+.password-page .input:focus {
     border-color: var(--blue);
     box-shadow: 0 0 0 3px rgba(10, 127, 184, .15);
 }
 
-.toggle {
+.password-page .toggle {
     position: absolute;
     top: 0;
     right: 0;
@@ -117,13 +117,13 @@ max-width:900px;
     cursor: pointer;
 }
 
-.toggle:focus-visible {
+.password-page .toggle:focus-visible {
     outline: 2px solid var(--blue);
     outline-offset: -2px;
     border-radius: 6px;
 }
 
-.hint {
+.password-page .hint {
     margin: 6px 0 0;
     font-size: 10px;
     line-height: 1.4;
@@ -131,13 +131,13 @@ max-width:900px;
 }
 
 /* ボタン */
-.actions {
+.password-page .actions {
     display: flex;
     gap: 9px;
     margin-top: 17px;
 }
 
-.btn {
+.password-page .btn {
     height: 32px;
     display: inline-flex;
     align-items: center;
@@ -151,30 +151,35 @@ max-width:900px;
     transition: background-color .15s, border-color .15s;
 }
 
-.btn-reset {
+/* .password-page .btn svg {
+    width: 100px;
+    height: 100px;
+} */
+
+.password-page .btn-reset {
     flex: 0 0 95px;
     background: var(--white);
     border: 1px solid var(--border);
     color: var(--text);
 }
-.btn-reset:hover { background: #f5f8fa; }
+.password-page .btn-reset:hover { background: #f5f8fa; }
 
-.btn-submit {
+.password-page .btn-submit {
     flex: 1;
     background: var(--blue);
     border: 1px solid var(--blue);
     color: var(--white);
 }
-.btn-submit:hover { background: #086a9c; border-color: #086a9c; }
+.password-page .btn-submit:hover { background: #086a9c; border-color: #086a9c; }
 
-.btn:focus-visible,
-.back-link:focus-visible {
+.password-page .btn:focus-visible,
+.password-page .back-link:focus-visible {
     outline: 2px solid var(--blue);
     outline-offset: 2px;
 }
 
 /* ログイン画面に戻るリンク */
-.back-link {
+.password-page .back-link {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -184,7 +189,7 @@ max-width:900px;
     color: var(--blue);
     text-decoration: none;
 }
-.back-link:hover { text-decoration: underline; }
+.password-page .back-link:hover { text-decoration: underline; }
 /* ====================パスワード再設定画面===================== */
 
 /* ====================ログイン画面===================== */
