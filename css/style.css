@@ -567,20 +567,6 @@ body {
     --unread-bg: #e8f4fd;
 }
 
-* { box-sizing: border-box; }
-
-body {
-    margin: 0;
-    background: #f4f7fa;
-    color: var(--text);
-    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
-
-h1, p, ul { margin: 0; padding: 0; }
-ul { list-style: none; }
-button { font-family: inherit; cursor: pointer; }
-
 /* 通知パネル本体（幅400px） */
 .notif {
     width: 100%;
@@ -590,11 +576,17 @@ button { font-family: inherit; cursor: pointer; }
     z-index: 999;
     position: fixed;
     right: 0px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
     overflow-y: auto;
     overscroll-behavior: contain;
     background: #fff;
     border-left: 1px solid var(--line);
     border-right: 1px solid var(--line);
+}
+
+.notif.is-show {
+  transform: translateX(0);
 }
 
 /* ===== 上部 ===== */

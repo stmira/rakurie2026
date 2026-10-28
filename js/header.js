@@ -3,11 +3,9 @@ const notificationArea = document.getElementById('notification_area')
 const closeButton = document.getElementById('close_btn')
 
 showButton.addEventListener('click', function() {
-    notificationArea.style.display = 'block'
-    showButton.setAttribute('aria-expanded', 'true')
+    notificationArea.classList.toggle('is-show')
 });
 
 closeButton.addEventListener('click', function() {
-    notificationArea.style.display = 'none'
-    showButton.setAttribute('aria-expanded', 'false')
+    notificationArea.classList.remove('is-show')
 })
