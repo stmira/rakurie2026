@@ -28,8 +28,17 @@
     }
     return {
       employees: [
-        { employee_id: 1, name: '大原', role: '板金・生産管理' }, { employee_id: 2, name: 'Tさん', role: '設計・作図' },
-        { employee_id: 3, name: 'Hさん', role: '製造・溶接' }, { employee_id: 4, name: 'Yさん', role: 'アームロボット' }],
+          { employee_id: 1,  name: '大原',   role: '板金・生産管理' },
+          { employee_id: 2,  name: 'Tさん',  role: '設計・作図' },
+          { employee_id: 3,  name: 'Hさん',  role: '製造・溶接' },
+          { employee_id: 4,  name: 'Yさん',  role: 'アームロボット' },
+          { employee_id: 5,  name: 'Sさん',  role: '板金・プレス' },
+          { employee_id: 6,  name: 'Kさん',  role: '製造・組立' },
+          { employee_id: 7,  name: 'Mさん',  role: '溶接' },
+          { employee_id: 8,  name: 'Nさん',  role: '塗装' },
+          { employee_id: 9,  name: 'Oさん',  role: '検査・出荷' },
+          { employee_id: 10, name: 'Aさん',  role: '設計・積算' },
+          { employee_id: 11, name: 'Rさん',  role: '運搬・資材' }],
       purchase_orders: [
         { purchase_order_id: 1, summary: 'H150', spec: '7m×1本・8m×6本', supplier_name: 'K社', arrival_date: d(0), status: '完了' },
         { purchase_order_id: 2, summary: 'プレス M10', spec: 'L2196×6本', supplier_name: 'N社', arrival_date: d(0), status: '遅延' },
@@ -45,8 +54,18 @@
         s(12, 3, 'ポスト溶接', 'N社', '', 0, 0, 0, null), s(13, 3, '出荷準備', 'Q S', '', 2, 2),
         s(14, 3, 'ポスト溶接', 'K社H社', '', 4, 4), s(15, 3, 'ベース製作', 'M社', '', 5, 5),
         s(16, 4, 'アームロボット', 'N社', '', 0, 0, 0, 0), s(17, 4, 'アームロボット', 'K社H社', '', 2, 2),
-        s(18, 4, 'アームロボット', 'K社H社 51・Y社 9', '', 4, 4), s(19, 4, 'アームロボット', 'Y社 34・M社 3', '', 5, 5)],
-      leaves: [{ employee_id: 1, date: d(1) }]
+        s(18, 4, 'アームロボット', 'K社H社 51・Y社 9', '', 4, 4),
+        s(19, 4, 'アームロボット', 'Y社 34・M社 3', '', 5, 5),
+        s(20, 5, 'プレス加工', 'N社', '', 0, 0, 0, null), s(21, 5, 'プレス加工', 'O工業', '', 1, 2),
+        s(22, 5, '曲げ加工', 'K社', '', 4, 4),
+        s(23, 6, '組立', 'M林業', '', 0, 1, 0, null), s(24, 6, '組立', 'R屋', '', 4, 5),
+        s(25, 7, 'ポスト溶接', 'K社H社', '', 1, 1), s(26, 7, '溶接', 'Q S', '', 3, 4),
+        s(27, 8, '塗装', 'N社', '', 0, 0, 0, 0), s(28, 8, '塗装', 'M社', '', 2, 3),
+        s(29, 9, '検査', 'N社', '', 0, 0, 0, 0), s(30, 9, '出荷準備', 'O工業', '', 2, 2),
+        s(31, 9, '出荷', 'O工業', '', 3, 3),
+        s(32, 10, '積算', 'A屋', '', 1, 2), s(33, 10, '図面作成', 'R屋', '', 4, 5),
+        s(34, 11, '資材手配', 'K社', '', 0, 0, 0, null), s(35, 11, '搬入', 'M林業', '', 5, 5)],
+        leaves: [{ employee_id: 1, date: d(1) }]
     };
   }
 

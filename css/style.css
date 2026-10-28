@@ -1675,9 +1675,17 @@ button { font-family: inherit; cursor: pointer; }
 .sc-dot{width:14px;height:14px;border-radius:3px;display:inline-block}
 .sc-legend-note{margin-left:auto;color:var(--text-muted)}
 .todo{background:#e9ecef}.doing{background:#d7ecd6}.done{background:#fdeba5}.late{background:#f8d1d1}
-
-.sc-scroll{overflow-x:auto;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-lg)}
+.sc-scroll{
+  overflow:auto;                         /* 縦・横どちらも、この枠の中でスクロール */
+  max-height:calc(100vh - 290px);        /* 画面の高さに合わせる（数字は調整可） */
+  min-height:420px;
+  background:#fff;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius-lg);
+}.sc-scroll{overflow-x:auto;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-lg)}
 .sc-grid{display:grid;grid-template-columns:150px repeat(var(--days),minmax(170px,1fr));min-width:max-content}
+.sc-h{position:sticky;top:0;z-index:3}
+.sc-h.corner{left:0;z-index:4}   /* 左上の「担当／作業日」は上にも左にも固定 */
 .sc-h,.sc-rh,.sc-cell{border-right:1px solid var(--border-color);border-bottom:1px solid var(--border-color)}
 .sc-h{padding:12px 10px;text-align:center;font-size:13px;font-weight:bold;background:#fff}
 .sc-h.today{background:#e1f1fb;color:var(--primary)}
