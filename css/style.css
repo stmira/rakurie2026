@@ -471,6 +471,10 @@ body {
     border-bottom: 1px solid #e3e9ee;
     font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
     -webkit-font-smoothing: antialiased;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 /* ロゴ */
