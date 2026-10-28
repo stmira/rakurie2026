@@ -34,21 +34,3 @@ items.forEach(function (item) {
 
 // ===== 画面を開いたときに、バッジの数を正しくそろえる =====
 updateBadge()
-
-// 画面が右から出てくる
-document.addEventListener("DOMContentLoaded", () => {
-    const target = document.querySelector(".box");
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("is-active");
-                observer.unobserve(entry.target); // 一度表示したら監視を終了する場合
-            }
-        });
-    }, {
-    threshold: 0.2 // 要素が20%見えたら発火
-    });
-
-    observer.observe(target);
-});
