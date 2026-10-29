@@ -550,10 +550,101 @@ body {
 .header .user-name { font-size: 10px; font-weight: 700; color: #26394a; }
 .header .user-role { font-size: 7px; color: #6b7a88; }
 
-/* 狭い画面ではメニューを横スクロールにする */
-@media (max-width: 900px) {
-.header .nav { overflow-x: auto; }
+/* ====================スマホ用ハンバーガーメニュー===================== */
+
+/* 1. PC画面など普段はハンバーガーボタンを非表示にする（※ハイフンからアンダーバーに修正） */
+.header .hamburger_btn {
+    display: none !important;
 }
+
+/* 2. スマホ用メニュー（ドロワー）の基本スタイル */
+.mobile-nav-drawer {
+    width: 50%;
+    max-width: 300px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1001; /* ヘッダーや通知パネルより手前に表示 */
+    background: #fff;
+    border-left: 1px solid var(--line);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.08);
+}
+
+/* クラスが付与されたら画面内にスライドインする */
+.mobile-nav-drawer.is-show {
+    transform: translateX(0);
+}
+
+/* スマホ用メニューのヘッダー部分 */
+.mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 20px;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy, #26394a);
+}
+
+/* スマホ用メニューのリンク一覧 */
+.mobile-nav-list {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+}
+
+.mobile-nav-list a {
+    padding: 14px 20px;
+    font-size: 14px;
+    color: var(--text-sub, #6b7a88);
+    text-decoration: none;
+    border-bottom: 1px solid #f1f5f8;
+}
+
+.mobile-nav-list a:hover {
+    background: #f6fafd;
+    color: var(--blue, #0a7fb8);
+}
+
+.mobile-nav-list a.is-active {
+    color: var(--blue, #0a7fb8);
+    font-weight: 700;
+    background: #e8f4fd;
+}
+
+/* 3. 画面幅が狭いとき（スマホサイズ：900px以下）のレイアウト調整 */
+@media (max-width: 900px) {
+    /* ヘッダー全体の左右の余白を少しスッキリさせる */
+    .header {
+        padding: 0 12px;
+    }
+
+    /* PC用のメインメニューを非表示にする */
+    .header .nav {
+        display: none;
+    }
+    
+    /* ハンバーガーボタンを表示する */
+    .header .hamburger_btn {
+        display: flex !important;
+    }
+
+    /* スマホで文字が潰れないように、ロゴのテキストを小さくするか、必要ならアイコンだけにする調整 */
+    .header .logo-text {
+        font-size: 16px;
+    }
+
+    /* ユーザー情報の役職（user-role）をスマホでは非表示にしてスッキリさせる場合 */
+    .header .user-role {
+        display: none; 
+    }
+}
+/* ====================スマホ用ハンバーガーメニュー===================== */
 /* ====================ヘッダー画面===================== */
 
 /* ====================通知画面===================== */
@@ -567,20 +658,6 @@ body {
     --unread-bg: #e8f4fd;
 }
 
-* { box-sizing: border-box; }
-
-body {
-    margin: 0;
-    background: #f4f7fa;
-    color: var(--text);
-    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
-
-h1, p, ul { margin: 0; padding: 0; }
-ul { list-style: none; }
-button { font-family: inherit; cursor: pointer; }
-
 /* 通知パネル本体（幅400px） */
 .notif {
     width: 100%;
@@ -590,11 +667,17 @@ button { font-family: inherit; cursor: pointer; }
     z-index: 999;
     position: fixed;
     right: 0px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
     overflow-y: auto;
     overscroll-behavior: contain;
     background: #fff;
     border-left: 1px solid var(--line);
     border-right: 1px solid var(--line);
+}
+
+.notif.is-show {
+  transform: translateX(0);
 }
 
 /* ===== 上部 ===== */
@@ -714,7 +797,6 @@ button { font-family: inherit; cursor: pointer; }
     font-size: 10px; color: var(--text-sub);
 }
 .foot svg { flex: none; }
-
 /* ====================通知画面===================== */
 
 /* ====================社員登録画面===================== */
