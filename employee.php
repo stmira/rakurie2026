@@ -97,7 +97,7 @@ function esc($value): string
           <table class="emp-table">
             <thead>
               <tr>
-                <th class="col-id">社員ID</th>
+                <th class="col-id">背番号</th>
                 <th class="col-name">氏名</th>
                 <th class="col-dept">部署</th>
                 <th class="col-pw">パスワード</th>
@@ -157,7 +157,7 @@ function esc($value): string
             </div>
 
             <div class="field" data-field="employee_id">
-              <label for="fId">社員ID <em class="req">必須</em></label>
+              <label for="fId">背番号 <em class="req">必須</em></label>
               <input type="text" id="fId" inputmode="numeric" maxlength="10" placeholder="例：1009" autocomplete="off">
               <p class="field-error" hidden></p>
             </div>
