@@ -22,7 +22,7 @@ $navItems = [
     'schedule'       => ['工程表',         'schedule.php'],
     'reference'      => ['早見表',         'reference.php'],
     'customer'       => ['お客様情報登録', 'customer.php'],
-    'shedule-entry'  => ['工程表情報登録', 'shedule-entry.php'],
+    'shedule-entry'  => ['工程表情報登録', 'schedule-entry.php'],
     'employee'       => ['社員情報',       'employee.php'],
     ];
 
