@@ -40,22 +40,37 @@
         { key: 'post_t',  label: 'ポストT' },
         { key: 'base',    label: 'ベース' },
         { key: 'arm',     label: 'アーム' },
-        { key: 'angle',   label: 'アングル' }
+        { key: 'angle',   label: 'アングル' },
+        { key: 'A_base',   label: 'Aベース' },
+        { key: 'others1',   label: 'その他1' },
+        { key: 'others2',   label: 'その他2' },
+        { key: 'others3',   label: 'その他3' },
+        { key: 'others4',   label: 'その他4' },
+        { key: 'others5',   label: 'その他5' },
+        { key: 'breath',   label: 'ブレス' },
+        { key: 'w_check',   label: 'wチェック' },
+        { key: 'salesperson',   label: '営業担当' },
     ];
 
     // ===== 画面確認用のサンプルデータ =====
     // 本番は PHP から window.REF_ORDERS に入れます（reference.html の下のコメント参照）。
     // customer_name は、orders と顧客テーブルを customer_id でつないで取ります。
     const EMPTY = {
-        drawing: 0, drawing_detail: '', post_l: 0, post_l_detail: '', post_t: 0, post_t_detail: '',
-        base: 0, base_detail: '', arm: 0, arm_detail: '', angle: 0, angle_detail: ''
+        drawing: 0, drawing_detail: '',
+        post_l: 0, post_l_detail: '',
+        post_t: 0, post_t_detail: '',
+        base: 0, base_detail: '',
+        arm: 0, arm_detail: '',
+        angle: 0, angle_detail: '',
+        A_base: 0, A_base_detail: ''
     };
     const SAMPLE_ORDERS = [
         Object.assign({}, EMPTY, {
         order_id: 26041, customer_name: 'A社', summary: 'H150', due_date: '2026-10-23',
         production: true, progress: 0, ship_status: 'today',
         post_l: 8, post_l_detail: '6 (2.4m)  XXX\nH125　7m*2本\n（大戸）10/1am',
-        arm: 7, arm_detail: '12 R (L1200)\n上部にアングル付ける'
+        arm: 7, arm_detail: '12 R (L1200)\n上部にアングル付ける',
+        A_base: 7, A_base_detail: 'aaaaaaaaa'
         }),
         Object.assign({}, EMPTY, {
         order_id: 26042, customer_name: 'B社', summary: 'H100', due_date: '2026-10-22',
