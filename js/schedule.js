@@ -103,7 +103,25 @@
       (carried ? '<span class="sc-carry">繰越</span>' : '') + st + '</span></div>' +
       lines.filter(Boolean).map(function (l) { return '<p>' + esc(l) + '</p>'; }).join('') + '</div>';
   }
+  // スマホ：担当者3人分の高さで表を止め、残りは表の中でスクロール
+  var SHOW_EMP = 3;
+  function fitRows() {
+    var box = document.querySelector('.sc-scroll'), grid = $('scGrid');
+    if (!box || !grid) return;
+    box.style.maxHeight = ''; box.style.minHeight = '';
+    if (!window.matchMedia('(max-width: 980px)').matches) return;   // PCは何もしない
 
+    // 入荷予定の行（トラックのアイコンつき）を除いた、担当者の見出しだけを集める
+    var heads = [].slice.call(grid.querySelectorAll('.sc-rh')).filter(function (el) {
+      return !el.querySelector('svg');
+    });
+    if (heads.length <= SHOW_EMP) return;                            // 3人以下なら全部表示
+
+    var last = heads[SHOW_EMP - 1];
+    var h = last.getBoundingClientRect().bottom - grid.getBoundingClientRect().top;
+    box.style.minHeight = '0';
+    box.style.maxHeight = Math.ceil(h) + 2 + 'px';                    // +2は枠線ぶん
+  }
   function render() {
     var data = state.data, days = [], i;
     for (i = 0; i < DAYS; i++) days.push(add(state.start, i));
@@ -156,6 +174,7 @@
     var a = days[0], b = days[DAYS - 1];
     $('scRange').textContent = a.getFullYear() + '年' + (a.getMonth() + 1) + '月' + a.getDate() + '日〜' +
       (b.getMonth() !== a.getMonth() ? (b.getMonth() + 1) + '月' : '') + b.getDate() + '日';
+    fitRows();
   }
 
   // ---------- 絞り込み（担当者） ----------
@@ -185,7 +204,30 @@
     $('scFilterBtn').addEventListener('click', function (e) { e.stopPropagation(); var p = $('scFilterPanel'); p.hidden = !p.hidden; });
     document.addEventListener('click', function (e) { var p = $('scFilterPanel'); if (!p.contains(e.target)) p.hidden = true; });
     load().then(function (d) { state.data = d; buildFilter(); render(); });
+    window.addEventListener('resize', fitRows);
+    window.addEventListener('load', fitRows);   // フォント読み込み後にも再計算
   }
   if ($('scGrid')) init();
 })();
 // ========================工程表一覧画面===========================
+// ====================スマホver========================================
+  // スマホ：担当者3人分の高さで表を止め、残りは表の中でスクロール
+  var SHOW_EMP = 3;
+  function fitRows() {
+    var box = document.querySelector('.sc-scroll'), grid = $('scGrid');
+    if (!box || !grid) return;
+    box.style.maxHeight = ''; box.style.minHeight = '';
+    if (!window.matchMedia('(max-width: 980px)').matches) return;   // PCは何もしない
+
+    // 入荷予定の行（トラックのアイコンつき）を除いた、担当者の見出しだけを集める
+    var heads = [].slice.call(grid.querySelectorAll('.sc-rh')).filter(function (el) {
+      return !el.querySelector('svg');
+    });
+    if (heads.length <= SHOW_EMP) return;                            // 3人以下なら全部表示
+
+    var last = heads[SHOW_EMP - 1];
+    var h = last.getBoundingClientRect().bottom - grid.getBoundingClientRect().top;
+    box.style.minHeight = '0';
+    box.style.maxHeight = Math.ceil(h) + 2 + 'px';                    // +2は枠線ぶん
+  }
+// ====================スマホver========================================
