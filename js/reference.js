@@ -50,6 +50,8 @@
         { key: 'breath',   label: 'ブレス' },
         { key: 'w_check',   label: 'wチェック' },
         { key: 'salesperson',   label: '営業担当' },
+        { key: 'small_item',   label: '小物準備' },
+        { key: 'small_check',   label: '小物wチェック' },
     ];
 
     // ===== 画面確認用のサンプルデータ =====
@@ -66,20 +68,19 @@
     };
     const SAMPLE_ORDERS = [
         Object.assign({}, EMPTY, {
-        order_id: 26041, customer_name: 'A社', summary: 'H150', due_date: '2026-10-23',
+        order_id: 26041, customer_name: 'A社', summary: 'H150', due_date: '2026-10-22',
         production: true, progress: 0, ship_status: 'today',
         post_l: 8, post_l_detail: '6 (2.4m)  XXX\nH125　7m*2本\n（大戸）10/1am',
         arm: 7, arm_detail: '12 R (L1200)\n上部にアングル付ける',
-        A_base: 7, A_base_detail: 'aaaaaaaaa'
         }),
         Object.assign({}, EMPTY, {
         order_id: 26042, customer_name: 'B社', summary: 'H100', due_date: '2026-10-22',
-        production: true, progress: 100, ship_status: 'shipped',
+        production: true, progress: 100, ship_status: 'today',
         post_l: 11, post_l_detail: '6 (3.3m) URP\nH125　10m*2本在庫使用'
         }),
         Object.assign({}, EMPTY, {
         order_id: 26043, customer_name: 'A社', summary: 'アーム', due_date: '2026-10-23',
-        production: true, progress: 50, ship_status: 'progress',
+        production: true, progress: 50, ship_status: 'shipped',
         post_l: 8, post_l_detail: '800 R (L1200)',
         post_t: 11, post_t_detail: '3 (1.8m)'
         }),
@@ -93,7 +94,7 @@
         }),
         Object.assign({}, EMPTY, {
         order_id: 26046, customer_name: 'F社', summary: 'H150　アーム', due_date: '2026-10-30',
-        production: true, progress: 0, ship_status: 'progress'
+        production: true, progress: 0, ship_status: 'undecided'
         }),
         Object.assign({}, EMPTY, {
         order_id: 26040, customer_name: 'D社', summary: 'H125', due_date: '2026-10-20',
@@ -141,7 +142,7 @@
         keyword: '',
         companies: new Set()   // 選んだ会社名
     };
-    const collapsed = new Set(); // スマホで「工程内訳」を閉じているカード
+    const opened = new Set(); // スマホで「工程内訳」を閉じているカード
     let menuTarget = null;
 
     // ===== 便利な関数 =====
@@ -229,7 +230,7 @@
     // ===== 表示（スマホ：カード） =====
     function cardHtml(o) {
         const id = esc(o.order_id);
-        const isOpen = !collapsed.has(String(o.order_id));
+        const isOpen = opened.has(String(o.order_id));
         const rows = DESIGN_COLS.map(function (c) {
         const code = o[c.key];
         const detail = o[c.key + '_detail'] || '';
@@ -421,8 +422,8 @@
 
         if (toggle && page.contains(toggle)) {
         const id = toggle.dataset.toggle;
-        if (collapsed.has(id)) collapsed.delete(id); else collapsed.add(id);
-        const open = !collapsed.has(id);
+        if (opened.has(id)) opened.delete(id); else opened.add(id);
+        const open = opened.has(id);
         toggle.setAttribute('aria-expanded', open);
         const box = toggle.closest('.ref-card').querySelector('.ref-detail-list');
         box.hidden = !open;

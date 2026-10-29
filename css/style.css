@@ -2094,7 +2094,7 @@ body {
   .ref-pop { left: auto; right: 0; }
 
   /* 凡例は検索の下に出す */
-  .ref-legend { order: 2; display: block; padding: 14px; border-radius: 10px; overflow: visible; }
+  .ref-legend { display: block; padding: 14px; border-radius: 10px; overflow: visible; }
   .ref-legend-title { display: block; margin-bottom: 10px; font-size: 12px; }
   .ref-legend-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; }
   .ref-legend-group { display: contents; }
@@ -2108,7 +2108,7 @@ body {
   .ref-legend-note { display: block; margin-top: 12px; font-size: 10px; color: var(--ref-sub); }
 
   /* 一覧 */
-  .ref-list { order: 3; background: transparent; border: 0; border-radius: 0; overflow: visible; }
+  .ref-list { background: transparent; border: 0; border-radius: 0; overflow: visible; }
   .ref-list-head { height: auto; padding: 0 0 10px; gap: 8px; }
   .ref-list-head h2 { font-size: 16px; }
   .ref-head-divider, .ref-late, .ref-soon { display: none; }
