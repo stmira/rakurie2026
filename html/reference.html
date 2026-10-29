@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>早見表 | 楽ラック</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>body { margin: 0; }</style>
+</head>
+<body>
+
+<!-- ================= ここから：早見表の画面（reference.php に組み込む部分） ================= -->
+<div class="ref-page" id="ref-page">
+
+    <h1 class="ref-title">早見表</h1>
+
+    <!-- ===== 検索 ===== -->
+    <section class="ref-search" aria-label="検索">
+        <form class="ref-search-form" id="ref-search-form" autocomplete="off">
+
+        <div class="ref-field ref-field-keyword">
+            <label for="ref-keyword" class="ref-label">キーワード</label>
+            <div class="ref-input-wrap">
+            <input type="search" id="ref-keyword" class="ref-input" placeholder="注番・品名・シリアルで検索">
+            <svg class="ref-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+        </div>
+
+        <div class="ref-field ref-field-filter">
+            <span class="ref-label">客先</span>
+            <div class="ref-filter" id="ref-filter">
+            <button type="button" class="ref-filter-btn" id="ref-filter-btn" aria-haspopup="true" aria-expanded="false" aria-label="客先で絞り込み">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+                <span class="ref-filter-text">絞り込み</span>
+                <span class="ref-filter-count" id="ref-filter-count" hidden></span>
+            </button>
+            <div class="ref-pop" id="ref-filter-pop" hidden>
+                <input type="search" class="ref-pop-input" id="ref-filter-search" placeholder="会社名を検索" aria-label="会社名を検索">
+                <ul class="ref-pop-list" id="ref-filter-list"></ul>
+                <button type="button" class="ref-pop-clear" id="ref-filter-clear">選択を解除</button>
+            </div>
+            </div>
+        </div>
+
+        <div class="ref-actions">
+            <button type="submit" class="ref-btn-search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            検索
+            </button>
+            <button type="button" class="ref-btn-reset" id="ref-reset">リセット</button>
+        </div>
+
+        </form>
+    </section>
+
+    <!-- ===== 受注一覧 ===== -->
+    <section class="ref-list" aria-labelledby="ref-list-title">
+        <div class="ref-list-head">
+        <h2 id="ref-list-title">受注一覧</h2>
+        <span class="ref-total" id="ref-total">全 0 件</span>
+        <span class="ref-head-divider" aria-hidden="true"></span>
+        <span class="ref-late" id="ref-late">遅延 0 件</span>
+        <span class="ref-soon" id="ref-soon">3日以内の納期 0 件</span>
+        </div>
+
+        <!-- パソコン：表（横にスライドできます） -->
+        <div class="ref-table-scroll" id="ref-scroll" tabindex="0" aria-label="受注一覧（横にスライドできます）">
+        <table class="ref-table">
+            <colgroup>
+            <col style="width:85px"><col style="width:91px"><col style="width:101px"><col style="width:103px">
+            <col style="width:164px"><col style="width:116px"><col style="width:114px"><col style="width:126px">
+            <col style="width:135px"><col style="width:66px"><col style="width:146px"><col style="width:114px">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>注番</th>
+                <th>制作可</th>
+                <th>進捗</th>
+                <th>客先名</th>
+                <th>概要</th>
+                <th>出荷日</th>
+                <th>製作図</th>
+                <th>ポストL</th>
+                <th>ポストT</th>
+                <th>ベース</th>
+                <th>アーム</th>
+                <th>アングル</th>
+                <!-- <th>Aベース</th>
+                <th>その他1</th>
+                <th>その他2</th>
+                <th>その他3</th>
+                <th>その他4</th>
+                <th>その他5</th>
+                <th>ブレス</th>
+                <th>wチェック</th>
+                <th>営業担当</th>
+                <th>小物準備</th>
+                <th>小物wチェック</th> -->
+            </tr>
+            </thead>
+            <tbody id="ref-tbody"></tbody>
+        </table>
+        </div>
+
+        <!-- スマホ：カード -->
+        <div class="ref-cards" id="ref-cards"></div>
+
+        <p class="ref-empty" id="ref-empty" hidden>該当する受注はありません。</p>
+    </section>
+
+    <!-- ===== 進捗の色（凡例） ===== -->
+    <section class="ref-legend" aria-label="進捗の色">
+        <span class="ref-legend-title">進捗の色</span>
+        <div class="ref-legend-groups">
+        <ul class="ref-legend-group">
+            <li class="ref-pill ref-c-undecided"><i></i><span>未定</span></li>
+            <li class="ref-pill ref-c-today"><i></i><span>当日</span></li>
+            <li class="ref-pill ref-c-shipped"><i></i><span>出荷済</span></li>
+        </ul>
+        <span class="ref-legend-divider" aria-hidden="true"></span>
+        <ul class="ref-legend-group">
+            <li class="ref-pill ref-c-distributed"><i></i><span>配布済</span></li>
+            <li class="ref-pill ref-c-checking"><i></i><span>確認中</span></li>
+            <li class="ref-pill ref-c-ready"><i></i><span>配布可</span></li>
+            <li class="ref-pill ref-c-check"><i></i><span>チェック</span></li>
+        </ul>
+        <span class="ref-legend-divider" aria-hidden="true"></span>
+        <ul class="ref-legend-group">
+            <li class="ref-pill ref-c-cut"><i></i><span>切断</span></li>
+            <li class="ref-pill ref-c-punch"><i></i><span>ポンチング</span></li>
+            <li class="ref-pill ref-c-weld"><i></i><span>溶接</span></li>
+            <li class="ref-pill ref-c-paint"><i></i><span>塗装</span></li>
+            <li class="ref-pill ref-c-outsource"><i></i><span>外注</span></li>
+            <li class="ref-pill ref-c-pack"><i></i><span>梱包可</span></li>
+            <li class="ref-pill ref-c-shipready"><i></i><span>出荷可</span></li>
+        </ul>
+        </div>
+        <p class="ref-legend-note">「—」は元の工程表の空欄を表しています。</p>
+    </section>
+
+    <!-- 色を選ぶメニュー（JSが中身を作ります） -->
+    <div class="ref-menu" id="ref-menu" role="menu" hidden></div>
+
+</div>
+<!-- ================= ここまで ================= -->
+
+<!--
+    PHPからデータを渡すときは、reference.js を読み込む前に次を書きます。
+    <script>window.REF_ORDERS = <?= json_encode($orders, JSON_UNESCAPED_UNICODE) ?>;</script>
+-->
+<script src="reference.js"></script>
+</body>
+</html>
