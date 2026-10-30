@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- ヘッダーの読み込み -->
 <?php $currentPage = 'schedule'; ?>
 <?php require 'header.php'; ?>

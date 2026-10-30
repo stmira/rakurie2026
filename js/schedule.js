@@ -3,7 +3,8 @@
 // API が返す JSON: { employees:[], schedules:[], purchase_orders:[], leaves:[] }
 (function () {
   'use strict';
-  var DAYS = 6;                         // 一度に表示する日数
+  var MOBILE = window.matchMedia('(max-width: 640px)');   // style.css のスマホ用 @media と同じ幅
+  var DAYS = MOBILE.matches ? 2 : 6;    // 一度に表示する日数（スマホ2日 / PC6日）
   var API = 'api/schedules.php';
   var WD = ['日', '月', '火', '水', '木', '金', '土'];
   var HOLIDAYS = [];                    // 祝日・会社休日 'YYYY-MM-DD'
@@ -28,17 +29,17 @@
     }
     return {
       employees: [
-          { employee_id: 1,  name: '大原',   role: '板金・生産管理' },
-          { employee_id: 2,  name: 'Tさん',  role: '設計・作図' },
-          { employee_id: 3,  name: 'Hさん',  role: '製造・溶接' },
-          { employee_id: 4,  name: 'Yさん',  role: 'アームロボット' },
-          { employee_id: 5,  name: 'Sさん',  role: '板金・プレス' },
-          { employee_id: 6,  name: 'Kさん',  role: '製造・組立' },
-          { employee_id: 7,  name: 'Mさん',  role: '溶接' },
-          { employee_id: 8,  name: 'Nさん',  role: '塗装' },
-          { employee_id: 9,  name: 'Oさん',  role: '検査・出荷' },
-          { employee_id: 10, name: 'Aさん',  role: '設計・積算' },
-          { employee_id: 11, name: 'Rさん',  role: '運搬・資材' }],
+        { employee_id: 1,  name: '大原',   role: '板金・生産管理' },
+        { employee_id: 2,  name: 'Tさん',  role: '設計・作図' },
+        { employee_id: 3,  name: 'Hさん',  role: '製造・溶接' },
+        { employee_id: 4,  name: 'Yさん',  role: 'アームロボット' },
+        { employee_id: 5,  name: 'Sさん',  role: '板金・プレス' },
+        { employee_id: 6,  name: 'Kさん',  role: '製造・組立' },
+        { employee_id: 7,  name: 'Mさん',  role: '溶接' },
+        { employee_id: 8,  name: 'Nさん',  role: '塗装' },
+        { employee_id: 9,  name: 'Oさん',  role: '検査・出荷' },
+        { employee_id: 10, name: 'Aさん',  role: '設計・積算' },
+        { employee_id: 11, name: 'Rさん',  role: '運搬・資材' }],
       purchase_orders: [
         { purchase_order_id: 1, summary: 'H150', spec: '7m×1本・8m×6本', supplier_name: 'K社', arrival_date: d(0), status: '完了' },
         { purchase_order_id: 2, summary: 'プレス M10', spec: 'L2196×6本', supplier_name: 'N社', arrival_date: d(0), status: '遅延' },
@@ -65,7 +66,7 @@
         s(31, 9, '出荷', 'O工業', '', 3, 3),
         s(32, 10, '積算', 'A屋', '', 1, 2), s(33, 10, '図面作成', 'R屋', '', 4, 5),
         s(34, 11, '資材手配', 'K社', '', 0, 0, 0, null), s(35, 11, '搬入', 'M林業', '', 5, 5)],
-        leaves: [{ employee_id: 1, date: d(1) }]
+      leaves: [{ employee_id: 1, date: d(1) }]
     };
   }
 
@@ -103,13 +104,14 @@
       (carried ? '<span class="sc-carry">繰越</span>' : '') + st + '</span></div>' +
       lines.filter(Boolean).map(function (l) { return '<p>' + esc(l) + '</p>'; }).join('') + '</div>';
   }
+
   // スマホ：担当者3人分の高さで表を止め、残りは表の中でスクロール
   var SHOW_EMP = 3;
   function fitRows() {
     var box = document.querySelector('.sc-scroll'), grid = $('scGrid');
     if (!box || !grid) return;
     box.style.maxHeight = ''; box.style.minHeight = '';
-    if (!window.matchMedia('(max-width: 980px)').matches) return;   // PCは何もしない
+    if (!MOBILE.matches) return;                                     // PCは何もしない
 
     // 入荷予定の行（トラックのアイコンつき）を除いた、担当者の見出しだけを集める
     var heads = [].slice.call(grid.querySelectorAll('.sc-rh')).filter(function (el) {
@@ -122,6 +124,7 @@
     box.style.minHeight = '0';
     box.style.maxHeight = Math.ceil(h) + 2 + 'px';                    // +2は枠線ぶん
   }
+
   function render() {
     var data = state.data, days = [], i;
     for (i = 0; i < DAYS; i++) days.push(add(state.start, i));
@@ -171,9 +174,11 @@
 
     grid.innerHTML = html + (rows || '<div class="sc-empty">該当する予定はありません。</div>');
 
+    // 日付表示：上段=年月（小さく）／下段=「24日（木）– 25日（金）」
     var a = days[0], b = days[DAYS - 1];
-    $('scRange').textContent = a.getFullYear() + '年' + (a.getMonth() + 1) + '月' + a.getDate() + '日〜' +
-      (b.getMonth() !== a.getMonth() ? (b.getMonth() + 1) + '月' : '') + b.getDate() + '日';
+    $('scRange').innerHTML = '<small>' + a.getFullYear() + '年' + (a.getMonth() + 1) + '月</small>' +
+      a.getDate() + '日（' + WD[a.getDay()] + '）– ' +
+      (b.getMonth() !== a.getMonth() ? (b.getMonth() + 1) + '月' : '') + b.getDate() + '日（' + WD[b.getDay()] + '）';
     fitRows();
   }
 
@@ -196,6 +201,9 @@
     });
   }
 
+  // 画面幅がスマホ⇔PCで切り替わったら、表示日数を変えて描き直す
+  function onModeChange() { DAYS = MOBILE.matches ? 2 : 6; render(); }
+
   function init() {
     $('scSearch').addEventListener('input', function (e) { state.q = e.target.value.trim().toLowerCase(); render(); });
     $('scPrev').addEventListener('click', function () { state.start = add(state.start, -DAYS); render(); });
@@ -206,28 +214,9 @@
     load().then(function (d) { state.data = d; buildFilter(); render(); });
     window.addEventListener('resize', fitRows);
     window.addEventListener('load', fitRows);   // フォント読み込み後にも再計算
+    if (MOBILE.addEventListener) MOBILE.addEventListener('change', onModeChange);
+    else MOBILE.addListener(onModeChange);      // 古いSafari用
   }
   if ($('scGrid')) init();
 })();
 // ========================工程表一覧画面===========================
-// ====================スマホver========================================
-  // スマホ：担当者3人分の高さで表を止め、残りは表の中でスクロール
-  var SHOW_EMP = 3;
-  function fitRows() {
-    var box = document.querySelector('.sc-scroll'), grid = $('scGrid');
-    if (!box || !grid) return;
-    box.style.maxHeight = ''; box.style.minHeight = '';
-    if (!window.matchMedia('(max-width: 980px)').matches) return;   // PCは何もしない
-
-    // 入荷予定の行（トラックのアイコンつき）を除いた、担当者の見出しだけを集める
-    var heads = [].slice.call(grid.querySelectorAll('.sc-rh')).filter(function (el) {
-      return !el.querySelector('svg');
-    });
-    if (heads.length <= SHOW_EMP) return;                            // 3人以下なら全部表示
-
-    var last = heads[SHOW_EMP - 1];
-    var h = last.getBoundingClientRect().bottom - grid.getBoundingClientRect().top;
-    box.style.minHeight = '0';
-    box.style.maxHeight = Math.ceil(h) + 2 + 'px';                    // +2は枠線ぶん
-  }
-// ====================スマホver========================================
