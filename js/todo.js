@@ -137,7 +137,9 @@
       list.innerHTML = '<p class="empty">この日のタスクはありません。</p>';
       return;
     }
-    list.innerHTML = withOrder.map(processCard).join('') + noOrder.map(simpleCard).join('');
+    list.innerHTML = withOrder.map(processCard).join('') +
+      (noOrder.length ? '<h2 class="section-label">作業内容</h2>' : '') +
+      noOrder.map(simpleCard).join('');
   }
 
   function renderShipments(items) {
