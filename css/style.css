@@ -737,6 +737,11 @@ body.password-page {
 /* ===== 通知一覧 ===== */
 .list li + li { border-top: 1px solid var(--line); }
 
+.list {
+  padding: 0;
+  margin: 0;
+}
+
 .item {
     display: block;
     min-height: 113px;
@@ -745,6 +750,13 @@ body.password-page {
     text-decoration: none;
     background: #fff;
 }
+
+.list li {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
 .item:hover { background: #f6fafd; }
 .item.is-unread { background: var(--unread-bg); }
 .item.is-unread:hover { background: #dfeffb; }
