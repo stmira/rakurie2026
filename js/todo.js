@@ -1,8 +1,8 @@
 /* ==========================================================
-   楽ラック  今日のタスク画面
-   schedules テーブルの内容を表示する
-   - order_id あり … 工程カード（会社名・概要・注番・本数を表示）
-   - order_id なし … 工程なしカード（打ち合わせなど）
+    楽ラック  今日のタスク画面
+    schedules テーブルの内容を表示する
+    - order_id あり … 工程カード（会社名・概要・注番・本数を表示）
+    - order_id なし … 工程なしカード（打ち合わせなど）
    ========================================================== */
 (function () {
   'use strict';
@@ -33,38 +33,29 @@
   }
 
   /* ---------- データ取得 ----------
-     schedules を tasks / orders と JOIN した1行1スケジュールの配列を返す。
-     いまは画面確認用のサンプル。DB接続後は下の fetch に差し替える。
-       return fetch('api/schedules.php?date=' + ymd).then(function (r) { return r.json(); });
-     返す項目:
-       schedule_id, employee_id, order_id, task_id, detail, status, quantity,
-       actual_start_date, actual_end_date, planned_start_date, planned_end_date,
-       task_name (tasks), company_name / summary / order_no (orders)
+    いまはPHP(DB)が未実装なので、todo-testdata.js の仮データ(window.TODO_TEST_DATA)を使う。
+    PHP実装後は「★PHP実装後」の fetch に差し替え、todo.html から todo-testdata.js を外す。
+    必要な項目（schedules を tasks / orders と JOIN した1行1スケジュール）:
+      schedule_id, employee_id, order_id, task_id, detail, status, quantity,
+      actual_start_date, actual_end_date, planned_start_date, planned_end_date,
+      task_name (tasks), company_name / summary / order_no (orders)
   ---------- */
   function fetchSchedules(ymd) {
-    return Promise.resolve([
-      {
-        schedule_id: 1, employee_id: 1, order_id: 101, task_id: 1,
-        task_name: '図めん配布', company_name: 'N社', summary: 'H150', order_no: '260924-01',
-        detail: '製造担当へ最新の製作図面を配布してください。',
-        status: '作業中', quantity: 10,
-        actual_start_date: ymd, actual_end_date: null,
-        planned_start_date: ymd, planned_end_date: ymd
-      },
-      {
-        schedule_id: 2, employee_id: 1, order_id: null, task_id: 9,
-        task_name: 'LWB', company_name: null, summary: null, order_no: null,
-        detail: '本日の打ち合わせ・確認事項の共有',
-        status: '完了', quantity: null,
-        actual_start_date: ymd, actual_end_date: ymd,
-        planned_start_date: ymd, planned_end_date: ymd
-      }
-    ]);
+    var test = window.TODO_TEST_DATA;
+    if (test) return Promise.resolve(test.schedules || []);
+    // ★PHP実装後: return fetch('api/schedules.php?date=' + ymd).then(function (r) { return r.json(); });
+    console.warn('表示するデータがありません。todo-testdata.js を読み込むか、APIに差し替えてください。');
+    return Promise.resolve([]);
   }
 
-  // 本日出荷の案件（orders 側のデータ。いまはサンプル）
+  // 本日出荷の案件（orders 側のデータ）
   function fetchShipments(ymd) {
-    return Promise.resolve([{ company_name: 'N社' }]);
+    var test = window.TODO_TEST_DATA;
+    if (test) {
+      return Promise.resolve((test.shipments || []).filter(function (s) { return s.ship_date === ymd; }));
+    }
+    // ★PHP実装後: return fetch('api/shipments.php?date=' + ymd).then(function (r) { return r.json(); });
+    return Promise.resolve([]);
   }
 
   /* ---------- 描画 ---------- */
@@ -85,7 +76,7 @@
   function statusSelect(row) {
     var options = STATUS_NAMES.map(function (name) {
       return '<li><button type="button" class="status-option" data-id="' + row.schedule_id + '" data-status="' + name + '">' +
-             '<span class="badge ' + cls(name) + '">' + name + '</span></button></li>';
+              '<span class="badge ' + cls(name) + '">' + name + '</span></button></li>';
     }).join('');
     return '' +
       '<div class="status-select">' +
