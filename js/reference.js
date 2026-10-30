@@ -18,40 +18,47 @@
     // ===== 製作図〜アングルの色（データベースの数字 1〜11） =====
     // 0 は「色なし」。番号と色の対応は、ここを変えるだけで直せます。
     const DESIGN_COLORS = [
-        { code: 1,  key: 'distributed', label: '配布済' },
-        { code: 2,  key: 'checking',    label: '確認中' },
-        { code: 3,  key: 'ready',       label: '配布可' },
-        { code: 4,  key: 'check',       label: 'チェック' },
-        { code: 5,  key: 'cut',         label: '切断' },
-        { code: 6,  key: 'punch',       label: 'ポンチング' },
-        { code: 7,  key: 'weld',        label: '溶接' },
-        { code: 8,  key: 'paint',       label: '塗装' },
-        { code: 9,  key: 'outsource',   label: '外注' },
-        { code: 10, key: 'pack',        label: '梱包可' },
-        { code: 11, key: 'shipready',   label: '出荷可' }
+        { code: 1,  group: 'drawing', key: 'distributed', label: '配布済' },
+        { code: 2,  group: 'drawing', key: 'checking',    label: '確認中' },
+        { code: 3,  group: 'drawing', key: 'ready',       label: '配布可' },
+        { code: 4,  group: 'drawing', key: 'check',       label: 'チェック' },
+        { code: 5,  group: 'work', key: 'cut',         label: '切断' },
+        { code: 6,  group: 'work', key: 'punch',       label: 'ポンチング' },
+        { code: 7,  group: 'work', key: 'weld',        label: '溶接' },
+        { code: 8,  group: 'work', key: 'paint',       label: '塗装' },
+        { code: 9,  group: 'work', key: 'outsource',   label: '外注' },
+        { code: 10, group: 'work', key: 'pack',        label: '梱包可' },
+        { code: 11, group: 'work', key: 'shipready',   label: '出荷可' },
+        { code: 12, group: 'stock', key: 'inventory',   label: '在庫使用' },
+        { code: 13, group: 'stock', key: 'in_stock',   label: '入荷済み' },
+        { code: 14, group: 'stock', key: 'unnecessary',   label: '不要' },
     ];
+    const CHECKER_COLORS = {
+        done:  { bg: '#d9d9d9', text: '#222222' },                  // 名前が入っているとき（灰色）
+        empty: { bg: '#ff0000', text: '#ffffff', label: '未' }      // 入っていないとき（赤色）
+    };
     const CODE_TO_KEY = {};
     DESIGN_COLORS.forEach(function (c) { CODE_TO_KEY[c.code] = c.key; });
 
     // 表に出す列（カラム名: orders テーブルの物理名）
     const DESIGN_COLS = [
-        { key: 'drawing', label: '製作図' },
-        { key: 'post_l',  label: 'ポストL' },
-        { key: 'post_t',  label: 'ポストT' },
-        { key: 'base',    label: 'ベース' },
-        { key: 'arm',     label: 'アーム' },
-        { key: 'angle',   label: 'アングル' },
-        { key: 'A_base',   label: 'Aベース' },
-        { key: 'others1',   label: 'その他1' },
-        { key: 'others2',   label: 'その他2' },
-        { key: 'others3',   label: 'その他3' },
-        { key: 'others4',   label: 'その他4' },
-        { key: 'others5',   label: 'その他5' },
-        { key: 'breath',   label: 'ブレス' },
-        { key: 'w_check',   label: 'wチェック' },
-        { key: 'salesperson',   label: '営業担当' },
-        { key: 'small_item',   label: '小物準備' },
-        { key: 'small_check',   label: '小物wチェック' },
+        { key: 'drawing', label: '製作図', group: 'drawing' },
+        { key: 'post_l',  label: 'ポストL', group: 'work' },
+        { key: 'post_t',  label: 'ポストT', group: 'work' },
+        { key: 'base',    label: 'ベース', group: 'work' },
+        { key: 'arm',     label: 'アーム', group: 'work' },
+        { key: 'angle',   label: 'アングル', group: 'work' },
+        { key: 'A_base',   label: 'Aベース', group: 'work' },
+        { key: 'others1',   label: 'その他1', group: 'work' },
+        { key: 'others2',   label: 'その他2', group: 'work' },
+        { key: 'others3',   label: 'その他3', group: 'work' },
+        { key: 'others4',   label: 'その他4', group: 'work' },
+        { key: 'others5',   label: 'その他5', group: 'work' },
+        { key: 'breath',   label: 'ブレス', group: 'stock' },
+        { key: 'double_check', label: 'wチェック', group: 'checker' },
+        { key: 'salesperson',   label: '営業担当'},
+        { key: 'small_item',   label: '小物準備', group: 'work' },
+        { key: 'small_check',   label: '小物wチェック', group: 'check' },
     ];
 
     // ===== 画面確認用のサンプルデータ =====
@@ -69,18 +76,18 @@
     const SAMPLE_ORDERS = [
         Object.assign({}, EMPTY, {
         order_id: 26041, customer_name: 'A社', summary: 'H150', due_date: '2026-10-22',
-        production: true, progress: 0, ship_status: 'today',
+        production: true, progress: 0, ship_status: 'shipped',
         post_l: 8, post_l_detail: '6 (2.4m)  XXX\nH125　7m*2本\n（大戸）10/1am',
         arm: 7, arm_detail: '12 R (L1200)\n上部にアングル付ける',
         }),
         Object.assign({}, EMPTY, {
         order_id: 26042, customer_name: 'B社', summary: 'H100', due_date: '2026-10-22',
-        production: true, progress: 100, ship_status: 'today',
+        production: true, progress: 100, ship_status: 'shipped',
         post_l: 11, post_l_detail: '6 (3.3m) URP\nH125　10m*2本在庫使用'
         }),
         Object.assign({}, EMPTY, {
         order_id: 26043, customer_name: 'A社', summary: 'アーム', due_date: '2026-10-23',
-        production: true, progress: 50, ship_status: 'shipped',
+        production: true, progress: 50, ship_status: 'progress',
         post_l: 8, post_l_detail: '800 R (L1200)',
         post_t: 11, post_t_detail: '3 (1.8m)'
         }),
@@ -255,7 +262,7 @@
         '</div>' +
         '<div class="ref-card-progress"><small>進捗</small>' +
             '<span class="ref-bar"><i style="width:' + Number(o.progress) + '%"></i></span><b>' + esc(o.progress) + '%</b>' +
-            '<button type="button" class="ref-toggle" data-toggle="' + id + '" aria-expanded="' + isOpen + '">工程内訳 ' +
+            '<button type="button" class="ref-toggle" data-toggle="' + id + '" aria-expanded="' + isOpen + '">詳細 ' +
             '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 15 12 9 18 15"/></svg>' +
             '</button>' +
         '</div>' +
@@ -362,11 +369,15 @@
         });
         } else {
         current = o[el.dataset.col];
-        items = [{ value: 0, label: '色なし', cls: '' }].concat(DESIGN_COLORS.map(function (c) {
+        const col = DESIGN_COLS.filter(function (c) { return c.key === el.dataset.col; })[0];
+        const group = col ? col.group : 'work';
+        items = [{ value: 0, label: '色なし', cls: '' }].concat(DESIGN_COLORS.filter(function (c) {
+            return c.group === group;
+        }).map(function (c) {
             return { value: c.code, label: c.label, cls: 'ref-c-' + c.key };
         }));
         }
-
+        
         menu.innerHTML = items.map(function (it) {
         return '<button type="button" role="menuitem" data-pick="' + it.value + '"' +
             (String(it.value) === String(current) ? ' class="is-current"' : '') + '>' +
