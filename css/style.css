@@ -1539,68 +1539,68 @@ body.password-page {
     gap: 12px;
 }
 /* ========================お客様情報登録画面=========================== */
-
+/* メモ sc-container*/
 /* ========================工程表一覧画面=========================== */
-.sc-container{max-width:1400px;margin:0 auto;padding:24px 20px 40px}
-.sc-title h1{font-size:24px;font-weight:bold;color:#111827}
-.sc-title p{color:var(--text-sub);font-size:13px;margin:2px 0 16px}
-.sc-toolbar{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
-.sc-spacer{flex:1}
-.sc-search{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0 12px;width:340px;color:var(--text-muted)}
-.sc-search input{border:0;outline:0;flex:1;height:38px;font-size:13px;background:none;color:var(--text-main)}
-.sc-btn{background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);height:38px;padding:0 16px;font-size:13px;font-weight:bold;cursor:pointer;color:var(--text-main);display:inline-flex;align-items:center;gap:6px}
-.sc-btn:hover{background:#f8fafc}
-.sc-count{background:var(--primary);color:#fff;border-radius:10px;font-size:11px;padding:0 6px}
-.sc-filter{position:relative}
-.sc-panel{position:absolute;top:44px;left:0;z-index:20;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);box-shadow:0 8px 24px rgba(0,0,0,.1);padding:8px;min-width:200px}
-.sc-panel label{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:13px;cursor:pointer;border-radius:4px}
-.sc-panel label:hover{background:#f1f5f9}
-.sc-panel hr{border:0;border-top:1px solid var(--border-color);margin:4px 0}
-.sc-range{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:bold}
-.sc-range button{background:none;border:0;cursor:pointer;font-size:16px;color:var(--text-sub);padding:4px 8px}
-.sc-range button:hover{color:var(--primary)}
-.sc-legend{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);padding:10px 14px;font-size:12px;margin-bottom:12px;flex-wrap:wrap}
-.sc-legend-title{font-weight:bold;margin-right:4px}
-.sc-chip{display:inline-flex;align-items:center;gap:6px}
-.sc-dot{width:14px;height:14px;border-radius:3px;display:inline-block}
-.sc-legend-note{margin-left:auto;color:var(--text-muted)}
+.schedule-page{max-width:1400px;margin:0 auto;padding:0px 20px 40px}
+.schedule-page .sc-title h1{font-size:24px;font-weight:bold;color:#111827}
+.schedule-page .sc-title p{color:var(--text-sub);font-size:13px;margin:2px 0 16px}
+.schedule-page .sc-toolbar{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.schedule-page .sc-spacer{flex:1}
+.schedule-page .sc-search{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0 12px;width:340px;color:var(--text-muted)}
+.schedule-page .sc-search input{border:0;outline:0;flex:1;height:38px;font-size:13px;background:none;color:var(--text-main)}
+.schedule-page .sc-btn{background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);height:38px;padding:0 16px;font-size:13px;font-weight:bold;cursor:pointer;color:var(--text-main);display:inline-flex;align-items:center;gap:6px}
+.schedule-page .sc-btn:hover{background:#f8fafc}
+.schedule-page .sc-count{background:var(--primary);color:#fff;border-radius:10px;font-size:11px;padding:0 6px}
+.schedule-page .sc-filter{position:relative}
+.schedule-page .sc-panel{position:absolute;top:44px;left:0;z-index:20;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);box-shadow:0 8px 24px rgba(0,0,0,.1);padding:8px;min-width:200px}
+.schedule-page .sc-panel label{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:13px;cursor:pointer;border-radius:4px}
+.schedule-page .sc-panel label:hover{background:#f1f5f9}
+.schedule-page .sc-panel hr{border:0;border-top:1px solid var(--border-color);margin:4px 0}
+.schedule-page .sc-range{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:bold}
+.schedule-page .sc-range button{background:none;border:0;cursor:pointer;font-size:16px;color:var(--text-sub);padding:4px 8px}
+.schedule-page .sc-range button:hover{color:var(--primary)}
+.schedule-page .sc-legend{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);padding:10px 14px;font-size:12px;margin-bottom:12px;flex-wrap:wrap}
+.schedule-page .sc-legend-title{font-weight:bold;margin-right:4px}
+.schedule-page .sc-chip{display:inline-flex;align-items:center;gap:6px}
+.schedule-page .sc-dot{width:14px;height:14px;border-radius:3px;display:inline-block}
+.schedule-page .sc-legend-note{margin-left:auto;color:var(--text-muted)}
 
 /* 進捗の色（凡例の四角とカードで共通） */
-.sc-dot.todo,.sc-card.todo{background:#e9ecef}
-.sc-dot.doing,.sc-card.doing{background:#d7ecd6}
-.sc-dot.done,.sc-card.done{background:#fdeba5}
-.sc-dot.late,.sc-card.late{background:#f8d1d1}
+.schedule-page .sc-dot.todo,.sc-card.todo{background:#e9ecef}
+.schedule-page .sc-dot.doing,.sc-card.doing{background:#d7ecd6}
+.schedule-page .sc-dot.done,.sc-card.done{background:#fdeba5}
+.schedule-page .sc-dot.late,.sc-card.late{background:#f8d1d1}
 
 /* 表：縦・横どちらも、この枠の中でスクロール */
-.sc-scroll{overflow:auto;max-height:calc(100vh - 290px);min-height:420px;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-lg)}
-.sc-grid{display:grid;grid-template-columns:150px repeat(var(--days),minmax(170px,1fr));min-width:max-content}
-.sc-h,.sc-rh,.sc-cell{border-right:1px solid var(--border-color);border-bottom:1px solid var(--border-color)}
-.sc-h{position:sticky;top:0;z-index:3;padding:12px 10px;text-align:center;font-size:13px;font-weight:bold;background:#fff}
-.sc-h.corner{left:0;z-index:4;text-align:left;background:#f8fafc;color:var(--text-sub);font-size:12px}   /* 左上は上にも左にも固定 */
-.sc-h.today{background:#e1f1fb;color:var(--primary)}
-.sc-h.off{color:var(--text-muted)}
-.sc-h small{background:#fff;color:var(--primary);font-size:10px;padding:0 5px;border-radius:3px;margin-left:6px}
-.sc-rh{padding:12px 12px;background:#f8fafc;display:flex;flex-direction:column;justify-content:center;gap:2px}
-.sc-rh b{font-size:14px;display:flex;align-items:center;gap:6px}
-.sc-rh span{font-size:10px;color:var(--text-muted)}
-.sc-cell{padding:8px;display:flex;flex-direction:column;gap:6px;min-height:70px}
-.sc-cell.off{background:#f6f7f9}
-.sc-cell .none{color:var(--text-muted);font-size:12px}
-.sc-offlabel,.sc-leave{font-size:11px;color:var(--text-muted)}
-.sc-card{border-radius:6px;padding:7px 9px;font-size:11px;line-height:1.4}
-.sc-card-top{display:flex;justify-content:space-between;gap:6px}
-.sc-card-top b{font-size:12px}
-.sc-st{font-size:10px;white-space:nowrap}
-.doing .sc-st{color:#2e7d32}.done .sc-st{color:#8a6100}.late .sc-st{color:#c62828}.todo .sc-st{color:#555}
-.sc-card p{color:#444;margin:0}
-.sc-carry{font-size:10px;background:#fff;border-radius:3px;padding:0 4px;margin-right:4px;color:#2e7d32}
-.sc-empty{padding:40px;text-align:center;color:var(--text-muted);grid-column:1/-1}
+.schedule-page .sc-scroll{overflow:auto;max-height:calc(100vh - 290px);min-height:420px;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-lg)}
+.schedule-page .sc-grid{display:grid;grid-template-columns:150px repeat(var(--days),minmax(170px,1fr));min-width:max-content}
+.schedule-page .sc-h,.sc-rh,.sc-cell{border-right:1px solid var(--border-color);border-bottom:1px solid var(--border-color)}
+.schedule-page .sc-h{position:sticky;top:0;z-index:3;padding:12px 10px;text-align:center;font-size:13px;font-weight:bold;background:#fff}
+.schedule-page .sc-h.corner{left:0;z-index:4;text-align:left;background:#f8fafc;color:var(--text-sub);font-size:12px}   /* 左上は上にも左にも固定 */
+.schedule-page .sc-h.today{background:#e1f1fb;color:var(--primary)}
+.schedule-page .sc-h.off{color:var(--text-muted)}
+.schedule-page .sc-h small{background:#fff;color:var(--primary);font-size:10px;padding:0 5px;border-radius:3px;margin-left:6px}
+.schedule-page .sc-rh{padding:12px 12px;background:#f8fafc;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.schedule-page .sc-rh b{font-size:14px;display:flex;align-items:center;gap:6px}
+.schedule-page .sc-rh span{font-size:10px;color:var(--text-muted)}
+.schedule-page .sc-cell{padding:8px;display:flex;flex-direction:column;gap:6px;min-height:70px}
+.schedule-page .sc-cell.off{background:#f6f7f9}
+.schedule-page .sc-cell .none{color:var(--text-muted);font-size:12px}
+.schedule-page .sc-offlabel,.sc-leave{font-size:11px;color:var(--text-muted)}
+.schedule-page .sc-card{border-radius:6px;padding:7px 9px;font-size:11px;line-height:1.4}
+.schedule-page .sc-card-top{display:flex;justify-content:space-between;gap:6px}
+.schedule-page .sc-card-top b{font-size:12px}
+.schedule-page .sc-st{font-size:10px;white-space:nowrap}
+.schedule-page .doing .sc-st{color:#2e7d32}.done .sc-st{color:#8a6100}.late .sc-st{color:#c62828}.todo .sc-st{color:#555}
+.schedule-page .sc-card p{color:#444;margin:0}
+.schedule-page .sc-carry{font-size:10px;background:#fff;border-radius:3px;padding:0 4px;margin-right:4px;color:#2e7d32}
+.schedule-page .sc-empty{padding:40px;text-align:center;color:var(--text-muted);grid-column:1/-1}
 /* ========================工程表一覧画面=========================== */
 
 /* ========================工程表一覧画面（スマホ版）===========================
    画面幅640px以下で適用。HTMLの変更は不要です。 */
 @media (max-width:640px){
-  .sc-container{padding:16px 14px 28px}
+  .schedule-page{padding:16px 14px 28px}
 
   /* タイトル：右側に「2日間表示」 */
   .sc-title{display:grid;grid-template-columns:1fr auto;align-items:end;margin-bottom:14px}
@@ -1675,7 +1675,7 @@ body.password-page {
   .sc-card.done .sc-st{color:#7a5b00}
 
   /* 表の下の案内 */
-  .sc-container::after{content:"↓  下にスクロールして、続きの予定を確認";display:block;margin-top:16px;text-align:center;font-size:11px;color:var(--text-muted)}
+  .schedule-page::after{content:"↓  下にスクロールして、続きの予定を確認";display:block;margin-top:16px;text-align:center;font-size:11px;color:var(--text-muted)}
 }
 /* ========================工程表一覧画面（スマホ版）=========================== */
 
