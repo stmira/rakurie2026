@@ -131,7 +131,7 @@
     var keys = days.map(key), grid = $('scGrid');
     grid.style.setProperty('--days', DAYS);
 
-    var html = '<div class="sc-h corner">担当／作業日</div>';
+    var html = '<div class="sc-h corner">担当／<br>&nbsp&nbsp&nbsp作業日</div>';
     days.forEach(function (d, i) {
       var off = d.getDay() === 0 || HOLIDAYS.indexOf(keys[i]) >= 0;
       html += '<div class="sc-h' + (keys[i] === T ? ' today' : '') + (off ? ' off' : '') + '">' + (d.getMonth() + 1) + '/' + d.getDate() +
