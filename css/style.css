@@ -231,6 +231,11 @@ body.password-page {
     text-decoration: none;
 }
 .password-page .back-link:hover { text-decoration: underline; }
+
+/* ====================パスワード再設定画面　スマホver========== */
+
+/* ====================パスワード再設定画面　スマホver========== */
+
 /* ====================パスワード再設定画面===================== */
 
 /* ====================ログイン画面===================== */
@@ -462,11 +467,135 @@ body.password-page {
     line-height: 1.6;
 }
 
-@media (max-width: 480px) {
+/* ====================ログイン画面　スマホver========== */
+@media (max-width: 900px) {
+
+    /* 画面全体：上から109pxの位置に置く（キーボードが出ても動かないよう上寄せ） */
+    .login-page {
+        align-items: flex-start;
+        padding: 109px 35px 40px;
+    }
+
+    .login-page .login-container {
+        max-width: 400px;   /* タブレット幅で横に伸びすぎないように */
+    }
+
+    /* ロゴ */
+    .login-page .logo {
+        gap: 8px;
+        margin-bottom: 26px;
+    }
+
+    .login-page .logo-icon {
+        width: 36px;
+        height: 36px;
+    }
+
     .login-page .logo-text {
-        font-size: 34px;
+        font-size: 22px;
+    }
+
+    /* ラベル（社員ＩＤ ／ パスワード ＋ 必須） */
+    .login-page .field {
+        margin-bottom: 20px;
+    }
+
+    .login-page .label-row {
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .login-page .label-row label {
+        font-size: 11px;
+        line-height: 16px;
+        color: #364d5a;
+    }
+
+    .login-page .required {
+        font-size: 9px;
+        color: #7fbed7;
+    }
+
+    /* 入力欄 */
+    .login-page .input-wrap input {
+        height: 35px;
+        padding: 0 10px;
+        font-size: 11px;
+        color: #4c616c;
+        border-color: #e1e9ee;
+        border-radius: 8px;
+    }
+
+    .login-page .input-wrap.has-toggle input {
+        padding-right: 38px;
+    }
+
+    /* 目のアイコン */
+    .login-page .toggle-pw {
+        right: 4px;
+        width: 28px;
+        height: 28px;
+        color: #8d9fa8;
+    }
+
+    .login-page .toggle-pw svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .login-page .hint {
+        margin-top: 8px;
+        font-size: 10px;
+        color: #92a3ac;
+    }
+
+    /* ログインボタン */
+    .login-page .login-button {
+        height: 34px;
+        margin-top: 19px;
+        gap: 8px;
+        font-size: 11px;
+        border-radius: 6px;
+    }
+
+    .login-page .login-button svg {
+        width: 11px;
+        height: 11px;
+        opacity: .45;   /* 矢印だけ薄く */
+    }
+
+    /* パスワードリンク */
+    .login-page .forgot {
+        margin-top: 18px;
+        font-size: 11px;
+        color: #5eadce;
+    }
+
+    /* 案内ボックス */
+    .login-page .notice {
+        margin-top: 24px;
+        padding: 13px 19px 13px 12px;
+        gap: 11px;
+        align-items: center;
+        border-radius: 8px;
+        color: #8ea0a9;
+        background: #f2f7fa;
+    }
+
+    .login-page .notice svg {
+        width: 13px;
+        height: 13px;
+        margin-top: 0;
+    }
+
+    .login-page .notice p {
+        font-size: 10px;
+        line-height: 15px;
     }
 }
+/* ====================ログイン画面　スマホver========== */
+
+
 /* ====================ログイン画面===================== */
 
 /* ====================ヘッダー画面===================== */
