@@ -233,7 +233,161 @@ body.password-page {
 .password-page .back-link:hover { text-decoration: underline; }
 
 /* ====================パスワード再設定画面　スマホver========== */
+.password-page .password-wrap { width: 100%; max-width: 318px; }   /* 旧 .password-card の幅をラッパーに移動 */
+.password-page .sp-only,
+.password-page .sp-header,
+.password-page .sp-head,
+.password-page .sp-note { display: none; }                         /* スマホ専用の部品はPCでは出さない */
+.password-page .input::placeholder { color: transparent; }         /* プレースホルダーはスマホだけ表示 */
 
+@media (max-width: 900px) {
+.password-page .pc-only { display: none; }
+.password-page .sp-only { display: revert; }
+
+body.password-page { background: #f3f8fb; }
+
+/* ---- ロゴだけのヘッダー ---- */
+.password-page .sp-header {
+    display: flex;
+    align-items: center;
+    height: 62px;
+    padding: 0 max(16px, calc((100% - 324px) / 2));        /* ロゴの左端をカードの左端にそろえる */
+    background: var(--white);
+    border-bottom: 1px solid var(--border-color);
+}
+.password-page .sp-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    text-decoration: none;
+}
+.password-page .sp-logo-mark { flex: none; width: 30px; height: 30px; }
+.password-page .sp-logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    line-height: 1;
+}
+
+/* ---- ページ全体 ---- */
+.password-page .page { min-height: 0; padding: 32px 16px 32px; }
+.password-page .password-wrap { max-width: 324px; }       /* カードは画面幅によらず約324pxで中央 */
+
+/* ---- 戻るボタン＋見出し（カードの外） ---- */
+.password-page .sp-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 23px;
+}
+.password-page .sp-back {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--white);
+    color: var(--text);
+}
+.password-page .sp-back:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.password-page .sp-title {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* ---- カード ----
+    左に鍵アイコン・右に説明文の1行目、その下にフォーム部品を全幅で並べる */
+.password-page .password-card {
+    max-width: none;
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 12px;
+    align-items: start;                                     /* アイコンと説明文は上揃え */
+    padding: 18px;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+}
+.password-page .password-card > * { grid-column: 1 / -1; }
+.password-page .password-card > .icon-box {
+    grid-column: 1;
+    grid-row: 1;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+}
+.password-page .icon-box svg { width: 18px; height: 18px; }
+.password-page .title { display: none; }                  /* 見出しはカードの外（.sp-title）を使う */
+.password-page .password-card > .lead {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.9;
+}
+.password-page .lead + .field { margin-top: 13px; }
+
+/* ---- 入力欄 ---- */
+.password-page .field { margin-bottom: 15px; }
+.password-page .label {
+    gap: 0;
+    margin-bottom: 6px;
+    font-size: 13px;
+    line-height: 18px;
+}
+.password-page .badge { display: none; }                  /* 「必須」はスマホでは出さない */
+.password-page .input {
+    height: 48px;
+    border-color: var(--border-color);
+    border-radius: 10px;
+    font-size: 13px;
+}
+.password-page .input::placeholder { color: #94a7b2; }
+.password-page .input.has-icon { padding-right: 46px; }
+.password-page .toggle { width: 42px; }
+.password-page .toggle svg { width: 18px; height: 18px; }
+.password-page .hint { display: none; }                   /* 8文字以上…の説明はスマホのデザインに無い */
+
+/* ---- ボタン（リセット : 登録 = 約 11 : 15） ---- */
+.password-page .actions { gap: 11px; margin-top: 5px; }
+.password-page .btn {
+    height: 48px;
+    gap: 8px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+.password-page .btn-reset {
+    flex: 11 1 0;
+    border-color: var(--blue);
+    color: var(--blue);
+}
+.password-page .btn-submit { flex: 15 1 0; }
+
+/* ---- カードの外：戻るリンク・注意書き ---- */
+.password-page .back-link {
+    margin-top: 22px;
+    gap: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.password-page .sp-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 23px 8px 0;
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--text-sub);
+}
+.password-page .sp-note svg { flex: none; width: 16px; height: 16px; margin-top: 1px; }
+}
 /* ====================パスワード再設定画面　スマホver========== */
 
 /* ====================パスワード再設定画面===================== */
