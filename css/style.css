@@ -558,7 +558,7 @@ body.password-page {
 .header .user-name { font-size: 10px; font-weight: 700; color: #26394a; }
 .header .user-role { font-size: 7px; color: #6b7a88; }
 
-/* ====================スマホ用ハンバーガーメニュー===================== */
+/* ====スマホ用ハンバーガーメニュー==== */
 
 /* PC画面など普段はハンバーガーボタンを非表示にする */
 .header .hamburger_btn {
@@ -647,7 +647,7 @@ body.password-page {
         display: none;
     }
 }
-/* ====================スマホ用ハンバーガーメニュー===================== */
+/* ====スマホ用ハンバーガーメニュー==== */
 /* ====================ヘッダー画面===================== */
 
 /* ====================通知画面===================== */
@@ -655,7 +655,8 @@ body.password-page {
 .notif {
     width: 100%;
     max-width: 400px;
-    height: 100vh;
+    top: 62px;
+    bottom: 0;
     z-index: 999;
     position: fixed;
     right: 0;
@@ -789,14 +790,49 @@ body.password-page {
     color: var(--text-sub);
 }
 
-/* ===== 下部の案内 ===== */
-.foot {
-    display: flex; align-items: center; gap: 8px;
-    padding: 20px 20px;
-    border-top: 1px solid var(--line);
-    font-size: 10px; color: var(--text-sub);
+/* ===== スマホ画面（通知） ===== */
+@media (max-width: 640px) {
+
+    /* 画面いっぱいに広げる（ヘッダーの上まで覆う） */
+    .notif {
+        top: 0px;
+        bottom: 0;
+        height: auto;        /* 上の height: 100vh を取り消す（top と bottom で高さが決まる） */
+        max-width: none;
+        border-left: 0;
+        border-right: 0;
+        z-index: 1100;       /* ヘッダー(1000)・スマホ用メニュー(1001)より手前 */
+    }
+
+    /* 開いている間は、うしろの画面がスクロールしないようにする */
+    body:has(.notif.is-show) {
+        overflow: hidden;
+    }
+
+    /* 上部（切れ込みのある端末では、切れ込みを避ける） */
+    .notif-head {
+        padding: calc(17px + env(safe-area-inset-top)) 16px 0;
+    }
+    .title-row { height: 40px; }
+    .title-row h1 { font-size: 22px; }
+    .badge-unread { height: 22px; padding: 0 10px; font-size: 11px; }
+
+    /* 閉じる・すべて既読にするは、指で押しやすい大きさに */
+    .close { width: 40px; height: 40px; }
+    .close svg { width: 20px; height: 20px; }
+    .action-row { height: 40px; margin-top: 4px; }
+    .read-all { height: 40px; padding: 0; font-size: 13px; }
+
+    /* 通知一覧 */
+    .item { min-height: 0; padding: 18px 16px 20px; }
+    .meta { height: auto; margin-bottom: 8px; font-size: 12px; }
+    .notif .icon { width: 20px; height: 20px; }
+    .texts strong { font-size: 16px; line-height: 1.4; }
+    .texts small { font-size: 12px; line-height: 1.4; }
+    .notif .chev { width: 14px; height: 14px; }
+    .body { margin-top: 10px; font-size: 13px; line-height: 1.6; }
 }
-.foot svg { flex: none; }
+/* ===== スマホ画面（通知） ===== */
 /* ====================通知画面===================== */
 
 /* ====================社員情報画面===================== */
