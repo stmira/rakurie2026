@@ -1604,7 +1604,7 @@ body.password-page {
 .schedule-page .sc-panel label{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:13px;cursor:pointer;border-radius:4px}
 .schedule-page .sc-panel label:hover{background:#f1f5f9}
 .schedule-page .sc-panel hr{border:0;border-top:1px solid var(--border-color);margin:4px 0}
-.schedule-page .sc-range{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:bold}
+.schedule-page .sc-range{margin: auto;gap:10px;font-size:13px;font-weight:bold}
 .schedule-page .sc-range button{background:none;border:0;cursor:pointer;font-size:16px;color:var(--text-sub);padding:4px 8px}
 .schedule-page .sc-range button:hover{color:var(--primary)}
 .schedule-page .sc-legend{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-md);padding:10px 14px;font-size:12px;margin-bottom:12px;flex-wrap:wrap}
@@ -1651,72 +1651,77 @@ body.password-page {
   .schedule-page{padding:16px 14px 28px}
 
   /* タイトル：右側に「2日間表示」 */
-  .sc-title{display:grid;grid-template-columns:1fr auto;align-items:end;margin-bottom:14px}
-  .sc-title h1{font-size:22px}
-  .sc-title p{display:none}
-  .sc-title::after{content:"2日間表示";font-size:12px;color:var(--text-muted);padding-bottom:3px}
+  .schedule-page .sc-title{display:grid;grid-template-columns:1fr auto;align-items:end;margin-bottom:14px}
+  .schedule-page .sc-title h1{font-size:22px}
+  .schedule-page .sc-title p{display:none}
+  .schedule-page .sc-title::after{content:"2日間表示";font-size:12px;color:var(--text-muted);padding-bottom:3px}
 
   /* ツールバー：1段目＝検索＋絞り込み／2段目＝< 日付 今日 次へ */
-  .sc-toolbar{display:grid;grid-template-columns:46px 1fr auto auto;gap:10px 8px;align-items:stretch;margin-bottom:12px}
-  .sc-spacer{display:none}
-  .sc-search{grid-row:1;grid-column:1/4;width:auto;height:46px;border-radius:10px}
-  .sc-search input{height:44px}
-  .sc-filter{grid-row:1;grid-column:4}
-  #scFilterBtn{height:46px;border-radius:10px;padding:0 14px}
-  #scFilterBtn::before{content:"";width:16px;height:16px;background:currentColor;
+  .schedule-page.sc-toolbar{display:grid;grid-template-columns:46px 1fr auto auto;gap:10px 8px;align-items:stretch;margin-bottom:12px}
+  .schedule-page.sc-spacer{display:none}
+  .schedule-page.sc-search{grid-row:1;grid-column:1/4;width:auto;height:46px;border-radius:10px}
+  .schedule-page.sc-search input{height:44px}
+  .schedule-page.sc-filter{grid-row:1;grid-column:4}
+  .schedule-page#scFilterBtn{height:46px;border-radius:10px;padding:0 14px}
+  .schedule-page#scFilterBtn::before{content:"";width:16px;height:16px;background:currentColor;
     --ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7h16M7 12h10M10 17h4'/%3E%3C/svg%3E");
     -webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
-  .sc-panel{left:auto;right:0}
-  .sc-range{display:contents}
-  #scPrev{grid-row:2;grid-column:1;height:44px;padding:0;background:#fff;border:1px solid var(--primary);color:var(--primary);border-radius:10px;font-size:16px}
-  #scRange{grid-row:2;grid-column:2;display:flex;align-items:center;height:44px;padding:0 12px;background:#fff;border:1px solid var(--border-color);border-radius:10px;font-size:13px}
-  #scToday{grid-row:2;grid-column:3;height:44px;border-radius:10px;padding:0 14px;font-size:12px}
-  #scNext{grid-row:2;grid-column:4;height:44px;padding:0 14px;border-radius:10px;background:#2a9fd0;color:#fff;font-size:0}
-  #scNext::after{content:"次へ  \203A";font-size:13px;font-weight:bold}
-  #scNext:hover{background:#1f8dbb;color:#fff}
+  .schedule-page.sc-panel{left:auto;right:0}
+  .schedule-page.sc-range{display:contents}
+  .schedule-page#scPrev{grid-row:2;grid-column:1;height:44px;padding:0;background:#fff;border:1px solid var(--primary);color:var(--primary);border-radius:10px;font-size:16px}
+  .schedule-page#scRange{grid-row:2;grid-column:2;display:flex;align-items:center;height:44px;padding:0 12px;background:#fff;border:1px solid var(--border-color);border-radius:10px;font-size:13px}
+  .schedule-page#scToday{grid-row:2;grid-column:3;height:44px;border-radius:10px;padding:0 14px;font-size:12px}
+  .schedule-page#scNext{grid-row:2;grid-column:4;height:44px;padding:0 14px;border-radius:10px;background:#2a9fd0;color:#fff;font-size:0}
+  .schedule-page#scNext::after{content:"次へ  \203A";font-size:13px;font-weight:bold}
+  .schedule-page#scNext:hover{background:#1f8dbb;color:#fff}
 
   /* 凡例 */
-  .sc-legend{border:0;background:none;padding:0 2px;margin-bottom:14px;justify-content:space-between;gap:6px;font-size:11px;flex-wrap:nowrap}
-  .sc-legend-title{font-size:0;margin:0}
-  .sc-legend-title::after{content:"進捗";font-size:11px;font-weight:normal;color:var(--text-muted)}
-  .sc-legend-note{display:none}
+  .schedule-page .sc-legend{border:0;background:none;padding:0 2px;margin-bottom:14px;justify-content:space-between;gap:6px;font-size:11px;flex-wrap:nowrap}
+  .schedule-page .sc-legend-title{font-size:0;margin:0}
+  .schedule-page .sc-legend-title::after{content:"進捗";font-size:11px;font-weight:normal;color:var(--text-muted)}
+  .schedule-page .sc-legend-note{display:none}
 
   /* 表：画面には2日分。残りの日は横スクロール、人が多いときは表の中で縦スクロール */
-  .sc-scroll{max-height:calc(100vh - 300px);min-height:360px;border-radius:14px;border-color:#d5dfe8;
+  .schedule-page .sc-scroll{max-height:calc(100vh - 300px);min-height:360px;border-radius:14px;border-color:#d5dfe8;
     scroll-snap-type:x mandatory;scroll-padding-left:68px}
-  .sc-grid{grid-template-columns:68px repeat(var(--days),calc((100vw - 30px - 68px) / 2));min-width:max-content}
-  .sc-h{padding:14px 6px;scroll-snap-align:start}
-  .sc-h.corner{font-size:10px;padding:14px 8px;line-height:1.3;scroll-snap-align:none}
-  .sc-h.today small{background:none;padding:0;margin-left:8px;font-size:10px}
+  .schedule-page .sc-grid{grid-template-columns:68px repeat(var(--days),calc((100vw - 30px - 68px) / 2));min-width:max-content}
+  .schedule-page .sc-h{padding:14px 6px;scroll-snap-align:start}
+  .schedule-page .sc-h.corner{font-size:10px;padding:14px 8px;line-height:1.3;scroll-snap-align:none}
+  .schedule-page .sc-h.today small{background:none;padding:0;margin-left:8px;font-size:10px}
+
+   /* 左の列幅：--sc-rh-w の1か所だけで決まります（狭くしたいときは数字を小さく） */
+  .schedule-page .sc-grid{
+   min-width:0;grid-template-columns:64px repeat(2,minmax(0,1fr))
+  }
+  .schedule-page .sc-h.corner{padding:0 6px;font-size:11px;line-height:1.3}
 
   /* 左の見出し列（横スクロールしても固定） */
-  .sc-rh{position:sticky;left:0;z-index:2;padding:14px 10px;justify-content:flex-start;gap:6px}
-  .sc-rh b{font-size:12px;flex-direction:column;align-items:flex-start;gap:6px}
-  .sc-rh b svg{width:20px;height:20px;color:var(--primary)}
-  .sc-rh > span{display:none}                    /* 担当の役割は非表示 */
-  .sc-h + .sc-rh > span{display:block;font-size:9px;line-height:1.4}   /* 入荷予定の補足だけ表示 */
-
+  .schedule-page .sc-rh{position:sticky;left:0;z-index:2;justify-content:flex-start;gap:5px;padding:16px 6px;background:#fff}
+  .schedule-page .sc-rh b{flex-direction:column;align-items:flex-start;gap:6px;font-size:12px;color:var(--navy)}
+  .schedule-page .sc-rh b svg{width:20px;height:20px;color:var(--sc-accent)}
+  .schedule-page .sc-rh > span{display:none}
+  .schedule-page .sc-rh:has(svg) > span{display:block;font-size:9px;line-height:1.5}
   /* セルとカード */
-  .sc-cell{padding:6px;gap:6px;min-height:60px}
-  .sc-cell .none{text-align:center;padding-top:4px;color:#94a3b8}
-  .sc-leave,.sc-offlabel{padding:6px 4px;font-size:12px}
-  .sc-card{display:flex;flex-direction:column;padding:9px 10px;border-radius:8px;font-size:12px}
-  .sc-card.todo{background:#e8ecf0}
-  .sc-card.doing{background:#d6eed8}
-  .sc-card.done{background:#fdeea5}
-  .sc-card.late{background:#f7d4d4}
-  .sc-card-top{display:contents}
-  .sc-card-top b{order:1;font-size:13px}
-  .sc-card p{order:2;margin-top:3px;font-size:12px;color:#2f3b46}
-  .sc-st{order:3;margin-top:5px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+  .schedule-page .sc-cell{padding:6px;gap:6px;min-height:60px}
+  .schedule-page .sc-cell .none{text-align:center;padding-top:4px;color:#94a3b8}
+  .schedule-page .sc-leave,.sc-offlabel{padding:6px 4px;font-size:12px}
+  .schedule-page .sc-card{display:flex;flex-direction:column;padding:9px 10px;border-radius:8px;font-size:12px}
+  .schedule-page .sc-card.todo{background:#e8ecf0}
+  .schedule-page .sc-card.doing{background:#d6eed8}
+  .schedule-page .sc-card.done{background:#fdeea5}
+  .schedule-page .sc-card.late{background:#f7d4d4}
+  .schedule-page .sc-card-top{display:contents}
+  .schedule-page .sc-card-top b{order:1;font-size:13px}
+  .schedule-page .sc-card p{order:2;margin-top:3px;font-size:12px;color:#2f3b46}
+  .schedule-page .sc-st{order:3;margin-top:5px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:4px}
 
   /* 状態アイコン（形は --ic に入れ、表示の指定は1か所にまとめる） */
-  .sc-st::before{content:"";width:12px;height:12px;background:currentColor;order:-1;
+  .schedule-page.sc-st::before{content:"";width:12px;height:12px;background:currentColor;order:-1;
     -webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
-  .sc-card.done .sc-st::before{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")}
-  .sc-card.doing .sc-st::before{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='M12 7.5V12l3 2'/%3E%3C/svg%3E")}
-  .sc-card.late .sc-st::before{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4l9 16H3z'/%3E%3Cpath d='M12 10v4M12 17.3v.1'/%3E%3C/svg%3E")}
-  .sc-card.todo .sc-st::before{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3C/svg%3E")}
+  .schedule-page.sc-card.done .sc-st::before{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")}
+  .schedule-page.sc-card.doing .sc-st::before{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='M12 7.5V12l3 2'/%3E%3C/svg%3E")}
+  .schedule-page.sc-card.late .sc-st::before{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4l9 16H3z'/%3E%3Cpath d='M12 10v4M12 17.3v.1'/%3E%3C/svg%3E")}
+  .schedule-page.sc-card.todo .sc-st::before{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3C/svg%3E")}
 
   /* 文字色（作業中・遅延はPC版と同じなので、ここでは上書きしない） */
   .sc-card.todo .sc-st{color:#4b5563}

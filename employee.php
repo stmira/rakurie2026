@@ -1,7 +1,7 @@
 <!-- お客様情報登録画面について -->
 
 <!-- ヘッダーの読み込み -->
-<?php $currentPage = 'customer'; ?>
+<?php $currentPage = 'employee'; ?>
 <?php require 'header.php'; ?>
 <!-- データベース接続 -->
 <?php require 'config/database.php'; ?>
