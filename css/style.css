@@ -737,6 +737,11 @@ body.password-page {
 /* ===== 通知一覧 ===== */
 .list li + li { border-top: 1px solid var(--line); }
 
+.list {
+  padding: 0;
+  margin: 0;
+}
+
 .item {
     display: block;
     min-height: 113px;
@@ -745,6 +750,13 @@ body.password-page {
     text-decoration: none;
     background: #fff;
 }
+
+.list li {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
 .item:hover { background: #f6fafd; }
 .item.is-unread { background: var(--unread-bg); }
 .item.is-unread:hover { background: #dfeffb; }
@@ -1718,9 +1730,14 @@ body.password-page {
 .ref-page .ref-c-outsource   { --c: #ff0000; --t: #fff; }
 .ref-page .ref-c-pack        { --c: #00ffff; --t: #000; }
 .ref-page .ref-c-shipready   { --c: #ff9900; --t: #000; }
+.ref-page .ref-c-inventory   { --c: #BF9000; --t: #000; }
+.ref-page .ref-c-in_stock   { --c: #FFFF00; --t: #000; }
+.ref-page .ref-c-unnecessary   { --c: #D9D9D9; --t: #222; }
+.ref-page .ref-c-check_ok   { --c: #D9D9D9; --t: #222; }
+.ref-page .ref-c-check_no   { --c: #ff0000; --t: #fff; }
 
 /* ===== タイトル ===== */
-.ref-title {
+.ref-page .ref-title {
   padding-left: 12px;
   border-left: 4px solid #8fd0f0;
   font-size: 28px;
@@ -1955,7 +1972,7 @@ body.password-page {
 }
 
 /* ===========================================================
-    スマホ表示
+    スマホ表示(早見表用)
     =========================================================== */
 @media (max-width: 760px) {
   .ref-page { gap: 14px; padding: 16px 16px 40px; }
