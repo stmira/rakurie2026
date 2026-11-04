@@ -167,12 +167,18 @@
     const filterList = document.getElementById('ref-filter-list');
     const filterClear = document.getElementById('ref-filter-clear');
     const filterCount = document.getElementById('ref-filter-count');
+    const editBtn = document.getElementById('ref-edit-btn');
+    const saveBtn = document.getElementById('ref-save-btn');
+    const cancelBtn = document.getElementById('ref-cancel-btn');
+    const editNote = document.getElementById('ref-edit-note');
 
     // ===== 画面の状態 =====
     const state = {
         keyword: '',
-        companies: new Set()   // 選んだ会社名
+        companies: new Set(),   // 選んだ会社名
+        editing: false
     };
+    let edits = {}
     const opened = new Set(); // スマホで「工程内訳」を閉じているカード
     let menuTarget = null;
 
@@ -235,8 +241,59 @@
         return words.every(function (w) { return hay.indexOf(w) !== -1; });
     }
 
+    // ---------- 編集モード用の関数 ----------
+    // 書き換え中の内容を先に見る（なければ元のデータ）
+    function draftValue(o, field) {
+        const d = edits[String(o.order_id)];
+        if (d && Object.prototype.hasOwnProperty.call(d, field)) return d[field];
+        return o[field] == null ? '' : o[field];
+    }
+
+    // 編集モードの1行
+    function editRowHtml(o) {
+        const id = esc(o.order_id);
+        const attr = function (field, label) {
+            return ' class="ref-field-input" data-id="' + id + '" data-field="' + field + '" aria-label="' + label + '"';
+        };
+
+        const cells = DESIGN_COLS.map(function (c) {
+            const info = getCellDisplay(c, o);
+
+            // 文字を持たない列（チェックした人・営業担当）は、表示だけ
+            if (c.group === 'checker' || c.group === 'person') {
+                return '<td class="ref-cell' + info.cls + '">' + info.text + '</td>';
+            }
+
+            return '<td class="ref-cell ref-editing' + info.cls + '">' +
+                '<textarea rows="3"' + attr(c.key + '_detail', c.label) + '>\n' +
+                esc(draftValue(o, c.key + '_detail')) + '</textarea></td>';
+        }).join('');
+
+        const isProd = String(draftValue(o, 'production')) === 'true';
+        const companyOptions = companies.map(function (name) {
+            return '<option value="' + esc(name) + '"' +
+                (name === draftValue(o, 'customer_name') ? ' selected' : '') + '>' + esc(name) + '</option>';
+        }).join('');
+
+        return '<tr>' +
+            '<td><a href="#" class="ref-order-no">' + id + '</a></td>' +
+            '<td class="ref-editing"><select' + attr('production', '制作可') + '>' +
+                '<option value="true"' + (isProd ? ' selected' : '') + '>可</option>' +
+                '<option value="false"' + (isProd ? '' : ' selected') + '>待ち</option></select></td>' +
+            '<td class="ref-editing"><input type="number" min="0" max="100" step="1"' + attr('progress', '進捗') +
+                ' value="' + esc(draftValue(o, 'progress')) + '"></td>' +
+            '<td class="ref-editing"><select' + attr('customer_name', '客先名') + '>' + companyOptions + '</select></td>' +
+            '<td class="ref-editing"><input type="text"' + attr('summary', '概要') +
+                ' value="' + esc(draftValue(o, 'summary')) + '"></td>' +
+            '<td class="ref-ship ref-editing' + shipClass(o) + '"><input type="date"' + attr('due_date', '出荷日') +
+                ' value="' + esc(draftValue(o, 'due_date')) + '"></td>' +
+            cells +
+            '</tr>';
+    }
+
     // ===== 表示（パソコン：表の1行） =====
     function rowHtml(o) {
+        if (state.editing) return editRowHtml(o);
         const cells = DESIGN_COLS.map(function (c) {
             const info = getCellDisplay(c, o);
 
@@ -304,6 +361,7 @@
 
     // ===== 画面を作り直す =====
     function render() {
+        page.classList.toggle('is-editing', state.editing);
         const list = ORDERS.filter(matches);
         tbody.innerHTML = list.map(rowHtml).join('');
         cards.innerHTML = list.map(cardHtml).join('');
@@ -501,7 +559,7 @@
         if (!menu.contains(e.target)) closeMenu();
         if (!filterWrap.contains(e.target)) closeFilter();
 
-        if (edit && page.contains(edit)) openMenu(edit, false);
+        if (edit && page.contains(edit) && !state.editing) openMenu(edit, false);
 
         if (toggle && page.contains(toggle)) {
         const id = toggle.dataset.toggle;
@@ -519,6 +577,7 @@
         closeFilter();
         return;
         }
+        if (state.editing) return;
         const edit = e.target.closest && e.target.closest('td[data-edit], span[data-edit]');
         if (edit && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault();
@@ -537,6 +596,7 @@
         let moved = false;
 
         scroller.addEventListener('pointerdown', function (e) {
+        if (e.target.closest('input, textarea, select')) return;
         if (e.pointerType !== 'mouse' || e.button !== 0) return; // タッチは、ふつうのスクロール
         down = true;
         moved = false;
@@ -566,6 +626,113 @@
         }
         }, true);
     })();
+
+    // ===== 編集モード =====
+    function updateEditUi() {
+        editBtn.hidden = state.editing;
+        saveBtn.hidden = !state.editing;
+        cancelBtn.hidden = !state.editing;
+        editNote.hidden = !state.editing;
+        editNote.classList.remove('is-error');
+        editNote.textContent = '編集中：書き換えたら「保存」を押してください';
+    }
+    function startEdit() {
+        closeMenu();
+        closeFilter();
+        state.editing = true;
+        edits = {};
+        updateEditUi();
+        render();
+    }
+    function endEdit() {
+        state.editing = false;
+        edits = {};
+        updateEditUi();
+        render();
+    }
+
+    // 入力された文字を、データの形に直す
+    function convertValue(field, raw) {
+        if (field === 'production') return raw === 'true';
+        if (field === 'progress') return Math.min(100, Math.max(0, Number(raw) || 0));
+        return raw;
+    }
+
+    // 元のデータと違うものだけを集める
+    function collectChanges() {
+        const changes = [];
+        Object.keys(edits).forEach(function (id) {
+            const o = ORDERS.filter(function (x) { return String(x.order_id) === id; })[0];
+            if (!o) return;
+            Object.keys(edits[id]).forEach(function (field) {
+                const value = convertValue(field, edits[id][field]);
+                const before = o[field] == null ? '' : o[field];
+                if (String(before) !== String(value)) {
+                    changes.push({ order_id: o.order_id, column: field, value: value });
+                }
+            });
+        });
+        return changes;
+    }
+
+    // 変更をまとめて保存する（今は動作確認用）
+    // 本番は PHP に送って、データベースを書き換えます。成功したら resolve するようにします。
+    function saveChanges(changes) {
+        // 例:
+        // return fetch('api/update_orders.php', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ changes: changes })
+        // }).then(function (res) {
+        //     if (!res.ok) throw new Error('save failed');
+        // });
+        console.log('保存する内容（まとめて）:', changes);
+        return Promise.resolve();
+    }
+
+    // 入力するたびに、書き換え中の内容を覚える
+    tbody.addEventListener('input', function (e) {
+        const el = e.target.closest('[data-field]');
+        if (!el) return;
+        const id = el.dataset.id;
+        edits[id] = edits[id] || {};
+        edits[id][el.dataset.field] = el.value;
+    });
+
+    editBtn.addEventListener('click', startEdit);
+
+    cancelBtn.addEventListener('click', function () {
+        if (Object.keys(edits).length && !window.confirm('書き換えた内容を破棄しますか？')) return;
+        endEdit();
+    });
+
+    saveBtn.addEventListener('click', function () {
+        // 出荷日は空にできない
+        const emptyDate = Object.keys(edits).some(function (id) { return edits[id].due_date === ''; });
+        if (emptyDate) {
+            editNote.textContent = '出荷日が空の行があります。入力してください。';
+            editNote.classList.add('is-error');
+            return;
+        }
+
+        const changes = collectChanges();
+        if (!changes.length) { endEdit(); return; }   // 変更がないとき
+
+        saveBtn.disabled = true;
+        saveChanges(changes).then(function () {
+            // 保存できたら、画面のデータにも反映する
+            changes.forEach(function (c) {
+                const o = ORDERS.filter(function (x) { return x.order_id === c.order_id; })[0];
+                if (o) o[c.column] = c.value;
+            });
+            endEdit();
+        }).catch(function () {
+            editNote.textContent = '保存できませんでした。もう一度お試しください。';
+            editNote.classList.add('is-error');
+        }).then(function () {
+            saveBtn.disabled = false;
+        });
+    });
 
   // ===== 最初の表示 =====
     updateFilterCount();
