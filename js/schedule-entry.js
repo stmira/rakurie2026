@@ -135,13 +135,13 @@
         var shown = all.filter(function (t) { return match(view(t.s).text); });
         var inner = off ? '<span class="sc-offlabel">休日</span>' : '';
         shown.forEach(function (t) { any = true; inner += card(t.s, t.carried); });
-        if (!all.length && !off) {   // 何も登録されていない枠だけ、選択できる
-          var picked = sel && sel.emp === e.employee_id && sel.date === k;
+        // if (!all.length && !off) {   // 何も登録されていない枠だけ、選択できる=>どこでも選択できる[修正]
+        var picked = sel && sel.emp === e.employee_id && sel.date === k;
           inner += picked
             ? '<div class="se-pick">' + PLUS + '<span>登録する</span></div>'
             : '<button type="button" class="se-empty" data-emp="' + e.employee_id + '" data-date="' + k +
               '" aria-label="' + esc(e.name) + 'の' + (days[idx].getMonth() + 1) + '月' + days[idx].getDate() + '日に工程を登録">–</button>';
-        }
+        
         cells += '<div class="se-cell' + (off ? ' is-off' : '') + '">' + inner + '</div>';
       });
       if (any || !state.q) {

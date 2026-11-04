@@ -3017,7 +3017,7 @@ body.password-page { background: #f3f8fb; }
 
 .schedule-entry-page .se-unit,
 .schedule-entry-page .se-date{position:relative}
-.schedule-entry-page .se-unit .se-control{padding-right:36px;-moz-appearance:textfield}
+.schedule-entry-page .se-unit .se-control{padding-right:36px;}
 .schedule-entry-page .se-unit .se-control::-webkit-inner-spin-button,
 .schedule-entry-page .se-unit .se-control::-webkit-outer-spin-button{margin:0;-webkit-appearance:none}
 .schedule-entry-page .se-unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text-muted);pointer-events:none}
