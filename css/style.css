@@ -2912,3 +2912,131 @@ body.password-page { background: #f3f8fb; }
 }
 /* ========================Todo画面（スマホ版）=========================== */
 /* ========================Todo画面====================== */
+
+/* ========================工程表情報登録画面===========================
+   画面全体は <div class="schedule-entry-page"> で囲んであります。
+   カード・状態の色・絞り込みパネルは、工程表一覧の部品
+   （.sc-card / .sc-dot / .sc-chip / .sc-panel など）と .toast をそのまま流用します。 */
+.schedule-entry-page{--se-accent:#2a9fd0;--se-line:#e4eaee;min-height:calc(100vh - 62px);background:#f4f7fa}
+.schedule-entry-page .se-page{max-width:1500px;margin:0 auto;padding:26px 26px 48px}
+
+/* ---- パンくず・タイトル ---- */
+.schedule-entry-page .se-crumb{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-sub)}
+.schedule-entry-page .se-crumb a{color:inherit;text-decoration:none}
+.schedule-entry-page .se-crumb a:hover{color:var(--blue);text-decoration:underline}
+.schedule-entry-page .se-title{margin:5px 0 0;font-size:24px;font-weight:700;line-height:1.3;color:var(--navy)}
+.schedule-entry-page .se-lead{margin:3px 0 0;font-size:13px;color:var(--text-sub)}
+
+/* ---- 2カラム（右の登録パネルを閉じているときは左だけ） ---- */
+.schedule-entry-page .se-layout{display:grid;grid-template-columns:minmax(0,1fr) 450px;gap:26px;align-items:stretch;margin-top:24px}
+.schedule-entry-page .se-layout.is-closed{grid-template-columns:minmax(0,1fr)}
+.schedule-entry-page .se-panel[hidden]{display:none}
+.schedule-entry-page .se-card{background:#fff;border:1px solid var(--line);border-radius:12px}
+
+/* ===== 左：工程表一覧 ===== */
+.schedule-entry-page .se-card-head{display:flex;align-items:center;justify-content:space-between;padding:19px 18px 0}
+.schedule-entry-page .se-card-head h2{display:flex;align-items:center;gap:10px;margin:0;font-size:16px;font-weight:700;color:var(--navy)}
+.schedule-entry-page .se-card-head h2 svg{color:var(--se-accent)}
+.schedule-entry-page .se-company{font-size:12px;color:var(--text-muted)}
+
+/* ツールバー（検索・絞り込み・今日・日付移動） */
+.schedule-entry-page .se-toolbar{display:flex;align-items:center;gap:10px;margin-top:20px;padding:0 18px}
+.schedule-entry-page .se-toolbar .sc-search{width:235px;height:33px;padding:0 12px;gap:8px;border-radius:6px}
+.schedule-entry-page .se-toolbar .sc-search input{min-width:0;height:31px;font-size:12px}
+.schedule-entry-page .se-toolbar .sc-btn{height:33px;padding:0 12px;gap:8px;border-radius:6px;font-size:12px;font-weight:500;color:var(--navy)}
+.schedule-entry-page .se-toolbar .sc-range{gap:6px;font-size:13px;font-weight:500;color:var(--navy)}
+.schedule-entry-page .se-toolbar .sc-range button{padding:4px 8px;font-size:14px}
+
+/* 状態の凡例 */
+.schedule-entry-page .se-legend{display:flex;align-items:center;gap:16px;height:36px;margin-top:16px;padding:0 18px;background:#f8fafb;border-top:1px solid var(--se-line);border-bottom:1px solid var(--se-line);font-size:10px;color:var(--text-sub)}
+.schedule-entry-page .se-legend-title{margin-right:2px;font-weight:700;color:var(--navy)}
+.schedule-entry-page .se-legend .sc-dot{width:13px;height:13px;border-radius:2px}
+
+/* 表（左の見出し95px＋日付6列） */
+.schedule-entry-page .se-scroll{overflow-x:auto}
+.schedule-entry-page .se-grid{display:grid;grid-template-columns:95px repeat(var(--days,6),minmax(0,1fr));min-width:820px}
+.schedule-entry-page .se-h,
+.schedule-entry-page .se-rh,
+.schedule-entry-page .se-cell{border-right:1px solid var(--se-line);border-bottom:1px solid var(--se-line)}
+.schedule-entry-page .se-grid > :nth-child(7n){border-right:0}   /* 右端の列は、カードの枠と二重にしない */
+.schedule-entry-page .se-h{display:flex;align-items:center;justify-content:center;height:45px;font-size:11px;font-weight:500;color:var(--navy)}
+.schedule-entry-page .se-h.corner{justify-content:flex-start;padding-left:12px;font-weight:700}
+.schedule-entry-page .se-h.is-sel{background:#e1f1fb;color:#1a7fb5}
+.schedule-entry-page .se-rh{display:flex;flex-direction:column;justify-content:center;gap:3px;padding:0 12px}
+.schedule-entry-page .se-rh b{font-size:13px;color:var(--navy)}
+.schedule-entry-page .se-rh span{font-size:9px;color:var(--text-muted)}
+.schedule-entry-page .se-rh.is-sel b{color:#1a82c4}
+.schedule-entry-page .se-none{grid-column:1/-1;padding:40px;text-align:center;font-size:13px;color:var(--text-muted)}
+
+/* セル */
+.schedule-entry-page .se-cell{display:flex;flex-direction:column;gap:4px;min-height:96px;padding:5px}
+.schedule-entry-page .se-cell .sc-offlabel{padding:3px 4px;font-size:10px}
+.schedule-entry-page .se-empty{flex:1;display:block;width:100%;padding:2px 6px;border:0;border-radius:4px;background:none;font:inherit;font-size:10px;line-height:12px;text-align:left;color:#9aa5b1;cursor:pointer}
+.schedule-entry-page .se-empty:hover,
+.schedule-entry-page .se-empty:focus-visible{background:#eef7fc;color:var(--se-accent);outline:none}
+.schedule-entry-page .se-pick{flex:1;min-height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1.5px dashed var(--se-accent);border-radius:4px;background:#f3fafe;color:var(--se-accent);font-size:11px}
+
+/* セルの中のカード（色・状態の文字色は、工程表一覧の .sc-card をそのまま使用） */
+.schedule-entry-page .se-cell .sc-card{padding:4px 6px;border-radius:5px;font-size:10px;line-height:1.2}
+.schedule-entry-page .se-cell .sc-card-top{align-items:baseline;gap:4px}
+.schedule-entry-page .se-cell .sc-card-top b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;line-height:13px}
+.schedule-entry-page .se-cell .sc-st{font-size:9px}
+.schedule-entry-page .se-cell .sc-carry{padding:0 3px;font-size:8px}
+.schedule-entry-page .se-cell .sc-card p{font-size:10px;line-height:12px;color:#5f6c78}
+
+.schedule-entry-page .se-hint{display:flex;align-items:center;gap:8px;height:62px;margin:0;padding:0 18px 0 20px;font-size:11px;color:var(--text-sub)}
+.schedule-entry-page .se-hint svg{flex:none;color:var(--se-accent)}
+
+/* ===== 右：工程を登録 ===== */
+.schedule-entry-page .se-panel{display:flex;flex-direction:column}
+.schedule-entry-page .se-panel form{display:flex;flex-direction:column;flex:1;min-height:0}
+.schedule-entry-page .se-panel-head{display:flex;align-items:flex-start;justify-content:space-between;padding:17px 23px 14px;border-bottom:1px solid var(--se-line)}
+.schedule-entry-page .se-panel-head h2{position:relative;margin:0;padding-left:13px;font-size:18px;line-height:26px;color:var(--navy)}
+.schedule-entry-page .se-panel-head h2::before{content:"";position:absolute;left:0;top:50%;width:4px;height:20px;margin-top:-10px;border-radius:2px;background:var(--se-accent)}
+.schedule-entry-page .se-selected{margin:3px 0 0;font-size:11px;line-height:16px;color:var(--text-sub)}
+.schedule-entry-page .se-badge{display:inline-flex;align-items:center;height:18px;margin-top:4px;padding:0 8px;border-radius:4px;background:#e6f4fb;color:var(--blue);font-size:10px;font-weight:700}
+
+.schedule-entry-page .se-panel-body{flex:1;overflow-y:auto;padding:20px 23px 7px}
+.schedule-entry-page .se-field{margin-bottom:13px}
+.schedule-entry-page .se-field label{display:flex;align-items:center;gap:6px;margin-bottom:5px;font-size:13px;line-height:18px;font-weight:700;color:var(--navy)}
+.schedule-entry-page .se-opt{font-style:normal;font-size:10px;font-weight:400;color:var(--text-muted)}
+.schedule-entry-page .se-help{margin:6px 0 0;font-size:10px;line-height:12px;color:var(--text-muted)}
+.schedule-entry-page .se-error{margin:5px 0 0;font-size:11px;color:#d6455d}
+.schedule-entry-page .se-error[hidden]{display:none}
+.schedule-entry-page .se-field.has-error .se-control{border-color:#d6455d}
+
+/* 入力部品（選択・文字・日付・本数で共通） */
+.schedule-entry-page .se-control{display:block;width:100%;height:40px;padding:0 12px;border:1px solid #dde3e8;border-radius:6px;background:#fff;font:inherit;font-size:13px;color:var(--c-text);outline:none;transition:border-color .15s,box-shadow .15s}
+.schedule-entry-page .se-control::placeholder{color:#9aa6b0}
+.schedule-entry-page .se-control:focus{border-color:var(--se-accent);box-shadow:0 0 0 3px rgba(42,159,208,.15)}
+.schedule-entry-page select.se-control{padding-right:36px;appearance:none;cursor:pointer;
+  background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7a86' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 12px center/14px}
+.schedule-entry-page select.se-control:has(option[value=""]:checked){color:#9aa6b0}
+.schedule-entry-page select.se-control option{color:var(--c-text)}
+.schedule-entry-page textarea.se-control{height:60px;min-height:60px;padding:10px 12px;line-height:1.5;resize:vertical}
+
+.schedule-entry-page .se-unit,
+.schedule-entry-page .se-date{position:relative}
+.schedule-entry-page .se-unit .se-control{padding-right:36px;-moz-appearance:textfield}
+.schedule-entry-page .se-unit .se-control::-webkit-inner-spin-button,
+.schedule-entry-page .se-unit .se-control::-webkit-outer-spin-button{margin:0;-webkit-appearance:none}
+.schedule-entry-page .se-unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text-muted);pointer-events:none}
+.schedule-entry-page .se-date .se-control{padding-right:40px}
+.schedule-entry-page .se-date svg{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none}
+.schedule-entry-page .se-date .se-control::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+
+/* フッターのボタン */
+.schedule-entry-page .se-panel-foot{display:flex;justify-content:flex-end;gap:12px;padding:20px 23px;border-top:1px solid var(--se-line)}
+.schedule-entry-page .se-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:8px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s,border-color .15s}
+.schedule-entry-page .se-btn-ghost{width:112px;border:1px solid #dde3e8;background:#fff;color:var(--navy)}
+.schedule-entry-page .se-btn-ghost:hover{background:#f6f9fb;border-color:#c9d3da}
+.schedule-entry-page .se-btn-primary{width:160px;border:0;background:var(--se-accent);color:#fff;font-size:14px}
+.schedule-entry-page .se-btn-primary:hover{background:#1f8dbb}
+
+@media (max-width:1100px){
+  .schedule-entry-page .se-page{padding:20px 16px 40px}
+  .schedule-entry-page .se-layout{grid-template-columns:minmax(0,1fr)}
+  .schedule-entry-page .se-toolbar{flex-wrap:wrap}
+  .schedule-entry-page .se-toolbar .sc-spacer{display:none}
+}
+/* ========================工程表情報登録画面=========================== */
