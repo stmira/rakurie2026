@@ -391,19 +391,17 @@ body.password-page { background: #f3f8fb; }
 /* ====================パスワード再設定画面　スマホver========== */
 
 /* ====================パスワード再設定画面===================== */
-
-/* ====================ログイン画面===================== */
 .login-page {
     min-height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
+    padding: 32px 24px;
 }
 
 .login-page .login-container {
     width: 100%;
-    max-width: 525px;
+    max-width: 420px;
 }
 
 /* ロゴ */
@@ -411,18 +409,18 @@ body.password-page { background: #f3f8fb; }
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 44px;
+    gap: 10px;
+    margin-bottom: 28px;
 }
 
 .login-page .logo-icon {
-    width: 60px;
-    height: 60px;
+    width: 44px;
+    height: 44px;
     display: block;
 }
 
 .login-page .logo-text {
-    font-size: 40px;
+    font-size: 26px;
     font-weight: 700;
     color: var(--c-logo-text);
     letter-spacing: 0.02em;
@@ -431,7 +429,7 @@ body.password-page { background: #f3f8fb; }
 
 /* フォーム */
 .login-page .field {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .login-page .field.has-hint {
@@ -441,19 +439,20 @@ body.password-page { background: #f3f8fb; }
 .login-page .label-row {
     display: flex;
     align-items: baseline;
-    gap: 12px;
-    margin-bottom: 14px;
+    gap: 8px;
+    margin-bottom: 8px;
 }
 
 .login-page .label-row label {
-    font-size: 17px;
+    font-size: 13px;
+    line-height: 18px;
     font-weight: 700;
-    color: var(--c-text);
+    color: #364d5a;
 }
 
 .login-page .required {
-    font-size: 13px;
-    color: var(--c-brand);
+    font-size: 10px;
+    color: #7fbed7;
 }
 
 .login-page .input-wrap {
@@ -462,14 +461,14 @@ body.password-page { background: #f3f8fb; }
 
 .login-page .input-wrap input {
     width: 100%;
-    height: 58px;
-    padding: 0 18px;
+    height: 40px;
+    padding: 0 12px;
     font-family: inherit;
-    font-size: 17px;
-    color: var(--c-text);
+    font-size: 13px;
+    color: #4c616c;
     background: #fff;
-    border: 1px solid var(--c-border);
-    border-radius: 10px;
+    border: 1px solid #e1e9ee;
+    border-radius: 8px;
     outline: none;
     transition: border-color 0.15s, box-shadow 0.15s;
 }
@@ -484,16 +483,16 @@ body.password-page { background: #f3f8fb; }
 }
 
 .login-page .input-wrap.has-toggle input {
-    padding-right: 56px;
+    padding-right: 42px;
 }
 
 .login-page .toggle-pw {
     position: absolute;
     top: 50%;
-    right: 12px;
+    right: 6px;
     transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     padding: 0;
     display: flex;
     align-items: center;
@@ -501,7 +500,7 @@ body.password-page { background: #f3f8fb; }
     background: none;
     border: none;
     border-radius: 6px;
-    color: #5d6b76;
+    color: #8d9fa8;
     cursor: pointer;
 }
 
@@ -510,8 +509,8 @@ body.password-page { background: #f3f8fb; }
 }
 
 .login-page .toggle-pw svg {
-    width: 22px;
-    height: 22px;
+    width: 16px;
+    height: 16px;
 }
 
 .login-page .toggle-pw .icon-eye {
@@ -527,15 +526,15 @@ body.password-page { background: #f3f8fb; }
 }
 
 .login-page .hint {
-    margin: 14px 0 0;
-    font-size: 14px;
-    color: var(--c-sub);
+    margin: 8px 0 0;
+    font-size: 11px;
+    color: #92a3ac;
 }
 
 .login-page .error-message {
     min-height: 0;
-    margin: 12px 0 0;
-    font-size: 14px;
+    margin: 8px 0 0;
+    font-size: 12px;
     color: var(--c-error);
 }
 
@@ -546,19 +545,19 @@ body.password-page { background: #f3f8fb; }
 /* ログインボタン */
 .login-page .login-button {
     width: 100%;
-    height: 55px;
-    margin-top: 32px;
+    height: 40px;
+    margin-top: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-family: inherit;
-    font-size: 17px;
+    font-size: 13px;
     font-weight: 700;
     color: #fff;
     background: var(--c-brand);
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background 0.15s;
 }
@@ -578,17 +577,18 @@ body.password-page { background: #f3f8fb; }
 }
 
 .login-page .login-button svg {
-    width: 20px;
-    height: 20px;
+    width: 13px;
+    height: 13px;
+    opacity: .45;
 }
 
 /* パスワードリンク */
 .login-page .forgot {
     display: block;
-    margin-top: 32px;
+    margin-top: 20px;
     text-align: center;
-    font-size: 17px;
-    color: var(--c-brand);
+    font-size: 12px;
+    color: #5eadce;
     text-decoration: none;
 }
 
@@ -598,29 +598,27 @@ body.password-page { background: #f3f8fb; }
 
 /* 案内ボックス */
 .login-page .notice {
-    margin-top: 40px;
-    padding: 22px 24px;
+    margin-top: 28px;
+    padding: 14px 18px 14px 14px;
     display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    background: var(--c-info-bg);
-    border-radius: 10px;
-    color: var(--c-sub);
+    align-items: center;
+    gap: 12px;
+    background: #f2f7fa;
+    border-radius: 8px;
+    color: #8ea0a9;
 }
 
 .login-page .notice svg {
     flex: none;
-    width: 22px;
-    height: 22px;
-    margin-top: 1px;
+    width: 15px;
+    height: 15px;
 }
 
 .login-page .notice p {
     margin: 0;
-    font-size: 14px;
+    font-size: 11px;
     line-height: 1.6;
 }
-
 /* ====================ログイン画面　スマホver========== */
 @media (max-width: 900px) {
 
