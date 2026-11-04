@@ -34,8 +34,14 @@
     { employee_id: 2, name: '小原', role: 'アームロボット' },
     { employee_id: 3, name: 'Tさん', role: '加工・検査' },
     { employee_id: 4, name: 'Hさん', role: 'MC・旋盤' },
-    { employee_id: 5, name: 'Yさん', role: 'アームロボット' }
-  ];
+    { employee_id: 5, name: 'Yさん', role: 'アームロボット' },
+    { employee_id: 6,  name: 'Kさん',  role: '製造・組立' },
+    { employee_id: 7,  name: 'Mさん',  role: '溶接' },
+    { employee_id: 8,  name: 'Nさん',  role: '塗装' },
+    { employee_id: 9,  name: 'Oさん',  role: '検査・出荷' },
+    { employee_id: 10, name: 'Aさん',  role: '設計・積算' },
+    { employee_id: 11, name: 'Rさん',  role: '運搬・資材' }
+  ]
   var TASKS = [   // 作業名（tasks テーブル）
     { task_id: 1, task_name: 'HIS10' }, { task_id: 2, task_name: 'アルミ加工' }, { task_id: 3, task_name: 'アルミ M10' },
     { task_id: 4, task_name: '平板 250×250' }, { task_id: 5, task_name: '部品入荷確認' }, { task_id: 6, task_name: '溶接準備' },
