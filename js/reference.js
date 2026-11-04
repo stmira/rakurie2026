@@ -104,7 +104,19 @@
         Object.assign({}, EMPTY, {
         order_id: 26040, customer_name: 'D社', summary: 'H125', due_date: '2026-10-20',
         production: false, progress: 0, ship_status: 'progress'
-        })
+        }),
+        Object.assign({}, EMPTY, {
+        order_id: 26040, customer_name: 'D社', summary: 'H125', due_date: '2026-10-20',
+        production: false, progress: 0, ship_status: 'progress'
+        }),
+        Object.assign({}, EMPTY, {
+        order_id: 26040, customer_name: 'D社', summary: 'H125', due_date: '2026-10-20',
+        production: false, progress: 0, ship_status: 'progress'
+        }),
+        Object.assign({}, EMPTY, {
+        order_id: 26040, customer_name: 'D社', summary: 'H125', due_date: '2026-10-20',
+        production: false, progress: 0, ship_status: 'progress'
+        }),
     ];
     const ORDERS = window.REF_ORDERS || SAMPLE_ORDERS;
 
@@ -166,7 +178,7 @@
         companies: new Set(),   // 選んだ会社名
         editing: false
     };
-    let edits = {};
+    let edits = {}
     const opened = new Set(); // スマホで「工程内訳」を閉じているカード
     let menuTarget = null;
 
@@ -247,20 +259,20 @@
         const cells = DESIGN_COLS.map(function (c) {
             const info = getCellDisplay(c, o);
 
-            // 営業担当は、社員の一覧から選ぶ
-            if (c.group === 'person') {
-                const current = String(draftValue(o, c.key));
-                const options = [{ employee_id: 0, name: '未設定' }].concat(EMPLOYEES).map(function (e) {
-                    return '<option value="' + esc(e.employee_id) + '"' +
-                        (String(e.employee_id) === current ? ' selected' : '') + '>' + esc(e.name) + '</option>';
-                }).join('');
-                return '<td class="ref-cell ref-editing"><select' + attr(c.key, c.label) + '>' + options + '</select></td>';
-            }
+        // 営業担当は、社員の一覧から選ぶ
+        if (c.group === 'person') {
+            const current = String(draftValue(o, c.key));
+            const options = [{ employee_id: 0, name: '未設定' }].concat(EMPLOYEES).map(function (e) {
+                return '<option value="' + esc(e.employee_id) + '"' +
+                    (String(e.employee_id) === current ? ' selected' : '') + '>' + esc(e.name) + '</option>';
+            }).join('');
+            return '<td class="ref-cell ref-editing"><select' + attr(c.key, c.label) + '>' + options + '</select></td>';
+        }
 
-            // チェックした人は、表示だけ
-            if (c.group === 'checker') {
-                return '<td class="ref-cell' + info.cls + '">' + info.text + '</td>';
-            }
+        // チェックした人は、表示だけ
+        if (c.group === 'checker') {
+            return '<td class="ref-cell' + info.cls + '">' + info.text + '</td>';
+        }
 
             return '<td class="ref-cell ref-editing' + info.cls + '">' +
                 '<textarea rows="3"' + attr(c.key + '_detail', c.label) + '>\n' +
@@ -358,6 +370,7 @@
 
     // ===== 画面を作り直す =====
     function render() {
+        page.classList.toggle('is-editing', state.editing);
         const list = ORDERS.filter(matches);
         tbody.innerHTML = list.map(rowHtml).join('');
         cards.innerHTML = list.map(cardHtml).join('');
@@ -557,12 +570,6 @@
 
         if (edit && page.contains(edit) && !state.editing) openMenu(edit, false);
 
-        // キーの処理（document.addEventListener('keydown', ...) の中。Escape の分岐の直後）
-        if (state.editing) return;   // ← 追加（スペースキーなどが文字入力を邪魔しないように）  
-
-        // 横ドラッグの処理（scroller.addEventListener('pointerdown', ...) の最初）
-        if (e.target.closest('input, textarea, select')) return;   // ← 追加（文字を選ぶ操作と区別する）
-
         if (toggle && page.contains(toggle)) {
         const id = toggle.dataset.toggle;
         if (opened.has(id)) opened.delete(id); else opened.add(id);
@@ -579,6 +586,7 @@
         closeFilter();
         return;
         }
+        if (state.editing) return;
         const edit = e.target.closest && e.target.closest('td[data-edit], span[data-edit]');
         if (edit && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault();
@@ -597,6 +605,7 @@
         let moved = false;
 
         scroller.addEventListener('pointerdown', function (e) {
+        if (e.target.closest('input, textarea, select')) return;
         if (e.pointerType !== 'mouse' || e.button !== 0) return; // タッチは、ふつうのスクロール
         down = true;
         moved = false;
@@ -655,6 +664,7 @@
     function convertValue(field, raw) {
         if (field === 'production') return raw === 'true';
         if (field === 'progress') return Math.min(100, Math.max(0, Number(raw) || 0));
+        if (field === 'salesperson') return Number(raw) || 0;   // ← 追加
         return raw;
     }
 
