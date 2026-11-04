@@ -2141,6 +2141,23 @@ body.password-page { background: #f3f8fb; }
   font-size: 11px; color: var(--ref-blue);
 }
 .ref-btn-reset:hover { text-decoration: underline; }
+/* ===== 編集・保存・キャンセル（パソコンだけ） ===== */
+.ref-btn-edit, .ref-btn-save, .ref-btn-cancel {
+  height: 44px;
+  padding: 0 18px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: 8px;
+  font-size: 13px; font-weight: 700;
+  white-space: nowrap;
+}
+.ref-btn-edit, .ref-btn-cancel { border: 1px solid var(--ref-line); background: #fff; color: var(--ref-navy); }
+.ref-btn-edit:hover, .ref-btn-cancel:hover { background: #f5f8fa; }
+.ref-btn-save { border: 0; background: var(--ref-btn); color: #fff; }
+.ref-btn-save:hover { background: #0f7fae; }
+.ref-btn-save:disabled { opacity: .6; cursor: default; }
+
+.ref-edit-note { font-size: 11px; font-weight: 700; color: var(--ref-blue); }
+.ref-edit-note.is-error { color: #b9352a; }
 
 .ref-page button:focus-visible,
 .ref-table-scroll:focus-visible,
@@ -2236,6 +2253,31 @@ body.password-page { background: #f3f8fb; }
   white-space: pre-line;
 }
 .ref-table td.ref-ship { padding: 0 12px; font-size: 13px; }
+/* ===== 編集モードの表 ===== */
+.ref-page.is-editing .ref-table-scroll { cursor: auto; }
+.ref-page.is-editing .ref-table td.ref-edit { cursor: default; }
+.ref-page.is-editing .ref-table td.ref-edit:hover { box-shadow: none; }
+
+.ref-table td.ref-editing { padding: 6px 8px; }
+.ref-field-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px dashed rgba(0, 0, 0, .35);
+  border-radius: 6px;
+  background: transparent;      /* 色のついたセルは、色を見せたまま */
+  color: inherit;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.45;
+  outline: none;
+}
+.ref-field-input:focus {
+  border: 1px solid var(--ref-blue);
+  background: rgba(255, 255, 255, .92);
+  color: #222;
+  box-shadow: 0 0 0 2px rgba(10, 127, 184, .2);
+}
+textarea.ref-field-input { display: block; min-height: 56px; resize: vertical; }
 .ref-page .ref-cell[class*="ref-c-"],
 .ref-page .ref-ship[class*="ref-c-"] { background: var(--c) !important; color: var(--ct, var(--t)); }
 .ref-dash { display: none; }
@@ -2328,6 +2370,9 @@ body.password-page { background: #f3f8fb; }
   }
   .ref-pill i { width: 11px; height: 11px; border-radius: 2px; background: var(--c); border: 1px solid rgba(0, 0, 0, .15); }
   .ref-legend-note { display: block; margin-top: 12px; font-size: 10px; color: var(--ref-sub); }
+
+  /* 編集ボタンを隠す */
+  .ref-btn-edit, .ref-btn-save, .ref-btn-cancel, .ref-edit-note { display: none; }
 
   /* 一覧 */
   .ref-list { background: transparent; border: 0; border-radius: 0; overflow: visible; }
