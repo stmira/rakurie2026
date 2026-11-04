@@ -13,7 +13,7 @@
 
       <!-- ===== 左：工程表一覧 ===== -->
       <!--【追加】スクロールバーの範囲をclassで設定-->
-      <div class="se-scroll">
+      
         <section class="se-card se-list" aria-labelledby="seListTitle">
           <div class="se-card-head">
             <h2 id="seListTitle">
@@ -45,7 +45,7 @@
               <button type="button" id="seNext" aria-label="次の日付へ">&gt;</button>
             </div>
           </div>
-        </div>
+        
 
         <div class="se-legend">
           <span class="se-legend-title">タスクの状態</span>
@@ -62,74 +62,75 @@
           空いている枠を選択して、右側のフォームから工程を登録します。
         </p>
       </section>
+      
 
       <!-- ===== 右：工程を登録（空白の枠をクリックすると表示） ===== -->
-      <aside class="se-card se-panel" id="sePanel" aria-labelledby="sePanelTitle" hidden>
-        <div class="se-panel-head">
-          <div>
-            <h2 id="sePanelTitle">工程を登録</h2>
-            <p class="se-selected" id="seSelected"></p>
-          </div>
-          <span class="se-badge">新規</span>
-        </div>
-
-        <form id="seForm" novalidate>
-          <div class="se-panel-body">
-
-            <div class="se-field" data-field="employee_id">
-              <label for="seEmp">担当者</label>
-              <select id="seEmp" class="se-control"></select>
-              <p class="se-error" hidden></p>
+      <div class="se-hidden">
+        <aside class="se-card se-panel" id="sePanel" aria-labelledby="sePanelTitle" hidden>
+          <div class="se-panel-head">
+            <div>
+              <h2 id="sePanelTitle">工程を登録</h2>
+              <p class="se-selected" id="seSelected"></p>
             </div>
-
-            <div class="se-field" data-field="order_id">
-              <label for="seOrder">会社名 <em class="se-opt">任意</em></label>
-              <select id="seOrder" class="se-control"></select>
-              <p class="se-help">未定の場合は空欄のまま登録できます。</p>
-              <p class="se-error" hidden></p>
-            </div>
-
-            <div class="se-field" data-field="task_id">
-              <label for="seTask">作業名</label>
-              <select id="seTask" class="se-control"></select>
-              <p class="se-error" hidden></p>
-            </div>
-
-            <div class="se-field" data-field="detail">
-              <label for="seDetail">詳細</label>
-              <textarea id="seDetail" class="se-control" maxlength="100" placeholder="作業内容・補足事項を入力"></textarea>
-              <p class="se-error" hidden></p>
-            </div>
-
-            <div class="se-field" data-field="quantity">
-              <label for="seQty">本数</label>
-              <div class="se-unit">
-                <input id="seQty" class="se-control" type="number" min="0" step="1" inputmode="numeric" placeholder="本数を入力">
-                <span>本</span>
-              </div>
-              <p class="se-error" hidden></p>
-            </div>
-
-            <div class="se-field" data-field="planned_start_date">
-              <label for="seStart">作業開始予定日</label>
-              <div class="se-date">
-                <input id="seStart" class="se-control" type="date">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-              </div>
-              <p class="se-error" hidden></p>
-            </div>
-
-            <div class="se-field" data-field="planned_end_date">
-              <label for="seEnd">作業終了予定日</label>
-              <div class="se-date">
-                <input id="seEnd" class="se-control" type="date">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-              </div>
-              <p class="se-error" hidden></p>
-            </div>
-
+            <span class="se-badge">新規</span>
           </div>
 
+          <form id="seForm" novalidate>
+            <div class="se-panel-body">
+
+              <div class="se-field" data-field="employee_id">
+                <label for="seEmp">担当者</label>
+                <select id="seEmp" class="se-control"></select>
+                <p class="se-error" hidden></p>
+              </div>
+
+              <div class="se-field" data-field="order_id">
+                <label for="seOrder">会社名 <em class="se-opt">任意</em></label>
+                <select id="seOrder" class="se-control"></select>
+                <p class="se-help">未定の場合は空欄のまま登録できます。</p>
+                <p class="se-error" hidden></p>
+              </div>
+
+              <div class="se-field" data-field="task_id">
+                <label for="seTask">作業名</label>
+                <select id="seTask" class="se-control"></select>
+                <p class="se-error" hidden></p>
+              </div>
+
+              <div class="se-field" data-field="detail">
+                <label for="seDetail">詳細</label>
+                <textarea id="seDetail" class="se-control" maxlength="100" placeholder="作業内容・補足事項を入力"></textarea>
+                <p class="se-error" hidden></p>
+              </div>
+
+              <div class="se-field" data-field="quantity">
+                <label for="seQty">本数</label>
+                <div class="se-unit">
+                  <input id="seQty" class="se-control" type="number" min="0" step="1" inputmode="numeric" placeholder="本数を入力">
+                  <span>本</span>
+                </div>
+                <p class="se-error" hidden></p>
+              </div>
+
+              <div class="se-field" data-field="planned_start_date">
+                <label for="seStart">作業開始予定日</label>
+                <div class="se-date">
+                  <input id="seStart" class="se-control" type="date">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                </div>
+                <p class="se-error" hidden></p>
+              </div>
+
+              <div class="se-field" data-field="planned_end_date">
+                <label for="seEnd">作業終了予定日</label>
+                <div class="se-date">
+                  <input id="seEnd" class="se-control" type="date">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                </div>
+                <p class="se-error" hidden></p>
+              </div>
+
+            </div>   
           <div class="se-panel-foot">
             <button type="button" class="se-btn se-btn-ghost" id="seCancel">取消し</button>
             <button type="submit" class="se-btn se-btn-primary">
@@ -139,6 +140,7 @@
           </div>
         </form>
       </aside>
+    </div>
 
     </div>
   </main>

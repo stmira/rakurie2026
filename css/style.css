@@ -3047,6 +3047,9 @@ textarea.ref-field-input { display: block; min-height: 56px; resize: vertical; }
 .schedule-entry-page .se-hint svg{flex:none;color:var(--se-accent)}
 
 /* ===== 右：工程を登録 ===== */
+.schedule-entry-page .se-hidden{
+    display: none;
+}
 .schedule-entry-page .se-panel{display:flex;flex-direction:column}
 .schedule-entry-page .se-panel form{display:flex;flex-direction:column;flex:1;min-height:0}
 .schedule-entry-page .se-panel-head{display:flex;align-items:flex-start;justify-content:space-between;padding:17px 23px 14px;border-bottom:1px solid var(--se-line)}
