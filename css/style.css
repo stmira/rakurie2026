@@ -2209,7 +2209,13 @@ body.password-page { background: #f3f8fb; }
 .ref-soon { font-size: 11px; color: #9a6a12; }
 
 /* 横にスライドできる部分 */
-.ref-table-scroll { overflow-x: auto; cursor: grab; -webkit-overflow-scrolling: touch; }
+.ref-table-scroll {
+  overflow: auto;
+  max-height: calc(100vh - 460px);
+  min-height: 400px;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+}
 .ref-table-scroll.is-dragging { cursor: grabbing; user-select: none; }
 
 .ref-table {
