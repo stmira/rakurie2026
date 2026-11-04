@@ -259,10 +259,20 @@
         const cells = DESIGN_COLS.map(function (c) {
             const info = getCellDisplay(c, o);
 
-            // 文字を持たない列（チェックした人・営業担当）は、表示だけ
-            if (c.group === 'checker' || c.group === 'person') {
-                return '<td class="ref-cell' + info.cls + '">' + info.text + '</td>';
-            }
+        // 営業担当は、社員の一覧から選ぶ
+        if (c.group === 'person') {
+            const current = String(draftValue(o, c.key));
+            const options = [{ employee_id: 0, name: '未設定' }].concat(EMPLOYEES).map(function (e) {
+                return '<option value="' + esc(e.employee_id) + '"' +
+                    (String(e.employee_id) === current ? ' selected' : '') + '>' + esc(e.name) + '</option>';
+            }).join('');
+            return '<td class="ref-cell ref-editing"><select' + attr(c.key, c.label) + '>' + options + '</select></td>';
+        }
+
+        // チェックした人は、表示だけ
+        if (c.group === 'checker') {
+            return '<td class="ref-cell' + info.cls + '">' + info.text + '</td>';
+        }
 
             return '<td class="ref-cell ref-editing' + info.cls + '">' +
                 '<textarea rows="3"' + attr(c.key + '_detail', c.label) + '>\n' +
@@ -280,8 +290,7 @@
             '<td class="ref-editing"><select' + attr('production', '制作可') + '>' +
                 '<option value="true"' + (isProd ? ' selected' : '') + '>可</option>' +
                 '<option value="false"' + (isProd ? '' : ' selected') + '>待ち</option></select></td>' +
-            '<td class="ref-editing"><input type="number" min="0" max="100" step="1"' + attr('progress', '進捗') +
-                ' value="' + esc(draftValue(o, 'progress')) + '"></td>' +
+            '<td class="ref-progress">' + esc(o.progress) + '%</td>' +
             '<td class="ref-editing"><select' + attr('customer_name', '客先名') + '>' + companyOptions + '</select></td>' +
             '<td class="ref-editing"><input type="text"' + attr('summary', '概要') +
                 ' value="' + esc(draftValue(o, 'summary')) + '"></td>' +
@@ -655,6 +664,7 @@
     function convertValue(field, raw) {
         if (field === 'production') return raw === 'true';
         if (field === 'progress') return Math.min(100, Math.max(0, Number(raw) || 0));
+        if (field === 'salesperson') return Number(raw) || 0;   // ← 追加
         return raw;
     }
 
