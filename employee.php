@@ -6,7 +6,8 @@
 <!-- データベース接続 -->
 <?php require 'config/database.php'; ?>
 <!-- CSSはHTMLのlinkタグで読み込む -->
-<link rel="stylesheet" href="css/style.css">
+ <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/employee.css">
 <?php require 'html/employee.html'; ?>
 <!-- PHPファイル側でJavaScriptを読み込む場合 -->
 <script src="js/employee.js"></script>
