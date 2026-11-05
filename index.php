@@ -3,7 +3,7 @@
 <!-- ログイン画面 -->
 <?php require 'html/index.html'; ?>
 <!-- CSSはHTMLのlinkタグで読み込む -->
-<link rel="stylesheet" href="css/style.css">
+<!-- <link rel="stylesheet" href="css/style.css"> -->
 <link rel="stylesheet" href="css/index.css">
 <!-- PHPファイル側でJavaScriptを読み込む場合 -->
 <script src="js/index.js"></script>

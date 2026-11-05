@@ -2,7 +2,7 @@
 <?php require 'config/database.php'; ?>
 
 <!-- CSSはHTMLのlinkタグで読み込む -->
-<link rel="stylesheet" href="css/style.css">
+<!-- <link rel="stylesheet" href="css/style.css"> -->
 <link rel="stylesheet" href="css/notification.css">
 
 <!-- 通知画面を接続 -->

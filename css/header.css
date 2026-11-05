@@ -1,0 +1,206 @@
+:root {
+    /* ヘッダー・通知 */
+    --blue: #0a7fb8;
+    --accent: #2a9df4;
+    --navy: #26394a;
+    --text-sub: #6b7a88;
+    --line: #e1e8ee;
+    --unread-bg: #e8f4fd;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+        "Yu Gothic", "Meiryo", sans-serif;
+    color: var(--c-text);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+}
+
+.header {
+    height: 62px;
+    display: flex;
+    align-items: stretch;
+    padding: 0 24px 0 23px;
+    background: #fff;
+    border-bottom: 1px solid #e3e9ee;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* ロゴ */
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 22px;
+    text-decoration: none;
+    
+}
+.header .logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a4a6b;
+    white-space: nowrap;
+}
+
+/* メニュー */
+.header .nav { display: flex; gap: 17px; }
+.header .nav a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    color: #6b7a88;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.header .nav a:hover { color: #0a7fb8; }
+.header .nav a.is-active { color: #0a7fb8; font-weight: 700; }
+.header .nav a.is-active::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 2px;
+    background: #2a9df4;
+}
+
+/* 右側（通知・設定・ユーザー） */
+.header .header-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.header .icon-btn {
+    position: relative;
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    border: 0; background: none;
+    color: #6b8ba3;
+    cursor: pointer;
+}
+.header .icon-btn:hover { color: #0a7fb8; }
+
+/* ベルの黄色い丸 */
+.header .bell .dot {
+    position: absolute; top: 5px; right: 7px;
+    width: 4px; height: 4px;
+    margin: 0 5px 0 1px;
+    border-radius: 50%;
+    background: #f5d02e;
+}
+
+.header .user { display: flex; align-items: center; gap: 7px; margin-left: 2px; }
+.header .avatar {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: #e6f4fb; color: #0a7fb8;
+    font-size: 10px; font-weight: 700;
+}
+.header .user-info { display: flex; flex-direction: column; line-height: 1.3; }
+.header .user-name { font-size: 10px; font-weight: 700; color: #26394a; }
+.header .user-role { font-size: 7px; color: #6b7a88; }
+
+/* ====スマホ用ハンバーガーメニュー==== */
+
+/* PC画面など普段はハンバーガーボタンを非表示にする */
+.header .hamburger_btn {
+    display: none !important;
+}
+
+/* スマホ用メニュー（ドロワー） */
+.mobile-nav-drawer {
+    width: 50%;
+    max-width: 300px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1001; /* ヘッダーや通知パネルより手前に表示 */
+    background: #fff;
+    border-left: 1px solid var(--line);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-nav-drawer.is-show {
+    transform: translateX(0);
+}
+
+.mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 20px;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.mobile-nav-list {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+}
+
+.mobile-nav-list a {
+    padding: 14px 20px;
+    font-size: 14px;
+    color: var(--text-sub);
+    text-decoration: none;
+    border-bottom: 1px solid #f1f5f8;
+}
+
+.mobile-nav-list a:hover {
+    background: #f6fafd;
+    color: var(--blue);
+}
+
+.mobile-nav-list a.is-active {
+    color: var(--blue);
+    font-weight: 700;
+    background: #e8f4fd;
+}
+
+/* 画面幅が狭いとき（スマホサイズ：900px以下） */
+@media (max-width: 900px) {
+    .header {
+        padding: 0 12px;
+    }
+
+    /* PC用のメインメニューを非表示 */
+    .header .nav {
+        display: none;
+    }
+
+    /* ハンバーガーボタンを表示 */
+    .header .hamburger_btn {
+        display: flex !important;
+    }
+
+    .header .logo-text {
+        font-size: 16px;
+    }
+
+    /* 役職はスマホでは非表示 */
+    .header .user-role {
+        display: none;
+    }
+}
+/* ====スマホ用ハンバーガーメニュー==== */
