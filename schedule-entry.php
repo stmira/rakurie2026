@@ -1,5 +1,5 @@
 <!-- ヘッダーの読み込み -->
-<?php $currentPage = 'shedule-entry'; ?>
+<?php $currentPage = 'schedule-entry'; ?>
 <?php require 'header.php'; ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- ヘッダーの読み込み（header.php の $navItems のキーと同じ値にする） -->
