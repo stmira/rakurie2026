@@ -35,7 +35,11 @@ body {
    （.sc-card / .sc-dot / .sc-chip / .sc-panel など）と .toast をそのまま流用します。 */
 .schedule-entry-page{--se-accent:#2a9fd0;--se-line:#e4eaee;min-height:calc(100vh - 62px);background:#f4f7fa}
 .schedule-entry-page .se-page{max-width:1500px;margin:0 auto;padding:26px 26px 48px}
-
+/* カードの色設定 */
+.schedule-entry-page .sc-dot.todo,.sc-card.todo{background:#e9ecef}
+.schedule-entry-page .sc-dot.doing,.sc-card.doing{background:#d7ecd6}
+.schedule-entry-page .sc-dot.done,.sc-card.done{background:#fdeba5}
+.schedule-entry-page .sc-dot.late,.sc-card.late{background:#f8d1d1}
 /* ---- パンくず・タイトル ---- */
 .schedule-entry-page .se-crumb{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-sub)}
 .schedule-entry-page .se-crumb a{color:inherit;text-decoration:none}
