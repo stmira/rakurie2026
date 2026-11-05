@@ -1,0 +1,425 @@
+/* お客様登録画面のcss */
+/* ==================設定部分================= */
+:root {
+    /* お客様情報 */
+    --border-color: #dbe3ea;
+    --text-main: #333333;
+    --text-muted: #888888;
+    --primary: #0088cc;
+    --primary-hover: #0077b3;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+        "Yu Gothic", "Meiryo", sans-serif;
+    color: var(--c-text);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+}
+
+.customer-page {
+    --bg-main: #f4f7f9;
+    --bg-card: #ffffff;
+    --bg-banner: #eaf4fb;
+    --bg-notice: #fef9e7;
+    --border-notice: #f3e3b3;
+    --text-sub: #666666;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+/* リセットはメイン領域だけ（ヘッダー・通知パネルには影響させない） */
+.customer-page .container,
+.customer-page .container * {
+    margin: 0;
+    padding: 0;
+}
+
+.customer-page .container a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Common Utility SVG Icons */
+.customer-page .container .icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+    vertical-align: -0.125em;
+}
+
+.customer-page .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px 40px;
+}
+
+/* Title Section */
+.customer-page .page-title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.customer-page .title-area h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.customer-page .title-area p {
+    color: var(--text-sub);
+    font-size: 13px;
+}
+
+.customer-page .required-note {
+    font-size: 13px;
+    color: var(--text-sub);
+}
+
+/* 「必須」バッジ（共通部分はまとめて、違いだけ個別に） */
+.customer-page .badge-required,
+.customer-page .badge-required-red {
+    background-color: #0284c7;
+    color: #ffffff;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: normal;
+}
+
+.customer-page .badge-required {
+    margin-right: 4px;
+    display: inline-block;
+}
+
+.customer-page .badge-required-red {
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+/* Form Outer Card */
+.customer-page .main-card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    overflow: hidden;
+}
+
+/* Top Instruction Banner */
+.customer-page .card-banner {
+    background-color: var(--bg-banner);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #0369a1;
+    font-size: 13px;
+    border-bottom: 1px solid #e0f2fe;
+}
+
+.customer-page .card-banner strong {
+    font-size: 14px;
+    color: #0284c7;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.customer-page .card-banner span.sub {
+    color: var(--text-sub);
+}
+
+/* Form Body Grid */
+.customer-page .form-body {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+@media (max-width: 900px) {
+    .customer-page .form-body {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Column Headers */
+.customer-page .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.customer-page .section-header-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #e0f2fe;
+    color: #0284c7;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.customer-page .section-desc {
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-bottom: 20px;
+}
+
+/* Input Controls */
+.customer-page .form-group {
+    margin-bottom: 20px;
+}
+
+.customer-page .form-label {
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #334155;
+}
+
+.customer-page .input-text,
+.customer-page .textarea,
+.customer-page .input-select {
+    width: 80%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: var(--text-main);
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.customer-page .input-text:focus,
+.customer-page .textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 136, 204, 0.15);
+}
+
+.customer-page .input-text::placeholder,
+.customer-page .textarea::placeholder {
+    color: #a0aec0;
+}
+
+.customer-page .textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.customer-page .date-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.customer-page .date-input-wrapper input {
+    padding-right: 40px;
+}
+
+.customer-page .date-icon {
+    position: absolute;
+    right: 12px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.customer-page .input-help {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    display: inline-block;
+}
+
+.customer-page .date-field-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ===== 左右カラム：自分の中身の高さのままにする（引き伸ばされない） ===== */
+.customer-page .form-col-left,
+.customer-page .form-col-right {
+    align-self: start;
+}
+
+/* テーブルの高さの上限は customer.js が「左カラムの高さ」に合わせてセットします。
+   JSが動かない場合でも使えるように、初期値を入れておく */
+.customer-page .process-table-wrapper {
+    max-height: 420px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+/* ===== テーブル本体 ===== */
+.customer-page .process-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* 見出し行（項目 / 内容・仕様）をスクロール中も固定 */
+.customer-page .process-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #f8fafc;
+}
+
+.customer-page .process-table th,
+.customer-page .process-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 13px;
+}
+
+.customer-page .process-table tr:last-child th,
+.customer-page .process-table tr:last-child td {
+    border-bottom: none;
+}
+
+.customer-page .process-table th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: bold;
+    text-align: left;
+    width: 110px;
+    border-right: 1px solid var(--border-color);
+}
+
+.customer-page .process-table td {
+    background-color: #ffffff;
+}
+
+.customer-page .process-table input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    outline: none;
+}
+
+.customer-page .process-table input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0, 136, 204, 0.15);
+}
+
+.customer-page .info-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 12px;
+}
+
+/* Notice Banner Bottom */
+.customer-page .notice-box {
+    background-color: var(--bg-notice);
+    border: 1px solid var(--border-notice);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    margin: 0 24px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #854d0e;
+}
+
+.customer-page .notice-icon {
+    color: #d97706;
+    font-size: 16px;
+}
+
+/* Action Buttons Footer */
+.customer-page .card-footer {
+    padding: 16px 24px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f1f5f9;
+}
+
+.customer-page .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.customer-page .btn-default {
+    background-color: #ffffff;
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+
+.customer-page .btn-default:hover {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.customer-page .btn-outline-primary {
+    background-color: #ffffff;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.customer-page .btn-outline-primary:hover {
+    background-color: #f0f9ff;
+}
+
+.customer-page .btn-primary {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.customer-page .btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.customer-page .footer-right-buttons {
+    display: flex;
+    gap: 12px;
+}
