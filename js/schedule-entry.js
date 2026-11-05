@@ -34,8 +34,14 @@
     { employee_id: 2, name: '小原', role: 'アームロボット' },
     { employee_id: 3, name: 'Tさん', role: '加工・検査' },
     { employee_id: 4, name: 'Hさん', role: 'MC・旋盤' },
-    { employee_id: 5, name: 'Yさん', role: 'アームロボット' }
-  ];
+    { employee_id: 5, name: 'Yさん', role: 'アームロボット' },
+    { employee_id: 6,  name: 'Kさん',  role: '製造・組立' },
+    { employee_id: 7,  name: 'Mさん',  role: '溶接' },
+    { employee_id: 8,  name: 'Nさん',  role: '塗装' },
+    { employee_id: 9,  name: 'Oさん',  role: '検査・出荷' },
+    { employee_id: 10, name: 'Aさん',  role: '設計・積算' },
+    { employee_id: 11, name: 'Rさん',  role: '運搬・資材' }
+  ]
   var TASKS = [   // 作業名（tasks テーブル）
     { task_id: 1, task_name: 'HIS10' }, { task_id: 2, task_name: 'アルミ加工' }, { task_id: 3, task_name: 'アルミ M10' },
     { task_id: 4, task_name: '平板 250×250' }, { task_id: 5, task_name: '部品入荷確認' }, { task_id: 6, task_name: '溶接準備' },
@@ -73,7 +79,13 @@
       s(15, 4, 12, null, 'M8　50本', 50, '作業中', 0, 0), s(16, 4, 11, null, '仕様の確認', null, '未着手', 2, 2),
       s(17, 4, 12, null, 'MC仕上げ', null, '未着手', 4, 4), s(18, 4, 13, null, 'アルミ切削', null, '未着手', 5, 5),
       s(19, 5, 14, null, '加工・検査', null, '完了', 0, 0), s(20, 5, 14, null, 'MC仕上げ', null, '未着手', 2, 2),
-      s(21, 5, 14, null, 'パレット製作', null, '未着手', 4, 4), s(22, 5, 14, null, 'MC仕上げ', null, '未着手', 5, 5)
+      s(21, 5, 14, null, 'パレット製作', null, '未着手', 4, 4), s(22, 5, 14, null, 'MC仕上げ', null, '未着手', 5, 5),
+      s(23,6,4,null,"溶接",null,"",0,0),s(24,6,2,null,"溶接",null,"未着手",0,3),
+      s(25,7,2,null,"穴あけ",null,"",0,0),s(26,7,1,null,"PC",null,"未着手",0,2),
+      s(27,8,4,null,"溶接",null,"",0,0),s(28,8,2,null,"溶接",null,"未着手",0,3),
+      s(29,9,2,null,"穴あけ",null,"",0,0),s(30,9,1,null,"PC",null,"未着手",0,2),
+      s(31,10,4,null,"溶接",null,"",0,0),s(32,10,2,null,"溶接",null,"未着手",0,3),
+      s(33,11,2,null,"穴あけ",null,"",0,0),s(34,11,1,null,"PC",null,"未着手",0,2),
     ]
   };
 
@@ -195,6 +207,7 @@
     syncSelected();
     openPanel();
     render();
+    
   }
 
   function cancel() {
@@ -317,7 +330,8 @@
 
     // 見本の画面と同じ「大原 × 9/26」を選択した状態で開く
     // （最初は何も選ばずに開きたいときは、次の1行を render(); に変えてください）
-    selectCell(1, d(2));
+    // selectCell(1, d(2));
+    render();
   }
   init();
 })();
