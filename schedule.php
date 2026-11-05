@@ -10,16 +10,7 @@
 <?php require 'html/schedule.html'; ?>
 <!-- PHPファイル側でJavaScriptを読み込む場合 -->
 <script src="js/schedule.js"></script>
-
 <?php
-$pdo = new PDO(
-    'mysql:host=localhost;dbname=rakurakku;charset=utf8mb4',
-    'root', '',
-    [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]
-);
-
 require __DIR__ . '/../db.php';
 header('Content-Type: application/json; charset=utf-8');
+?>
