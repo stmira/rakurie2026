@@ -9,6 +9,23 @@
 <!-- データベース接続 -->
 <?php require 'config/database.php'; ?>
 
+
+<!-- dbから情報取得 -->
+<?php
+    /** @var PDO $pdo */ //dbの場所を教える
+    // 受注情報を取得
+    $orders = $pdo->query(
+        'select o.*, c.customer_name
+        from orders as o
+        left join customers as c on o.customer_id = c.customer_id
+        order by o.due_date'
+    )->fetchAll(PDO::FETCH_ASSOC); // 一度に連想配列として取得する
+?>
+
+<script>
+    window.REF_ORDERS    = <?= json_encode($orders,    JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?>; // jsのグローバルの領域にref_ordersという変数を用意し、jsで使えるjson形式に変換して代入する、＜？＝　→　＜？php echoの略
+</script>
+
 <!-- 早見表画面の読み込み -->
 <?php require 'html/reference.html'; ?>
 
@@ -74,74 +91,8 @@
         { key: 'small_double_check',   label: '小物wチェック', group: 'checker' },
     ];
 
-    // ===== 画面確認用のサンプルデータ =====
-    // 本番は PHP から window.REF_ORDERS に入れます（reference.html の下のコメント参照）。
-    // customer_name は、orders と顧客テーブルを customer_id でつないで取ります。
-    <?php 
-        $orders = 'select o.*, c.customer_id as customre_name
-            from orders as o
-            left join customers as c on o.customer_id = c.customer_id
-            order by o.due_date';
-    ?>
-
-    const EMPTY = {
-        drawing: 0, drawing_detail: '',
-        post_l: 0, post_l_detail: '',
-        post_t: 0, post_t_detail: '',
-        base: 0, base_detail: '',
-        arm: 0, arm_detail: '',
-        angle: 0, angle_detail: '',
-        A_base: 0, A_base_detail: '',
-        double_check: 0, small_check: 0
-    };
-    const SAMPLE_ORDERS = [
-        Object.assign({}, EMPTY, {
-        order_id: 26041, customer_name: 'A社', summary: 'H150', due_date: '2026-10-22',
-        production: true, progress: 0, ship_status: 'shipped',
-        post_l: 8, post_l_detail: '6 (2.4m)  XXX\nH125　7m*2本\n（大戸）10/1am',
-        arm: 7, arm_detail: '12 R (L1200)\n上部にアングル付ける',
-        }),
-        Object.assign({}, EMPTY, {
-        order_id: 26042, customer_name: 'B社', summary: 'H100', due_date: '2026-10-22',
-        production: true, progress: 100, ship_status: 'shipped',
-        post_l: 11, post_l_detail: '6 (3.3m) URP\nH125　10m*2本在庫使用'
-        }),
-        Object.assign({}, EMPTY, {
-        order_id: 26043, customer_name: 'A社', summary: 'アーム', due_date: '2026-10-23',
-        production: true, progress: 50, ship_status: 'progress',
-        post_l: 8, post_l_detail: '800 R (L1200)',
-        post_t: 11, post_t_detail: '3 (1.8m)'
-        }),
-        Object.assign({}, EMPTY, {
-        order_id: 26044, customer_name: 'D社', summary: '750アーム', due_date: '2026-10-26',
-        production: false, progress: 0, ship_status: 'progress'
-        }),
-        Object.assign({}, EMPTY, {
-        order_id: 26045, customer_name: 'B社', summary: '移設セット', due_date: '2026-10-28',
-        production: true, progress: 0, ship_status: 'progress'
-        }),
-        Object.assign({}, EMPTY, {
-        order_id: 26046, customer_name: 'F社', summary: 'H150　アーム', due_date: '2026-10-30',
-        production: true, progress: 0, ship_status: 'undecided'
-        }),
-        Object.assign({}, EMPTY, {
-        order_id: 26040, customer_name: 'D社', summary: 'H125', due_date: '2026-10-20',
-        production: false, progress: 0, ship_status: 'progress'
-        }),
-        Object.assign({}, EMPTY, {
-        order_id: 26040, customer_name: 'D社', summary: 'H125', due_date: '2026-10-20',
-        production: false, progress: 0, ship_status: 'progress'
-        }),
-        Object.assign({}, EMPTY, {
-        order_id: 26040, customer_name: 'D社', summary: 'H125', due_date: '2026-10-20',
-        production: false, progress: 0, ship_status: 'progress'
-        }),
-        Object.assign({}, EMPTY, {
-        order_id: 26040, customer_name: 'D社', summary: 'H125', due_date: '2026-10-20',
-        production: false, progress: 0, ship_status: 'progress'
-        }),
-    ];
-    const ORDERS = window.REF_ORDERS || SAMPLE_ORDERS;
+    // dbal
+    const ORDERS = window.REF_ORDERS;
 
     // ===== 社員（チェックした人・営業担当の選択肢） =====
     // 本番は PHP から window.REF_EMPLOYEES に入れます。今は仮の3人です。
@@ -687,7 +638,7 @@
     function convertValue(field, raw) {
         if (field === 'production') return raw === 'true';
         if (field === 'progress') return Math.min(100, Math.max(0, Number(raw) || 0));
-        if (field === 'salesperson') return Number(raw) || 0;   // ← 追加
+        if (field === 'employee_id') return Number(raw) || 0;   // ← 追加
         return raw;
     }
 
