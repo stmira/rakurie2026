@@ -3,7 +3,7 @@
 <?php require 'header.php'; ?>
 
 <!-- CSSはHTMLのlinkタグで読み込む -->
-<link rel="stylesheet" href="css/style.css">
+<!-- <link rel="stylesheet" href="css/style.css"> -->
 <link rel="stylesheet" href="css/reference.css">
 
 <!-- データベース接続 -->

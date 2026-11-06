@@ -4,7 +4,7 @@
 <!-- データベース接続 -->
 <?php require 'config/database.php'; ?>
 <!-- CSSはHTMLのlinkタグで読み込む -->
-<link rel="stylesheet" href="css/style.css">
+<!-- <link rel="stylesheet" href="css/style.css"> -->
 <link rel="stylesheet" href="css/todo.css">
 <!-- todo.htmlの読み込み -->
 <?php require 'html/todo.html'; ?>
