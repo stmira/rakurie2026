@@ -1,0 +1,544 @@
+:root {
+   /* お客様情報・工程表で共通 */
+    --border-color: #dbe3ea;
+    --text-main: #333333;
+    --text-muted: #888888;
+    --primary: #0088cc;
+    --primary-hover: #0077b3;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+        "Yu Gothic", "Meiryo", sans-serif;
+    color: var(--c-text);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+}
+/* ========================Todo画面================================ */
+.todo-page {
+  --todo-bg: #f2f6f9;
+  --todo-surface: #ffffff;
+  --todo-border: #dbe4eb;
+  --todo-text: #213747;
+  --todo-muted: #6b7c89;
+  --todo-blue: #1e87c2;
+  --todo-blue-line: #2aa0d6;
+  --todo-yellow-soft: #fef9d9;
+
+  /* 状態カラー */
+  --todo-st-working-bg: #fde7ee;
+  --todo-st-working-fg: #b1325f;
+  --todo-st-working-bar: #b6dca3;
+  --todo-st-done-bg: #eceff2;
+  --todo-st-done-fg: #5b6770;
+  --todo-st-done-bar: #0000ff;
+  --todo-st-todo-bg: #e8f1f8;
+  --todo-st-todo-fg: #2a73a6;
+  --todo-st-todo-bar: #c5d0d9;
+
+  background: var(--todo-bg);
+  min-height: 100vh;
+}
+
+/* ---------------- ページ本体（ヘッダーは対象外） ---------------- */
+.todo-page .page,
+.todo-page .page * {
+  margin: 0;
+  padding: 0;
+}
+
+.todo-page .page {
+  padding: 33px 41px 40px 42px;
+  color: var(--todo-text);
+}
+.todo-page .page a { color: inherit; text-decoration: none; }
+.todo-page .page button { font-family: inherit; cursor: pointer; }
+
+.todo-page .page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  margin-bottom: 26px;
+}
+.todo-page .page-title { font-size: 27px; font-weight: 700; }
+
+.todo-page .date-chip {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  height: 40px;
+  padding: 0 24px 0 19px;
+  background: var(--todo-surface);
+  border: 1px solid var(--todo-border);
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.todo-page .date-chip svg { color: var(--todo-blue); }
+
+.todo-page .layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ---------------- タスクカード共通 ---------------- */
+.todo-page .task-card {
+  position: relative;
+  background: var(--todo-surface);
+  border: 1px solid var(--todo-border);
+  border-radius: 14px;
+  margin-bottom: 18px;
+}
+
+/* 状態ごとの色（バー） */
+.todo-page .task-card.is-working { --todo-bar: var(--todo-st-working-bar); }
+.todo-page .task-card.is-done    { --todo-bar: var(--todo-st-done-bar); }
+.todo-page .task-card.is-todo    { --todo-bar: var(--todo-st-todo-bar); }
+
+/* ---------------- 工程カード（会社名などがあるタスク） ---------------- */
+.todo-page .task-card.is-process {
+  padding: 23px 25px 25px 25px;
+}
+.todo-page .task-card.is-process::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  background: var(--todo-bar);
+  border-radius: 13px 0 0 13px;
+}
+
+.todo-page .task-head { display: flex; align-items: center; gap: 12px; height: 40px; }
+.todo-page .check-circle {
+  flex: none;
+  width: 20px; height: 20px;
+  border: 2px solid #cfd8df;
+  border-radius: 50%;
+}
+.todo-page .task-name { font-size: 21px; font-weight: 700; }
+.todo-page .task-tag {
+  margin-left: 1px;
+  padding: 3px 8px;
+  background: #eef2f5;
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--todo-muted);
+}
+
+.todo-page .task-body {
+  display: flex;
+  justify-content: space-between;
+  min-height: 107px;
+  margin-top: 26px;
+}
+.todo-page .task-info { display: flex; flex-direction: column; }
+.todo-page .info-row { display: flex; align-items: center; gap: 25px; height: 33px; }
+.todo-page .info-label { font-size: 13px; color: var(--todo-muted); }
+.todo-page .info-value { font-size: 14px; font-weight: 700; }
+.todo-page .info-value.is-sub { font-size: 13px; font-weight: 400; }
+
+.todo-page .task-side { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; }
+.todo-page .task-qty { font-size: 44px; font-weight: 700; line-height: 1; letter-spacing: .01em; }
+.todo-page .task-qty small { margin-left: 6px; font-size: 16px; font-weight: 500; }
+
+.todo-page .task-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 42px;
+  margin-top: 21px;
+  padding: 0 14px;
+  background: #f1f4f7;
+  border-radius: 8px;
+  font-size: 11.7px;
+  color: var(--todo-muted);
+}
+.todo-page .task-note svg { flex: none; width: 13px; height: 13px; color: #8a99a5; }
+
+/* ---------------- 工程なしカード（打ち合わせなど） ---------------- */
+.todo-page .task-card.is-simple {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 92px;
+  padding: 0 24px;
+}
+.todo-page .task-card.is-simple .accent {
+  flex: none;
+  width: 4px; height: 44px;
+  background: var(--todo-bar);
+  border-radius: 2px;
+}
+.todo-page .simple-icon { flex: none; width: 20px; height: 20px; color: #2c8fc9; }
+.todo-page .task-card.is-simple .simple-text { flex: 1; min-width: 0; margin-left: 1px; }
+.todo-page .simple-title { font-size: 16px; font-weight: 700; letter-spacing: .2em; color: var(--todo-text); }
+.todo-page .simple-sub { margin-top: 2px; font-size: 12px; color: var(--todo-muted); }
+.todo-page .task-card.is-simple.is-done .simple-title { color: #6c7f8e; }
+
+/* ---------------- 状態バッジ + ドロップダウン ---------------- */
+.todo-page .status-select { position: relative; }
+.todo-page .status-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 35px;
+  padding: 0 10px 0 12px;
+  background: var(--todo-surface);
+  border: 1px solid var(--todo-border);
+  border-radius: 10px;
+}
+.todo-page .status-btn:hover { border-color: #b9c8d3; }
+.todo-page .status-btn .chev { color: #7d8e9b; transition: transform .15s; }
+.todo-page .status-select.is-open .chev { transform: rotate(180deg); }
+
+.todo-page .badge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.todo-page .badge.is-working { background: var(--todo-st-working-bg); color: var(--todo-st-working-fg); }
+.todo-page .badge.is-done    { background: var(--todo-st-done-bg);    color: var(--todo-st-done-fg); }
+.todo-page .badge.is-todo    { background: var(--todo-st-todo-bg);    color: var(--todo-st-todo-fg); }
+
+.todo-page .status-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 10;
+  display: none;
+  min-width: 128px;
+  padding: 6px;
+  list-style: none;
+  background: var(--todo-surface);
+  border: 1px solid var(--todo-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(33, 55, 71, .12);
+}
+.todo-page .status-select.is-open .status-menu { display: block; }
+.todo-page .status-option {
+  display: block;
+  width: 100%;
+  padding: 7px 8px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  text-align: left;
+}
+.todo-page .status-option:hover { background: #f3f7fa; }
+
+/* ---------------- 脚注・空状態 ---------------- */
+.todo-page .footnote { margin-top: 18px; font-size: 10.8px; color: var(--todo-muted); }
+.todo-page .empty { padding: 32px 0; font-size: 14px; color: var(--todo-muted); }
+
+/* ---------------- 右カラム：本日出荷の案件 ---------------- */
+.todo-page .shipping-card {
+  padding: 27px 24px 23px;
+  background: var(--todo-yellow-soft);
+  border-radius: 14px;
+}
+.todo-page .shipping-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.todo-page .shipping-title svg { color: #5f7a8c; }
+.todo-page .shipping-item { margin-top: 19px; font-size: 17px; font-weight: 700; line-height: 1.4; color: #2d4252; }
+.todo-page .shipping-empty { margin-top: 18px; font-size: 13px; color: var(--todo-muted); }
+
+.todo-page .btn-reference {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  margin-top: 13px;
+  background: var(--todo-surface);
+  border: 1px solid var(--todo-border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.todo-page .btn-reference svg { color: var(--todo-blue); }
+.todo-page .btn-reference:hover { border-color: var(--todo-blue-line); }
+
+/* ========================Todo画面（スマホ版）===========================
+   画面幅900px以下で適用（ヘッダーのハンバーガー切替と同じ幅）。HTML構造はPC版と共通です。
+   ※ .todo-page .page * { margin:0; padding:0 } のリセットが強いので、
+     上書きするセレクタは .todo-page から始めて詳細度を揃えています。 */
+
+/* 「作業内容」見出し（todo.js が出力。PCでは使わない） */
+.todo-page .section-label { display: none; }
+
+@media (max-width: 900px) {
+  /* 状態ごとの見出し背景（スマホの工程カード用） */
+  .todo-page .task-card.is-working { --todo-head-bg: #eaf5e2; }
+  .todo-page .task-card.is-done    { --todo-head-bg: #e8eaff; }
+  .todo-page .task-card.is-todo    { --todo-head-bg: #eef3f7; }
+
+  /* ---- ページ全体 ---- */
+  .todo-page .page { padding: 20px 20px 32px; }
+  .todo-page .page-head {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    height: auto;
+    margin-bottom: 16px;
+  }
+  .todo-page .page-title { font-size: 26px; }
+  .todo-page .date-chip {
+    height: auto;
+    padding: 0;
+    gap: 8px;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--todo-muted);
+  }
+  .todo-page .date-chip svg { width: 16px; height: 16px; }
+
+  /* 1カラム（タスク → 本日出荷の順） */
+  .todo-page .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .todo-page .footnote { display: none; }
+
+  .todo-page .section-label {
+    display: block;
+    margin: 10px 0 10px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  /* ---- 状態ドロップダウン（共通） ---- */
+  .todo-page .status-btn {
+    justify-content: space-between;
+    min-width: 120px;
+    height: 44px;
+    padding: 0 14px;
+  }
+  .todo-page .status-btn .chev { width: 18px; height: 18px; }
+  .todo-page .badge { flex: none; padding: 4px 12px; font-size: 13px; white-space: nowrap; }
+
+  /* ---- 工程カード ---- */
+  .todo-page .task-card { margin-bottom: 14px; }
+  .todo-page .task-card.is-process { padding: 0; }
+
+  /* 左のバー → 上のバーに変更 */
+  .todo-page .task-card.is-process::before {
+    left: 0; right: 0; top: 0; bottom: auto;
+    width: auto;
+    height: 4px;
+    border-radius: 13px 13px 0 0;
+  }
+
+  .todo-page .task-card.is-process .task-head {
+    gap: 10px;
+    height: auto;
+    padding: 18px 16px 12px;
+    background: var(--todo-head-bg);
+    border-radius: 13px 13px 0 0;
+  }
+  .todo-page .task-card.is-process .check-circle { width: 22px; height: 22px; }
+  .todo-page .task-card.is-process .task-name { font-size: 20px; }
+  .todo-page .task-card.is-process .task-tag {
+    margin-left: auto;
+    padding: 3px 10px;
+    background: var(--todo-surface);
+    color: var(--todo-text);
+  }
+
+  /* 本体：info / side の箱を外して、1つのグリッドに並べ直す
+     1行目 会社名 / 2行目 本数 / 3行目 概要｜注番 / 4行目 進捗状況 */
+  .todo-page .task-card.is-process .task-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 0;
+    margin-top: 0;
+    padding: 18px 16px 16px;
+  }
+  .todo-page .task-card.is-process .task-info,
+  .todo-page .task-card.is-process .task-side { display: contents; }
+  .todo-page .task-card.is-process .task-side > div:empty { display: none; }  /* 本数なしの空div */
+
+  .todo-page .task-card.is-process .info-row { height: auto; gap: 0; }
+
+  /* 会社名（左に見出し・右に大きく） */
+  .todo-page .task-card.is-process .info-row:nth-child(1) {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;   /* 本数が無いときも、下の箱とくっつけない */
+  }
+  .todo-page .task-card.is-process .info-row:nth-child(1) .info-label { flex: none; white-space: nowrap; }
+  .todo-page .task-card.is-process .info-row:nth-child(1) .info-value {
+    font-size: 20px;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+
+  /* 本数（中央に大きく） */
+  .todo-page .task-card.is-process .task-qty {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0 0 18px;
+    text-align: center;
+    font-size: 56px;
+  }
+  .todo-page .task-card.is-process .task-qty small { margin-left: 8px; font-size: 20px; }
+
+  /* 概要｜注番（グレーの箱を2つ並べて1つに見せる） */
+  .todo-page .task-card.is-process .info-row:nth-child(2),
+  .todo-page .task-card.is-process .info-row:nth-child(3) {
+    grid-row: 3;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 12px 16px;
+    background: #f1f5f8;
+  }
+  .todo-page .task-card.is-process .info-row:nth-child(2) {
+    grid-column: 1;
+    border-radius: 10px 0 0 10px;
+  }
+  .todo-page .task-card.is-process .info-row:nth-child(3) {
+    grid-column: 2;
+    padding-left: 20px;
+    border-radius: 0 10px 10px 0;
+    background: linear-gradient(#d3dce3, #d3dce3) left center / 1px 60% no-repeat, #f1f5f8;
+  }
+  .todo-page .task-card.is-process .info-row:nth-child(2) .info-value,
+  .todo-page .task-card.is-process .info-row:nth-child(3) .info-value {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /* 進捗状況（左に見出し・右にドロップダウン） */
+  .todo-page .task-card.is-process .status-select {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  .todo-page .task-card.is-process .status-select::before {
+    content: "進捗状況";
+    font-size: 13px;
+    color: var(--todo-muted);
+  }
+
+  /* 備考 */
+  .todo-page .task-note {
+    height: auto;
+    min-height: 40px;
+    margin: 0 16px 16px;
+    padding: 10px 12px;
+    align-items: flex-start;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .todo-page .task-note svg { margin-top: 2px; }
+
+  /* ---- 工程なしカード（打ち合わせなど） ----
+     1行目 アイコン・タイトル・状態 / 2行目 備考（アイコンの下から） */
+  .todo-page .task-card.is-simple {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 6px;
+    height: auto;
+    min-height: 72px;
+    padding: 14px 14px 14px 22px;
+  }
+  .todo-page .task-card.is-simple .accent {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    height: auto;
+    border-radius: 13px 0 0 13px;
+  }
+  .todo-page .task-card.is-simple .simple-text { display: contents; }
+  .todo-page .task-card.is-simple .simple-icon { grid-column: 1; grid-row: 1; }
+  .todo-page .task-card.is-simple .simple-title {
+    grid-column: 2; grid-row: 1;
+    font-size: 17px;
+    letter-spacing: .15em;
+  }
+  .todo-page .task-card.is-simple .simple-sub {
+    grid-column: 1 / -1; grid-row: 2;
+    margin: 0;
+  }
+  .todo-page .task-card.is-simple .status-select { grid-column: 3; grid-row: 1; }
+
+  /* ---- 本日出荷の案件 ----
+     左にトラックのアイコン / 中央に見出しと会社名 / 右に「早見表を見る」 */
+  .todo-page .shipping-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    align-items: center;
+    min-height: 80px;
+    margin-top: 4px;
+    padding: 16px 18px 16px 78px;
+  }
+  .todo-page .shipping-title {
+    grid-column: 1; grid-row: 1;
+    align-self: end;
+    gap: 0;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .todo-page .shipping-title svg {
+    position: absolute;
+    left: 18px; top: 50%;
+    transform: translateY(-50%);
+    width: 44px; height: 44px;
+    padding: 11px;
+    background: var(--c-logo-bg);
+    border-radius: 12px;
+    color: #4a5a68;
+  }
+  .todo-page #shipping-list { grid-column: 1; grid-row: 2; align-self: start; }
+  .todo-page .shipping-item { margin-top: 2px; font-size: 16px; }
+  .todo-page .shipping-empty { margin-top: 2px; font-size: 12px; }
+  .todo-page .btn-reference {
+    grid-column: 2; grid-row: 1 / 3;
+    flex-direction: row-reverse;
+    gap: 6px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-size: 12px;
+    color: var(--todo-blue);
+  }
+}
+/* ========================Todo画面（スマホ版）=========================== */
+/* ========================Todo画面====================== */
