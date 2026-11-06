@@ -61,22 +61,29 @@
         { key: 'base',    label: 'ベース', group: 'work' },
         { key: 'arm',     label: 'アーム', group: 'work' },
         { key: 'angle',   label: 'アングル', group: 'work' },
-        { key: 'A_base',   label: 'Aベース', group: 'work' },
-        { key: 'others1',   label: 'その他1', group: 'work' },
-        { key: 'others2',   label: 'その他2', group: 'work' },
-        { key: 'others3',   label: 'その他3', group: 'work' },
-        { key: 'others4',   label: 'その他4', group: 'work' },
-        { key: 'others5',   label: 'その他5', group: 'work' },
-        { key: 'breath',   label: 'ブレス', group: 'stock' },
+        { key: 'a_base',   label: 'Aベース', group: 'work' },
+        { key: 'others_1',   label: 'その他1', group: 'work' },
+        { key: 'others_2',   label: 'その他2', group: 'work' },
+        { key: 'others_3',   label: 'その他3', group: 'work' },
+        { key: 'others_4',   label: 'その他4', group: 'work' },
+        { key: 'others_5',   label: 'その他5', group: 'work' },
+        { key: 'brace',   label: 'ブレス', group: 'stock' },
         { key: 'double_check', label: 'wチェック', group: 'checker' },
-        { key: 'salesperson', label: '営業担当', group: 'person', readonly: true },
+        { key: 'employee_id', label: '営業担当', group: 'person', readonly: true },
         { key: 'small_item',   label: '小物準備', group: 'work' },
-        { key: 'small_check',   label: '小物wチェック', group: 'checker' },
+        { key: 'small_double_check',   label: '小物wチェック', group: 'checker' },
     ];
 
     // ===== 画面確認用のサンプルデータ =====
     // 本番は PHP から window.REF_ORDERS に入れます（reference.html の下のコメント参照）。
     // customer_name は、orders と顧客テーブルを customer_id でつないで取ります。
+    <?php 
+        $orders = 'select o.*, c.customer_id as customre_name
+            from orders as o
+            left join customers as c on o.customer_id = c.customer_id
+            order by o.due_date';
+    ?>
+
     const EMPTY = {
         drawing: 0, drawing_detail: '',
         post_l: 0, post_l_detail: '',
