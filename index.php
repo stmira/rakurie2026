@@ -41,12 +41,13 @@ foreach($password_hash as $hash){
 }
 
 //employeeを取得する為のsqlを書く
+//ここ取得できてるのか?
 $sql = $dsn->query("select * from employees");
 foreach ($sql as $row) {
-    $_SESSION['employee'] = [
-        'id'       => $row['employeeId'], 
-        'name'     => $row['name'], 
-        'password' => $row['password']
+    $_SESSION['employee'] []= [
+        'id'       => $row['employee_id'], 
+        'name'     => $row['employee_name'], 
+        'password' => $row['password_hash']
     ];
 }
 
