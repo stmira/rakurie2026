@@ -1,8 +1,8 @@
 
     // ===== 遷移先 =====
     const ROUTES = {
-      production: 'todo.html',      // 生産部 → todo画面
-      sales: 'schedule.html'        // 営業部 → 工程表一覧画面
+      production: './todo.php',      // 生産部 → todo画面
+      sales: './schedule.php'        // 営業部 → 工程表一覧画面
     };
 
     // ===== 社員IDから部署を判定 =====

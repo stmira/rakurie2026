@@ -1,14 +1,15 @@
 /* ==================設定部分================= */
 :root {
-    /* お客様情報 */
-    --border-color: #dbe3ea;
-    --text-main: #333333;
-    --text-muted: #888888;
-    --primary: #0088cc;
-    --primary-hover: #0077b3;
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
+    /* ログイン・社員情報 */
+    --c-brand: #0a80b6;
+    --c-brand-dark: #0a6c9a;
+    --c-logo-text: #0f5670;
+    --c-logo-bg: #ffe266;
+    --c-text: #1f2d3a;
+    --c-sub: #6b7a86;
+    --c-border: #d8dee3;
+    --c-info-bg: #f1f5f8;
+    --c-error: #c8352f;
 }
 *, *::before, *::after {
     box-sizing: border-box;
@@ -29,14 +30,6 @@ body {
 }
 
 
-login-page {
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 32px 24px;
-}
-
 .login-page {
     min-height: 100%;
     display: flex;
@@ -44,6 +37,7 @@ login-page {
     align-items: center;
     padding: 32px 24px;
 }
+
 .login-page .login-container {
     width: 100%;
     max-width: 420px;
