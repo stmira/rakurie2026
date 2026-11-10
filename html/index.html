@@ -26,8 +26,9 @@
         </svg>
         <span class="logo-text">楽ラック</span>
       </div>
-
-      <form id="loginForm" novalidate>
+      
+      <!-- ログインに必要な情報をformで送信する(背番号とパスワード)-->
+      <form action="../index.php" method="post" id="loginForm" novalidate>
         <!-- 背番号 -->
         <div class="field">
           <div class="label-row">
@@ -37,6 +38,7 @@
           <div class="input-wrap">
             <input type="text" id="employeeId" name="employeeId" value=""
                   autocomplete="username" inputmode="numeric" required>
+            <input type="hidden" name="employeeId" >
           </div>
         </div>
 
@@ -49,6 +51,7 @@
           <div class="input-wrap has-toggle">
             <input type="password" id="password" name="password" value=""
                   autocomplete="current-password" required>
+            <input type="hidden" name="password">
             <button type="button" class="toggle-pw" id="togglePw" aria-label="パスワードを表示する">
               <!-- 目に斜線(非表示中) -->
               <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor"
