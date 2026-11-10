@@ -20,10 +20,16 @@
         left join customers as c on o.customer_id = c.customer_id
         order by o.due_date'
     )->fetchAll(PDO::FETCH_ASSOC); // 一度に連想配列として取得する
+
+    // 社員情報を取得
+    $employees = $pdo->query(
+        'select employee_id, employee_name as name FROM employees'
+        )->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <script>
     window.REF_ORDERS    = <?= json_encode($orders,    JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?>; // jsのグローバルの領域にref_ordersという変数を用意し、jsで使えるjson形式に変換して代入する、＜？＝　→　＜？php echoの略
+    window.REF_EMPLOYEES = <?= json_encode($employees, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?>;
 </script>
 
 <!-- 早見表画面の読み込み -->
@@ -79,11 +85,11 @@
         { key: 'arm',     label: 'アーム', group: 'work' },
         { key: 'angle',   label: 'アングル', group: 'work' },
         { key: 'a_base',   label: 'Aベース', group: 'work' },
-        { key: 'others_1',   label: 'その他1', group: 'work' },
-        { key: 'others_2',   label: 'その他2', group: 'work' },
-        { key: 'others_3',   label: 'その他3', group: 'work' },
-        { key: 'others_4',   label: 'その他4', group: 'work' },
-        { key: 'others_5',   label: 'その他5', group: 'work' },
+        { key: 'other_1',   label: 'その他1', group: 'work' },
+        { key: 'other_2',   label: 'その他2', group: 'work' },
+        { key: 'other_3',   label: 'その他3', group: 'work' },
+        { key: 'other_4',   label: 'その他4', group: 'work' },
+        { key: 'other_5',   label: 'その他5', group: 'work' },
         { key: 'brace',   label: 'ブレス', group: 'stock' },
         { key: 'double_check', label: 'wチェック', group: 'checker' },
         { key: 'employee_id', label: '営業担当', group: 'person', readonly: true },
@@ -91,17 +97,14 @@
         { key: 'small_double_check',   label: '小物wチェック', group: 'checker' },
     ];
 
-    // dbal
-    const ORDERS = window.REF_ORDERS;
-
+    // ===== データ（PHPが window.REF_ORDERS に入れたもの） =====
+    const ORDERS = (window.REF_ORDERS || []).map(function (o) {
+        return Object.assign({ progress: 0, ship_status: 'progress' }, o, {
+            production: Number(o.production) === 1      // 1/0 を true/false に直す
+        });
+    });
     // ===== 社員（チェックした人・営業担当の選択肢） =====
-    // 本番は PHP から window.REF_EMPLOYEES に入れます。今は仮の3人です。
-    const SAMPLE_EMPLOYEES = [
-        { employee_id: 1, name: '山田' },
-        { employee_id: 2, name: '佐藤' },
-        { employee_id: 3, name: '鈴木' }
-    ];
-    const EMPLOYEES = window.REF_EMPLOYEES || SAMPLE_EMPLOYEES;
+    const EMPLOYEES = window.REF_EMPLOYEES || [];
 
     function employeeName(id) {
         const e = EMPLOYEES.filter(function (x) { return String(x.employee_id) === String(id); })[0];
@@ -447,9 +450,9 @@
 
             if (group === 'checker') {
                 // チェックした人を選ぶ
-                items = [{ value: 0, label: 'なし（未チェック）', cls: 'ref-c-check_no' }].concat(
+                items = [{ value: '', label: 'なし（未チェック）', cls: 'ref-c-check_no' }].concat(
                     EMPLOYEES.map(function (e) {
-                        return { value: e.employee_id, label: e.name, cls: 'ref-c-check_ok' };
+                        return { value: e.name, label: e.name, cls: 'ref-c-check_ok' };
                     })
                 );
                 } else if (group === 'person') {
@@ -469,7 +472,7 @@
         }
         
         menu.innerHTML = items.map(function (it) {
-        return '<button type="button" role="menuitem" data-pick="' + it.value + '"' +
+        return '<button type="button" role="menuitem" data-pick="' + esc(it.value) + '"' +
             (String(it.value) === String(current) ? ' class="is-current"' : '') + '>' +
             '<i class="ref-swatch ' + it.cls + '"></i>' + esc(it.label) + '</button>';
         }).join('');
@@ -503,7 +506,8 @@
             o.ship_status = b.dataset.pick;
             saveChange({ order_id: o.order_id, column: 'ship_status', value: o.ship_status });
         } else {
-            o[menuTarget.col] = Number(b.dataset.pick);
+            const col = DESIGN_COLS.filter(function (c) { return c.key === menuTarget.col; })[0];
+            o[menuTarget.col] = (col && col.group === 'checker') ? b.dataset.pick : Number(b.dataset.pick);
             saveChange({ order_id: o.order_id, column: menuTarget.col, value: o[menuTarget.col] });
         }
         }
@@ -517,7 +521,7 @@
 
         // チェッカー系（wチェック、小物wチェック）の場合
         if (c.group === 'checker') {
-            const name = employeeName(code);
+            const name = String(code == null ? '' : code).trim();
             if (!name) return { cls: ' ref-c-check_no', text: '未' };
             return { cls: ' ref-c-check_ok', text: esc(name) };
         }
