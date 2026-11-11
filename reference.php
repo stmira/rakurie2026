@@ -23,7 +23,7 @@
 
     // 社員情報を取得
     $employees = $pdo->query(
-        'select employee_id, employee_name as name FROM employees'
+        'select employee_id, employee_name as name, department_name as department FROM employees'
         )->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -106,21 +106,37 @@
     // ===== 社員（チェックした人・営業担当の選択肢） =====
     const EMPLOYEES = window.REF_EMPLOYEES || [];
 
+    const PRODUCTION_STAFF = EMPLOYEES.filter(function (e) {
+        return e.department === '生産部';
+    });
+
     function employeeName(id) {
         const e = EMPLOYEES.filter(function (x) { return String(x.employee_id) === String(id); })[0];
         return e ? e.name : '';
     }
 
-    // ===== 変更を保存する（今は動作確認用） =====
-    // 本番は PHP に送って、データベースを書き換えます。
+    // ===== 変更を保存する =====
     function saveChange(change) {
-        // 例:
-        // fetch('api/update_order.php', {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify(change)
-        // });
-        console.log('保存する内容:', change);
+        return fetch('api/update_order.php', { //api/update_order.phpで動く
+            method: 'post',
+            headers: {'Content_Type': 'application/json'},
+            body: JSON.stringify(change)
+        })
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error('更新に失敗しました。');
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            if (!data.success) {
+                alert('エラー: ' + (data.message || '保存できませんでした'));
+            }
+        })
+        .catch(function (error) {
+            console.error('通信エラー:', error);
+            alert('通信エラーが発生しました。');
+        });
     }
 
     // ===== 要素の取得 =====
@@ -165,6 +181,8 @@
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
+
+    // ---------------------- 検索 ---------------------
     // 全角・半角、大文字・小文字をそろえる
     function norm(value) {
         return String(value).normalize('NFKC').toLowerCase();
@@ -236,7 +254,7 @@
         const cells = DESIGN_COLS.map(function (c) {
             const info = getCellDisplay(c, o);
 
-        // 営業担当は、社員の一覧から選ぶ
+        // 社員の一覧から選ぶ
         if (c.group === 'person') {
             const current = String(draftValue(o, c.key));
             const options = [{ employee_id: 0, name: '未設定' }].concat(EMPLOYEES).map(function (e) {
@@ -451,7 +469,7 @@
             if (group === 'checker') {
                 // チェックした人を選ぶ
                 items = [{ value: '', label: 'なし（未チェック）', cls: 'ref-c-check_no' }].concat(
-                    EMPLOYEES.map(function (e) {
+                    PRODUCTION_STAFF.map(function (e) {
                         return { value: e.name, label: e.name, cls: 'ref-c-check_ok' };
                     })
                 );
@@ -504,6 +522,7 @@
         if (o) {
         if (menuTarget.type === 'ship') {
             o.ship_status = b.dataset.pick;
+            // 変更内容をオブジェクトにして saveChange 関数に渡す
             saveChange({ order_id: o.order_id, column: 'ship_status', value: o.ship_status });
         } else {
             const col = DESIGN_COLS.filter(function (c) { return c.key === menuTarget.col; })[0];
