@@ -5,7 +5,7 @@
     </a>
 
     <!-- pc用メインメニュー -->
-    <!-- pc用メインメニュー -->
+    <!-- nav人によって見せるnavを変更する -->
     <nav class="nav" aria-label="メインメニュー">
         <?php 
         // 1. 初期値を空の配列にしておく（未定義エラーを防ぐ）
@@ -22,7 +22,6 @@
         }
         ?>
 
-        //navが空でない場合：該当のnavを表示させるロジックです。
         <?php if (!empty($department_boolean)): ?>
             <?php foreach ($department_boolean as $key => [$label, $href]): ?>
                 <?php $isActive = ($key === $currentPage); ?>

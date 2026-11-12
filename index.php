@@ -29,6 +29,7 @@ $user_num = $_REQUEST["employee_Id"];
 $sql = $pdo->prepare("select * from employees where employee_id=?");
 $sql->execute([$user_num]);
 
+//ここでは、employeeに背番号、社員名、部署名、パスワードを代入している
 foreach ($sql as $row) {
 	$_SESSION['employee']=[
 		'id'=>$row['employee_id'], 'name'=>$row['employee_name'],
@@ -45,9 +46,4 @@ if($_SESSION['employee']['department_name'] == "生産部"){
 }else{
     //ログインしていなかった何もしない
 }
-// ---(デバッグをしやすくするため)最前面に黒いボックスで強制表示 ---
-echo '<div style="position:fixed; top:10px; left:10px; z-index:999999; background:rgba(0,0,0,0.9); color:#fff; padding:20px; border-radius:5px; max-height:80vh; overflow:auto; font-family:monospace; font-size:14px;">';
-echo '<strong style="color:#00ff00;">▼ SESSION DATA ▼</strong><br><pre style="color:#fff; background:none; border:none; margin:10px 0 0 0;">';
-var_dump($_SESSION['employee']['department_name']);//何も表示されていない
-echo '</pre></div>';
 ?>
