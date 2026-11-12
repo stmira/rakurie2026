@@ -1,5 +1,5 @@
 <!-- データベース接続 -->
-<?php require 'config/database.php'; ?>
+<?php require_once __DIR__ . '/config/database.php'; ?>
 <!-- CSSはHTMLのlinkタグで読み込む -->
 <!-- <link rel="stylesheet" href="css/style.css"> -->
 <link rel="stylesheet" href="css/header.css">

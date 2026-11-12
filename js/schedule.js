@@ -25,27 +25,27 @@
   function sample() {
     var d = function (n) { return key(add(today, n)); };
     function s(id, emp, task, co, detail, ps, pe, as, ae) {
-      return { schedule_id: id, employee_id: emp, task_name: task, company_name: co, detail: detail, planned_start_date: d(ps), planned_end_date: d(pe), actual_start_date: as == null ? null : d(as), actual_end_date: ae == null ? null : d(ae) };
+      return { schedule_id: id, employee_id: emp, task_name: task, customer_name: co, detail: detail, planned_start_date: d(ps), planned_end_date: d(pe), actual_start_date: as == null ? null : d(as), actual_end_date: ae == null ? null : d(ae) };
     }
     return {
       employees: [
-        { employee_id: 1,  name: '大原',   role: '板金・生産管理' },
-        { employee_id: 2,  name: 'Tさん',  role: '設計・作図' },
-        { employee_id: 3,  name: 'Hさん',  role: '製造・溶接' },
-        { employee_id: 4,  name: 'Yさん',  role: 'アームロボット' },
-        { employee_id: 5,  name: 'Sさん',  role: '板金・プレス' },
-        { employee_id: 6,  name: 'Kさん',  role: '製造・組立' },
-        { employee_id: 7,  name: 'Mさん',  role: '溶接' },
-        { employee_id: 8,  name: 'Nさん',  role: '塗装' },
-        { employee_id: 9,  name: 'Oさん',  role: '検査・出荷' },
-        { employee_id: 10, name: 'Aさん',  role: '設計・積算' },
-        { employee_id: 11, name: 'Rさん',  role: '運搬・資材' }],
+        { employee_id: 1,  employees_name: '大原',   department_name: '板金・生産管理' },
+        { employee_id: 2,  employees_name: 'Tさん',  department_name: '設計・作図' },
+        { employee_id: 3,  employees_name: 'Hさん',  department_name: '製造・溶接' },
+        { employee_id: 4,  employees_name: 'Yさん',  department_name: 'アームロボット' },
+        { employee_id: 5,  employees_name: 'Sさん',  department_name: '板金・プレス' },
+        { employee_id: 6,  employees_name: 'Kさん',  department_name: '製造・組立' },
+        { employee_id: 7,  employees_name: 'Mさん',  department_name: '溶接' },
+        { employee_id: 8,  employees_name: 'Nさん',  department_name: '塗装' },
+        { employee_id: 9,  employees_name: 'Oさん',  department_name: '検査・出荷' },
+        { employee_id: 10, employees_name: 'Aさん',  department_name: '設計・積算' },
+        { employee_id: 11, employees_name: 'Rさん',  department_name: '運搬・資材' }],
       purchase_orders: [
-        { purchase_order_id: 1, summary: 'H150', spec: '7m×1本・8m×6本', supplier_name: 'K社', arrival_date: d(0), status: '完了' },
-        { purchase_order_id: 2, summary: 'プレス M10', spec: 'L2196×6本', supplier_name: 'N社', arrival_date: d(0), status: '遅延' },
-        { purchase_order_id: 3, summary: 'プレス M10', spec: 'L290×90本', supplier_name: 'N社', arrival_date: d(1) },
-        { purchase_order_id: 4, summary: 'H150', spec: '8m×3本', supplier_name: 'M社（O社）', arrival_date: d(4) },
-        { purchase_order_id: 5, summary: '平鋼 350×150×9t', spec: '1枚', supplier_name: 'M林業（D鋼業）', arrival_date: d(5) }],
+        { purchase_orders_id: 1, summary: 'H150', spec: '7m×1本・8m×6本', company_name: 'K社', arrival_date: d(0), status: '完了' },
+        { purchase_orders_id: 2, summary: 'プレス M10', spec: 'L2196×6本', company_name: 'N社', arrival_date: d(0), status: '遅延' },
+        { purchase_orders_id: 3, summary: 'プレス M10', spec: 'L290×90本', company_name: 'N社', arrival_date: d(1) },
+        { purchase_orders_id: 4, summary: 'H150', spec: '8m×3本', company_name: 'M社（O社）', arrival_date: d(4) },
+        { purchase_orders_id: 5, summary: '平鋼 350×150×9t', spec: '1枚', company_name: 'M林業（D鋼業）', arrival_date: d(5) }],
       schedules: [
         s(1, 1, '図めん配布', 'K社', '', 0, 0, 0, 0), s(2, 1, '発注業務', 'N社', '', 0, 0, 0, null),
         s(3, 1, 'LWB', 'N社', '', -2, -1, -2, null), s(4, 1, '封筒作成', 'K社', '', 0, 0),
@@ -144,10 +144,10 @@
     keys.forEach(function (k, i) {
       var off = days[i].getDay() === 0 || HOLIDAYS.indexOf(k) >= 0;
       var cs = data.purchase_orders.filter(function (p) {
-        return p.arrival_date === k && match([p.summary, p.spec, p.supplier_name].join(' ').toLowerCase());
+        return p.arrival_date === k && match([p.summary, p.quantity, p.company_name].join(' ').toLowerCase());
       }).map(function (p) {
         any = true;
-        return card(p.summary, p.status || (k < T ? '完了' : '未着手'), [p.spec, p.supplier_name]);
+        return card(p.summary, p.status || (k < T ? '完了' : '未着手'), [p.quantity, p.company_name]);
       });
       cells += '<div class="sc-cell' + (off ? ' off' : '') + '">' + (off ? '<span class="sc-offlabel">休日</span>' : '') + (cs.join('') || (off ? '' : '<span class="none">—</span>')) + '</div>';
     });
@@ -161,15 +161,15 @@
         var off = days[i].getDay() === 0 || HOLIDAYS.indexOf(k) >= 0;
         var leave = data.leaves.some(function (l) { return l.employee_id === e.employee_id && l.date === k; });
         var cs = tasksFor(e.employee_id, k).filter(function (t) {
-          return match([t.s.company_name, t.s.detail, t.s.task_name].join(' ').toLowerCase());
+          return match([t.s.customer_name, t.s.detail, t.s.task_name].join(' ').toLowerCase());
         }).map(function (t) {
           any2 = true;
-          return card(t.s.task_name, t.st, [t.s.detail, t.s.company_name], t.carried);
+          return card(t.s.task_name, t.st, [t.s.detail, t.s.customer_name], t.carried);
         });
         cl += '<div class="sc-cell' + (off ? ' off' : '') + '">' + (off ? '<span class="sc-offlabel">休日</span>' : '') +
           (leave ? '<span class="sc-leave">有休</span>' : '') + (cs.join('') || (off || leave ? '' : '<span class="none">—</span>')) + '</div>';
       });
-      if (any2 || !state.q) rows += '<div class="sc-rh"><b>' + esc(e.name) + '</b><span>' + esc(e.role) + '</span></div>' + cl;
+      if (any2 || !state.q) rows += '<div class="sc-rh"><b>' + esc(e.employee_name) + '</b><span>' + esc(e.department_name) + '</span></div>' + cl;
     });
 
     grid.innerHTML = html + (rows || '<div class="sc-empty">該当する予定はありません。</div>');
@@ -186,7 +186,7 @@
   function buildFilter() {
     var p = $('scFilterPanel');
     p.innerHTML = '<label><input type="checkbox" id="scAll" checked>全員</label><hr>' + state.data.employees.map(function (e) {
-      return '<label><input type="checkbox" class="scEmp" value="' + e.employee_id + '" checked>' + esc(e.name) + '</label>';
+      return '<label><input type="checkbox" class="scEmp" value="' + e.employee_id + '" checked>' + esc(e.employee_name) + '</label>';
     }).join('');
     p.addEventListener('change', function (ev) {
       var boxes = [].slice.call(p.querySelectorAll('.scEmp'));
@@ -211,6 +211,7 @@
     $('scToday').addEventListener('click', function () { state.start = today; render(); });
     $('scFilterBtn').addEventListener('click', function (e) { e.stopPropagation(); var p = $('scFilterPanel'); p.hidden = !p.hidden; });
     document.addEventListener('click', function (e) { var p = $('scFilterPanel'); if (!p.contains(e.target)) p.hidden = true; });
+    // TODO: 絞り込み実装時に buildFilter() を有効化（今は未実装でエラーになるため停止）
     load().then(function (d) { state.data = d; buildFilter(); render(); });
     window.addEventListener('resize', fitRows);
     window.addEventListener('load', fitRows);   // フォント読み込み後にも再計算
