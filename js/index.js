@@ -1,19 +1,4 @@
-    //javascriptを修正する
-    // ===== 遷移先 =====
-    // const ROUTES = {
-    //   production: './todo.php',      // 生産部 → todo画面
-    //   sales: './schedule.php'        // 営業部 → 工程表一覧画面
-    // };
-//
-    // ===== 社員IDから部署を判定 =====ここはロジックとしては使っていない所
-    // async function authenticate(employeeId, password) {
-
-    //   const userid = document.getElementById('employeeId');
-    //   // if (Number.isNaN(num)) return { ok: false };
-    //   return { ok: true, department: userid < 15 ? 'production' : 'sales' };
-    // }
-
-    // ===== パスワード表示切替 =====
+   // ===== パスワード表示切替 =====
     const pw = document.getElementById('password');//htmlのidを取得している
     const toggle = document.getElementById('togglePw');//htmlのid(目隠しトグル)を取得している
     //目隠しトグルの仕組みづくり
@@ -38,6 +23,7 @@
     }
 
     //ボタンを押すというイベントがおきたら
+    //この中でパスワードの条件に合っているかどうかを判断しています。
    form.addEventListener('submit', (e) => {
     const id = idInput.value.trim();//空白とか余分なものをなくしidに入れる
     const password = pw.value;

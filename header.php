@@ -20,15 +20,14 @@
 $currentPage = $currentPage ?? '';
 
 // メニュー（key => [表示名, 移動先]）
+//生産部の人が見るnav
 $navItems = [
     'todo'          => ['今日のタスク',   'todo.php'],
     'schedule'       => ['工程表',         'schedule.php'],
     'reference'      => ['早見表',         'reference.php'],
-    // 'customer'       => ['お客様情報登録', 'customer.php'],
-    // 'schedule-entry'  => ['工程表情報登録', 'schedule-entry.php'],
-    // 'employee'       => ['社員情報',       'employee.php'],
     ];
 
+//営業部の人が見るnav
 $administrator_navItems = [
     'todo'          => ['今日のタスク',   'todo.php'],
     'schedule'       => ['工程表',         'schedule.php'],
@@ -39,23 +38,17 @@ $administrator_navItems = [
 ];
 
     // ログイン中のユーザー（本番はセッションやDBから取得）
-    // $user = ['name' => 'Oさん', 'role' => '管理者']; //ここでdbから名前をとる
     //もし、セッションにデータがあったら(ログインに成功している)
     if (isset($_SESSION['employee'])) {
         $user = [
             'name' => $_SESSION['employee']['name'], 
-            'role' => $_SESSION['employee'] ['department_name']// ※必要に応じてここもDBの値に書き換えるとより柔軟になります
+            'role' => $_SESSION['employee'] ['department_name']
         ];
     }else{
-        echo "データが取得できていない";//このelseにいってしまう
+        echo "データが取得できていない";
     }
-    // ---(デバッグをしやすくするため)最前面に黒いボックスで強制表示 ---
-    // echo '<div style="position:fixed; top:10px; left:10px; z-index:999999; background:rgba(0,0,0,0.9); color:#fff; padding:20px; border-radius:5px; max-height:80vh; overflow:auto; font-family:monospace; font-size:14px;">';
-    // echo '<strong style="color:#00ff00;">▼ SESSION DATA ▼</strong><br><pre style="color:#fff; background:none; border:none; margin:10px 0 0 0;">';
-    // var_dump($_POST['password']);//何も表示されていない
-    // echo '</pre></div>';
     ?>
+<!-- header.htmlを読み込み -->
 <?php require 'html/header.html'; ?>
-
 <!-- 通知画面読み込み -->
 <?php require 'notification.php'; ?>
